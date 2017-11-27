@@ -96,11 +96,6 @@
     NSLog(@"UIColor : %@", color);
     if (color) {
         
-        /*
-        [[UINavigationBar appearance] setTintColor: color];
-        [[UITextView appearance]      setTintColor: color];
-        [[UITabBar appearance]        setTintColor: color];
-        */
         [[UINavigationBar appearance] setTintColor: color];
         [[UITextView appearance]      setTintColor: color];
         [[UITabBar appearance]        setTintColor: color];

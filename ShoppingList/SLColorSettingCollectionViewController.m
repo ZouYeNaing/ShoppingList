@@ -99,8 +99,7 @@ static NSString * const reuseIdentifier = @"Cell";
     NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [colorCode objectAtIndex: indexPath.row]];
     [[NSUserDefaults standardUserDefaults] setObject: colorData forKey: @"myColor"];
     
-    // [self updateColor];
-    [[SLShoppingListData sharedInstance] updateColor];
+    [self updateColor];
     
     [self.navigationController popViewControllerAnimated: YES];
     
