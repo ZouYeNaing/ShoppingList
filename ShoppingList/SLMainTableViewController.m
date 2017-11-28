@@ -27,7 +27,7 @@
     
     UIBarButtonItem *barButtonItem;
     
-    int selectedTabIndex;
+    NSInteger selectedTabIndex;
 }
 
 @end
@@ -51,7 +51,7 @@
     
     UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
     
-    selectedTabIndex = (int)vc.tabBarItem.tag;
+    selectedTabIndex = vc.tabBarItem.tag;
     
     // selectedTabIndex = (int)[SLShoppingListData sharedInstance].tabBarController.selectedIndex;
     
