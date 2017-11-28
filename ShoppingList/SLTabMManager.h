@@ -19,5 +19,5 @@
 - (void)saveDefaultTabBarMArray;
 - (void)hideTabBarItem : (NSMutableArray *)indexes;
 - (void)setTabBarTitle : (NSMutableArray *)tabSettingArray;
-- (NSString *)getTabBarTitle : (int)selectedTabIndex;
+- (NSString *)getTabBarTitle : (NSInteger)selectedTabIndex;
 @end
