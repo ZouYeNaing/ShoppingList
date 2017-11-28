@@ -66,6 +66,7 @@
 - (void) hideKeyboard {
     
     [myTextField resignFirstResponder];
+    [self.tableView reloadData];
 }
 
 -(void)onLongPress: (UILongPressGestureRecognizer*)longPress {
