@@ -27,6 +27,8 @@
     
     UIBarButtonItem *barButtonItem;
     
+    UIColor *color;
+    
     int selectedTabIndex;
 }
 
@@ -271,6 +273,9 @@
     
     barButtonItem = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     [SLShoppingListData sharedInstance].trashButtonItem = barButtonItem;
+    
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
+    color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
     NSLog(@"viewDidAppear");
     
@@ -705,10 +710,12 @@
 
 -(NSAttributedString *)deletedText: (NSString *) deleteString {
     
+    
+    
     UIFont *font = [UIFont fontWithName:@"HiraKakuProN-W3" size: 15];
     NSDictionary* attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
                                       NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                      NSStrikethroughColorAttributeName: [UIColor redColor],
+                                      NSStrikethroughColorAttributeName: color,
                                       NSFontAttributeName: font};
     
     
