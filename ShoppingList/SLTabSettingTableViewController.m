@@ -64,7 +64,7 @@
 }
 
 - (void) hideKeyboard {
-    
+
     [myTextField resignFirstResponder];
     [self.tableView reloadData];
 }
@@ -85,14 +85,15 @@
     }
     NSLog(@"indexpath : %ld", self.indexpath.row);
     
-    myTextField = [[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: self.indexpath.row];
+//    UITextField *textField = (UITextField *)[[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: (int)self.indexpath.row];
+    UITextField *textField = (UITextField *)[[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: 999];
+
+    NSLog(@"selected txtField.tag : %ld", textField.tag);
+    NSLog(@"selected txtField.text: %@", textField.text);
     
-    NSLog(@"selected txtField.tag : %ld", myTextField.tag);
-    NSLog(@"selected txtField.text: %@", myTextField.text);
-    
-    myTextField.userInteractionEnabled = YES;
-    myTextField.returnKeyType = UIReturnKeyDone;
-    [myTextField becomeFirstResponder];
+    textField.userInteractionEnabled = YES;
+    textField.returnKeyType = UIReturnKeyDone;
+    [textField becomeFirstResponder];
 }
 
 
@@ -102,10 +103,11 @@
     
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    NSLog(@"indexpath : %ld", self.indexpath.row);
-    
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     
     NSMutableDictionary *changeTitle = [NSMutableDictionary dictionary];
     [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
@@ -117,12 +119,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     self.tabBarController.tabBar.items[self.indexpath.row].title = textField.text;
+    
     [self.tableView reloadData];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField resignFirstResponder];
-    
-    
-    
     return YES;
 }
 
@@ -139,29 +142,30 @@
     
     NSString *CellIdentifier = @"TabSettingCell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+//    // Remove OldTextField.
+//    myTextField = [cell viewWithTag: indexPath.row];
+//    [myTextField removeFromSuperview];
     
-    // Remove OldTextField.
-    myTextField = [cell viewWithTag: indexPath.row];
-    [myTextField removeFromSuperview];
-    
-    
-    // UITextField.
-    myTextField = [[UITextField alloc]initWithFrame:CGRectMake(15, 5, 200, 30)];
-    myTextField.delegate = self;
-    myTextField.userInteractionEnabled = NO;
-    myTextField.tag  = indexPath.row;
-    myTextField.text = [tabSettingArray objectAtIndex: indexPath.row][@"data"];
+    UITextField *textField = (UITextField *)[cell viewWithTag: 999];
+    if (nil == textField) {
+        // UITextField.
+        textField = [[UITextField alloc]initWithFrame:CGRectMake(15, 5, 200, 30)];
+        textField.delegate = self;
+        textField.userInteractionEnabled = NO;
+        textField.tag  = 999;
+        [cell.contentView addSubview: textField];
+    }
+    textField.text = [tabSettingArray objectAtIndex: indexPath.row][@"data"];
     
     // UISwitch.
     UISwitch *switchView = [[UISwitch alloc] initWithFrame: CGRectMake(120, 13, 375, 30)];
     cell.accessoryView = switchView;
-    switchView.tag = indexPath.row;
+    switchView.tag = (int)indexPath.row;
     switchView.tintColor = switchColor;
     switchView.onTintColor = switchColor;
     [switchView addTarget: self
@@ -181,7 +185,6 @@
         
     }
     
-    [cell.contentView addSubview: myTextField];
     
     return cell;
 }
