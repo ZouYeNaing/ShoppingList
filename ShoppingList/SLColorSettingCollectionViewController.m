@@ -122,11 +122,10 @@ static NSString * const reuseIdentifier = @"Cell";
         
         [[UINavigationBar appearance] setTintColor: color];
         [[UITextView appearance]      setTintColor: color];
-        [[UITabBar appearance]        setBarTintColor: color];
+        // [[UITabBar appearance]        setBarTintColor: color];
         [[UITabBar appearance]        setTintColor: color];
         self.tabBarController.tabBar.tintColor = color;
         self.navigationController.navigationBar.tintColor = color;
-        [[UITabBar appearance]        setTintColor: color];
     }
     
 }
