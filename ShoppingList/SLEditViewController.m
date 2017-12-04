@@ -26,7 +26,7 @@
     
     if (!_isEditing) {
         
-        UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
+        UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
                                                                                 target: self
                                                                                 action: @selector(addListDataAction:)];
         self.navigationItem.rightBarButtonItem = addBtn;

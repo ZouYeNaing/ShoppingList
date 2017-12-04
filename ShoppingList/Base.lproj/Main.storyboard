@@ -230,7 +230,7 @@
                                 <action selector="CancelList:" destination="Usf-9N-4oY" id="DYr-Ak-l8I"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="ckb-xR-cn7">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ckb-xR-cn7">
                             <connections>
                                 <action selector="SaveList:" destination="Usf-9N-4oY" id="2PC-Qo-1iH"/>
                             </connections>
@@ -333,7 +333,7 @@
                                 <action selector="CancelList:" destination="r2N-YV-g47" id="QNn-j7-Vo3"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="abC-48-ucU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="abC-48-ucU">
                             <connections>
                                 <action selector="SaveList:" destination="r2N-YV-g47" id="Qfp-y6-M04"/>
                             </connections>
@@ -467,7 +467,7 @@
                                 <action selector="CancelList:" destination="Cdh-db-ftf" id="zy4-w9-efH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="rYP-AA-bZV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="rYP-AA-bZV">
                             <connections>
                                 <action selector="SaveList:" destination="Cdh-db-ftf" id="GXS-wm-oFX"/>
                             </connections>
@@ -581,7 +581,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CdH-kr-hwS" id="ovs-Il-xxH">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -654,7 +654,7 @@
                                 <action selector="CancelList:" destination="nVW-VR-gva" id="I6e-il-i8Y"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="bt9-6b-jer">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="bt9-6b-jer">
                             <connections>
                                 <action selector="SaveList:" destination="nVW-VR-gva" id="FV4-i0-UeB"/>
                             </connections>
@@ -682,7 +682,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kvV-dL-iOc" id="cOD-hh-CtF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -756,7 +756,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IyT-i9-hQl" id="Fb7-Ta-G1x">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
