@@ -27,7 +27,9 @@
     
     UIBarButtonItem *barButtonItem;
     
-    NSInteger selectedTabIndex;
+    UIColor *color;
+    
+    int selectedTabIndex;
 }
 
 @end
@@ -51,7 +53,7 @@
     
     UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
     
-    selectedTabIndex = vc.tabBarItem.tag;
+    selectedTabIndex = (int)vc.tabBarItem.tag;
     
     // selectedTabIndex = (int)[SLShoppingListData sharedInstance].tabBarController.selectedIndex;
     
@@ -244,12 +246,7 @@
     
     NSLog(@"viewWillAppear");
     
-    
-    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
-    if(tabSetting.count > 0) {
-        self.title = [[SLTabMManager sharedInstance] getTabBarTitle: selectedTabIndex];
-    }
-    
+    self.title = [[SLTabMManager sharedInstance] getTabBarTitle: selectedTabIndex];
     
     // NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
     
@@ -276,6 +273,9 @@
     
     barButtonItem = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     [SLShoppingListData sharedInstance].trashButtonItem = barButtonItem;
+    
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
+    color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
     NSLog(@"viewDidAppear");
     
@@ -710,10 +710,12 @@
 
 -(NSAttributedString *)deletedText: (NSString *) deleteString {
     
+    
+    
     UIFont *font = [UIFont fontWithName:@"HiraKakuProN-W3" size: 15];
     NSDictionary* attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
                                       NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                      NSStrikethroughColorAttributeName: [UIColor redColor],
+                                      NSStrikethroughColorAttributeName: color,
                                       NSFontAttributeName: font};
     
     
