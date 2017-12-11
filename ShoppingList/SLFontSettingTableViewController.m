@@ -31,25 +31,21 @@
         }
     }
     
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     switchColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
     [[UITableViewCell appearance] setTintColor: switchColor];
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    }
-
 - (void) viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear: animated];
     
     selectedRow = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedIndex"] intValue];
     
     NSLog(@"selected font: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedFont"]);
 
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -58,18 +54,22 @@
     
     [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: selectedRow inSection: 0] atScrollPosition: UITableViewScrollPositionTop animated: YES];
     
-    }
+}
 
 - (void) viewWillDisappear:(BOOL)animated{
+    
     [[NSUserDefaults standardUserDefaults] setObject:@(selectedRow) forKey:@"selectedIndex"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat: @"%@", [fontFamily objectAtIndex: selectedRow]] forKey:@"selectedFont"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return [fontFamily count];
+    
 }
 
 

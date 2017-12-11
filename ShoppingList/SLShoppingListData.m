@@ -91,15 +91,14 @@
 
 - (void)updateColor {
     
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
-    UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
-    NSLog(@"UIColor : %@", color);
-    if (color) {
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
+    UIColor *selectedColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
+    if (selectedColor) {
         
-        [[UINavigationBar appearance] setTintColor: color];
-        [[UITextView appearance]      setTintColor: color];
-        [[UITabBar appearance]        setTintColor: color];
-        self.tabBarController.tabBar.tintColor = color;
+        [[UINavigationBar appearance] setTintColor: selectedColor];
+        [[UITextView appearance]      setTintColor: selectedColor];
+        [[UITabBar appearance]        setTintColor: selectedColor];
+        self.tabBarController.tabBar.tintColor = selectedColor;
     }
 }
 

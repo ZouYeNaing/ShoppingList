@@ -16,20 +16,15 @@
 @interface SLMainTableViewController ()
 {
     NSMutableArray *mainVCArray;
-    NSString *fontStyle;
+    
+    NSString *selectedFont;
+    UIColor  *selectedColor;
+    
     UILongPressGestureRecognizer *longPressRecognizer;
     
-    UIBarButtonItem *singleDelete;
-    UIBarButtonItem *doneDelete;
+    UIBarButtonItem *barButtonItem0, *barButtonItem1, *barButtonTrash, *singleDelete, *doneDelete;
     
-    UIBarButtonItem *barButtonItem0;
-    UIBarButtonItem *barButtonItem1;
-    
-    UIBarButtonItem *barButtonItem;
-    
-    UIColor *color;
-    
-    int selectedTabIndex;
+    NSInteger selectedTabIndex;
 }
 
 @end
@@ -53,20 +48,15 @@
     
     UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
     
-    selectedTabIndex = (int)vc.tabBarItem.tag;
-    
-    // selectedTabIndex = (int)[SLShoppingListData sharedInstance].tabBarController.selectedIndex;
+    selectedTabIndex = vc.tabBarItem.tag;
     
     [[SLShoppingListData sharedInstance] createNSDictionary];
     
     if (selectedTabIndex == 0) { // For first tab.
         
-        // [SLShoppingListData sharedInstance].SLData0Array  = [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList0"]];
-        
         [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList0"]]
                                                        forKey: @"List0"];
         
-        // if (![SLShoppingListData sharedInstance].SLData0Array) {
         if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List0"]) {
             
             NSLog(@"No SLDataArray");
@@ -75,7 +65,6 @@
             
             // Yes => Delete
             
-            // NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"}.mutableCopy;
             NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
             NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
             NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
@@ -94,21 +83,14 @@
             
             NSLog(@"Is SLDataDict");
             
-            // mainVCArray = [SLShoppingListData sharedInstance].SLData0Array;
-            
             mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List0"];
-            
-            NSLog(@"mainVCArray First Tab: %@", mainVCArray);
             
         }
     } else if (selectedTabIndex == 1) { // For second tab.
         
-        // [SLShoppingListData sharedInstance].SLData1Array  = [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList1"]];
-        
         [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList1"]]
                                                       forKey: @"List1"];
         
-        // if (![SLShoppingListData sharedInstance].SLData1Array) {
         if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List1"]) {
             
             NSLog(@"No SLData2Array");
@@ -117,7 +99,6 @@
             
             // Yes => Delete
             
-            // NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"}.mutableCopy;
             NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
             NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
             NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
@@ -136,21 +117,14 @@
             
             NSLog(@"Is SLDataDict");
             
-            // mainVCArray = [SLShoppingListData sharedInstance].SLData1Array;
-            
             mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List1"];
-            
-            NSLog(@"mainVCArray Second Tab: %@", mainVCArray);
             
         }
         
     } else if (selectedTabIndex == 2) { // For third tab.
         
-        // [SLShoppingListData sharedInstance].SLData2Array  = [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList2"]];
-        
         [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList2"]]
                                                       forKey: @"List2"];
-        
         
         if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List2"]) {
             
@@ -160,7 +134,6 @@
             
             // Yes => Delete
             
-            // NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"}.mutableCopy;
             NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
             NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
             NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
@@ -179,18 +152,11 @@
             
             NSLog(@"Is SLDataDict");
             
-            // mainVCArray = [SLShoppingListData sharedInstance].SLData2Array;
-            
             mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List2"];
-            
-            
-            NSLog(@"mainVCArray Second Tab: %@", mainVCArray);
             
         }
         
     } else { // For second tab.
-        
-        // [SLShoppingListData sharedInstance].SLData3Array  = [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList3"]];
         
         [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList3"]]
                                                       forKey: @"List3"];
@@ -203,7 +169,6 @@
             
             // Yes => Delete
             
-            // NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"}.mutableCopy;
             NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
             NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
             NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
@@ -222,11 +187,7 @@
             
             NSLog(@"Is SLDataDict");
             
-            // mainVCArray = [SLShoppingListData sharedInstance].SLData3Array;
-            
             mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List3"];
-            
-            NSLog(@"mainVCArray Second Tab: %@", mainVCArray);
             
         }
         
@@ -248,20 +209,12 @@
     
     self.title = [[SLTabMManager sharedInstance] getTabBarTitle: selectedTabIndex];
     
-    // NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     
+    selectedFont = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedFont"];
+    selectedColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
-    
-    // [[SLTabMManager sharedInstance] setTabBarTitle: tabSetting];
-    /*
-    if(tabSetting.count > 0)
-    {
-        self.title = [tabSetting objectAtIndex: (int)selectedTabIndex][@"data"];
-    }
-    */
-    // [[SLShoppingListData sharedInstance] updateColor];
-    
-    fontStyle = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedFont"];
+    [[SLShoppingListData sharedInstance] updateColor];
     
     [self.tableView reloadData];
     
@@ -271,15 +224,10 @@
     
     [super viewDidAppear: animated];
     
-    barButtonItem = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
-    [SLShoppingListData sharedInstance].trashButtonItem = barButtonItem;
-    
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
-    color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
-    
     NSLog(@"viewDidAppear");
     
-    NSLog(@"get tabdata : %@", [SLShoppingListData sharedInstance].getSLDataArray);
+    barButtonTrash = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
+    [SLShoppingListData sharedInstance].trashButtonItem = barButtonTrash;
     
     mainVCArray = [SLShoppingListData sharedInstance].getSLDataArray;
     [self changeTrashButtom: mainVCArray];
@@ -303,18 +251,22 @@
         [self editListData];
         
     } else {
+        
         NSLog(@"NO addListData.");
+        
     }
 }
 
 - (void)changeTrashButtom: (NSArray *)VCArray {
+    
     for (int i=0; i < [VCArray count]; i++) {
         
         if ([[VCArray objectAtIndex: i][@"status"] boolValue] == YES) {
-            barButtonItem.enabled = YES;
-        } else
-        {
-            barButtonItem.enabled = NO;
+            
+            barButtonTrash.enabled = YES;
+            
+        } else {
+            barButtonTrash.enabled = NO;
         }
     }
 }
@@ -373,7 +325,7 @@
         
         if ([[mainVCArray objectAtIndex: i][@"status"] boolValue] == YES) {
             
-            [indexes addIndex : i];
+            [indexes addIndex: i];
             
             [indexArray addObject: [NSNumber numberWithInt: i]];
         }
@@ -390,10 +342,11 @@
     [self.tableView beginUpdates];
     
     for (int i=0; i < [indexArray count]; i++) {
+        
         NSInteger test = [indexArray[i] integerValue];
-        NSLog(@"indexex: %ld", (long)test);
         
         [self.tableView deleteRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: test inSection: 0]]   withRowAnimation: UITableViewRowAnimationFade];
+        
     }
     
     [mainVCArray removeObjectsAtIndexes: indexes];
@@ -410,18 +363,14 @@
 
 -(void)addListData {
     
-    // NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
+    
     NSMutableArray *indexArray = [NSMutableArray array];
     
     for (int i=0; i < [_listAdded count]; i++) {
         
-        // [indexes addIndex : i];
         [indexArray addObject: [NSNumber numberWithInt: i]];
         
     }
-    
-    NSLog(@"indexArray : %@", indexArray);
-    
     //animation
     
     [CATransaction begin];
@@ -472,7 +421,6 @@
 
 -(void)editListData {
     
-    // _EditedText has value;
     if (_EditedText.length > 0) {
         
         // animation.
@@ -487,6 +435,7 @@
             [self.tableView setUserInteractionEnabled:YES];
             
             [self addList];
+            
         }];
         
         [self.tableView beginUpdates];
@@ -516,82 +465,10 @@
     }
     
     return;
-    
-    /*
-    // for detect edited index.
-    NSMutableArray *indexArray = [NSMutableArray array];
-    
-    for (int i=0; i < [_listEdited count]; i++) {
-        
-        [indexArray addObject: [NSNumber numberWithInt: i]];
-        
-    }
-    
-    // animation.
-    [CATransaction begin];
-    [self.tableView setUserInteractionEnabled:NO];
-    
-    [CATransaction setCompletionBlock:^{
-        
-        [self.tableView reloadData];
-        [_listEdited removeAllObjects]; // for unconflict adding data.
-        
-        [self.tableView setUserInteractionEnabled:YES];
-    }];
-    
-    [self.tableView beginUpdates];
-    
-    for (int i = 0; i < [indexArray count]; i++) {
-        
-        NSInteger editIndex = [indexArray[i] integerValue];
-        NSLog(@"indexex: %ld", (long)editIndex);
-        
-        if ([_listEdited[i] isEqualToString:@""]) {
-            
-            NSLog(@"Edited Empty.");
-            
-        } else {
-            
-            / *
-            if (i == 0) {
-                
-                NSMutableDictionary *editList = [NSMutableDictionary dictionary];
-                [editList setValue: [mainVCArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
-                [editList setValue: _listEdited[0] forKey: @"data"];
-                
-                [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: self.indexpath.row inSection: 0]] withRowAnimation:UITableViewRowAnimationFade];
-                
-                [mainVCArray replaceObjectAtIndex: self.indexpath.row withObject: editList];
-                
-                // [mainVCArray insertObject: editList atIndex: 0];
-                
-            } else {
-                * /
-                
-                [self.tableView insertRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: editIndex inSection: 0]] withRowAnimation:UITableViewRowAnimationTop];
-                
-                NSMutableDictionary *editList = [NSMutableDictionary dictionary];
-                [editList setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
-                [editList setValue: _listEdited[i] forKey: @"data"];
-                
-                [mainVCArray insertObject: editList atIndex: 0];
-            // }
-        }
-    }
-    
-    [self.tableView endUpdates];
-    
-    [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-    [self changeTrashButtom: mainVCArray];
-    [[SLShoppingListData sharedInstance] saveData];
-    
-    [CATransaction commit];
-    */
-    
 }
 
 - (void)addList {
-    // for detect edited index.
+    
     NSMutableArray *indexArray = [NSMutableArray array];
     
     for (int i=0; i < [_listEdited count]; i++) {
@@ -599,7 +476,6 @@
         [indexArray addObject: [NSNumber numberWithInt: i]];
         
     }
-    
     // animation.
     [CATransaction begin];
     [self.tableView setUserInteractionEnabled:NO];
@@ -701,8 +577,8 @@
         cell.textLabel.text = [mainVCArray objectAtIndex: indexPath.row][@"data"];
         
     }
-    if (fontStyle > 0) {
-        cell.textLabel.font = [UIFont fontWithName: fontStyle size: 15];
+    if (selectedFont > 0) {
+        cell.textLabel.font = [UIFont fontWithName: selectedFont size: 15];
     }
     
     return cell;
@@ -710,13 +586,25 @@
 
 -(NSAttributedString *)deletedText: (NSString *) deleteString {
     
-    
+    NSDictionary *attributesDict = [NSDictionary dictionary];
     
     UIFont *font = [UIFont fontWithName:@"HiraKakuProN-W3" size: 15];
-    NSDictionary* attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
-                                      NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                      NSStrikethroughColorAttributeName: color,
-                                      NSFontAttributeName: font};
+    
+    if(selectedColor != NULL) {
+        
+        attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
+                                          NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                          NSStrikethroughColorAttributeName: selectedColor,
+                                          NSFontAttributeName: font};
+    } else {
+        
+        attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
+                            NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                            NSStrikethroughColorAttributeName: [UIColor redColor],
+                            NSFontAttributeName: font};
+        
+    }
+    
     
     
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString: deleteString
@@ -733,14 +621,18 @@
     NSLog(@"UILongPressGestureRecognizer");
     
     if (longPress.state != UIGestureRecognizerStateBegan) {
+        
         return;
+        
     }
     
     CGPoint p = [longPress locationInView: self.tableView];
     self.indexpath = [self.tableView indexPathForRowAtPoint: p];
     
     if (self.indexpath == nil) {
+        
         return;
+        
     }
     
     [self performSegueWithIdentifier: @"showEditViewController" sender: nil];
@@ -764,6 +656,7 @@
             // animation has finished
             [self.tableView reloadData];
             [self.tableView setUserInteractionEnabled:YES];
+            
         }];
         
         [self.tableView beginUpdates];
@@ -803,9 +696,6 @@
         NSMutableDictionary *changeStatusDict = [NSMutableDictionary dictionary];
         [changeStatusDict setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
         [changeStatusDict setValue: [mainVCArray objectAtIndex: indexPath.row][@"data"] forKey: @"data"];
-        
-        NSLog(@"self index : %ld", (long)indexPath.row);
-        NSLog(@"self index : %lu", [mainVCArray count]-1);
         
         [CATransaction begin];
         [self.tableView setUserInteractionEnabled:NO];
@@ -867,7 +757,6 @@
     }
 }
 
-
 - (BOOL)tableView: (UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath: (NSIndexPath *)indexPath {
     
     return NO;
@@ -877,11 +766,13 @@
 - (UITableViewCellEditingStyle)tableView: (UITableView *)tableView editingStyleForRowAtIndexPath: (NSIndexPath *)indexPath {
     
     if (self.editing == YES) {
+        
         return UITableViewCellEditingStyleNone;
         
     } else {
-        
+    
         return UITableViewCellEditingStyleDelete;
+        
     }
     
 }
@@ -895,9 +786,6 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle: (UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        NSLog(@"UITableViewCellEditingStyleDelete");
-        NSLog(@"indexpath delete : %ld", (long)indexPath.row);
         
         [mainVCArray removeObjectAtIndex: indexPath.row];
         
@@ -917,7 +805,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue: (UIStoryboardSegue *)segue sender: (id)sender {
     
-    
     if([segue.identifier isEqualToString: @"showEditViewController"]) {
         
         UINavigationController *navController = (UINavigationController*)[segue destinationViewController];
@@ -926,7 +813,7 @@
         [eventsController setIndexpath: self.indexpath];
         eventsController.isEditing = YES;
         
-    }else if([segue.identifier isEqualToString: @"showAddViewController"]) {
+    } else if([segue.identifier isEqualToString: @"showAddViewController"]) {
         
         UINavigationController *navController = (UINavigationController*)[segue destinationViewController];
         SLEditViewController *eventsController = (SLEditViewController *)[navController topViewController];

@@ -76,7 +76,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // cell.backgroundColor = [colorCode objectAtIndex: indexPath.row];
     
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
     if([color isEqual: [colorCode objectAtIndex: indexPath.row]]) {
@@ -105,7 +105,7 @@ static NSString * const reuseIdentifier = @"Cell";
     NSLog(@"didSelectItemAtIndexPath: %@", [NSString stringWithFormat: @"%@", [colorCode objectAtIndex: indexPath.row]]);
     
     NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [colorCode objectAtIndex: indexPath.row]];
-    [[NSUserDefaults standardUserDefaults] setObject: colorData forKey: @"myColor"];
+    [[NSUserDefaults standardUserDefaults] setObject: colorData forKey: @"selectedColor"];
     
     [self updateColor];
     
@@ -115,7 +115,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)updateColor {
     
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     NSLog(@"UIColor : %@", color);
     if (color) {

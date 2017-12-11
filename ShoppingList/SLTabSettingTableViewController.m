@@ -58,7 +58,7 @@
     
     
     //UISwitchColor
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"myColor"];
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     switchColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
 }
@@ -74,22 +74,22 @@
     NSLog(@"UILongPressGestureRecognizer");
     
     if (longPress.state != UIGestureRecognizerStateBegan) {
+        
         return;
+        
     }
     
     CGPoint p = [longPress locationInView: self.tableView];
     self.indexpath = [self.tableView indexPathForRowAtPoint: p];
     
     if (self.indexpath == nil) {
+        
         return;
+        
     }
     NSLog(@"indexpath : %ld", self.indexpath.row);
     
-//    UITextField *textField = (UITextField *)[[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: (int)self.indexpath.row];
     UITextField *textField = (UITextField *)[[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: 999];
-
-    NSLog(@"selected txtField.tag : %ld", textField.tag);
-    NSLog(@"selected txtField.text: %@", textField.text);
     
     textField.userInteractionEnabled = YES;
     textField.returnKeyType = UIReturnKeyDone;
@@ -104,7 +104,9 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
     return YES;
+    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -127,6 +129,7 @@
     
     [textField resignFirstResponder];
     return YES;
+    
 }
 
 #pragma mark - Table view data source
@@ -146,10 +149,6 @@
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-//    // Remove OldTextField.
-//    myTextField = [cell viewWithTag: indexPath.row];
-//    [myTextField removeFromSuperview];
     
     UITextField *textField = (UITextField *)[cell viewWithTag: 999];
     if (nil == textField) {
@@ -184,9 +183,8 @@
         [switchView setOn: NO animated: NO];
         
     }
-    
-    
     return cell;
+    
 }
 
 -(void)switchChanged: (id)sender {

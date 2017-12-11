@@ -27,8 +27,6 @@
         UIViewController *vc = [tabArray objectAtIndex: i];
         vc.tabBarItem.tag = i;
     }
-    // UIViewController *vc = [tabArray objectAtIndex: 0];
-    // NSLog(@"vc tag: %ld", vc.tabBarItem.tag);
     
     [tabBarController setTabBarItem: tabArray.mutableCopy];
     
