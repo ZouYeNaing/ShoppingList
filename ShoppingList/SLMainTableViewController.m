@@ -244,7 +244,12 @@
     
     NSLog(@"viewWillAppear");
     
-    self.title = [[SLTabMManager sharedInstance] getTabBarTitle: selectedTabIndex];
+    
+    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
+    if(tabSetting.count > 0) {
+        self.title = [[SLTabMManager sharedInstance] getTabBarTitle: selectedTabIndex];
+    }
+    
     
     // NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
     
