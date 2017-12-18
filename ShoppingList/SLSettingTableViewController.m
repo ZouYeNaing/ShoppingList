@@ -8,10 +8,15 @@
 
 #import "SLSettingTableViewController.h"
 #import "SLTabSettingTableViewController.h"
+#import "SLTabMManager.h"
+#import "SLShoppingListData.h"
 
 @interface SLSettingTableViewController ()
 {
     NSMutableArray *settingDataArray;
+    
+    NSString *selectedFont;
+    UIColor  *selectedColor;
 }
 @end
 
@@ -23,8 +28,27 @@
     
     settingDataArray = [NSMutableArray arrayWithObjects: @"Tab Setting", @"Color Setting", @"Font Setting", nil];
     
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
+    
     NSLog(@"Count : %ld", [settingDataArray count]);
     NSLog(@"viewDidLoad SLSettingTableViewController");
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear: animated];
+    
+    NSLog(@"viewWillAppear");
+    
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
+    
+    selectedFont = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedFont"];
+    selectedColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
+    
+    [[SLShoppingListData sharedInstance] updateColor];
+    
+    [self.tableView reloadData];
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -33,11 +57,6 @@
     
     NSLog(@"Count : %ld", [settingDataArray count]);
 
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
 }
 
 #pragma mark - Table view data source
@@ -52,8 +71,13 @@
     NSString *CellIdentifier = @"SettingCell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
     
+    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier];
+    }
+    
+    if (selectedFont > 0) {
+        cell.textLabel.font = [UIFont fontWithName: selectedFont size: 15];
     }
     
     cell.textLabel.text = [settingDataArray objectAtIndex: indexPath.row];
