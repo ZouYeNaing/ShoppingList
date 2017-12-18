@@ -155,10 +155,10 @@
         // UITextField.
         textField = [[UITextField alloc]initWithFrame:CGRectMake(15, 5, 200, 30)];
         textField.delegate = self;
-        textField.userInteractionEnabled = NO;
         textField.tag  = 999;
         [cell.contentView addSubview: textField];
     }
+    textField.userInteractionEnabled = NO;
     textField.text = [tabSettingArray objectAtIndex: indexPath.row][@"data"];
     
     // UISwitch.

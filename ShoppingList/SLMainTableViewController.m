@@ -42,6 +42,7 @@
     doneDelete     = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
                                                                    target: self
                                                                    action: @selector(doneDeleteAction:)];
+    doneDelete.style = UIBarButtonItemStyleDone;
     singleDelete   = self.navigationController.topViewController.navigationItem.leftBarButtonItem;
     barButtonItem0 = self.navigationController.topViewController.navigationItem.rightBarButtonItems[0];
     barButtonItem1 = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
