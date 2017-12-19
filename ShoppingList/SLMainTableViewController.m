@@ -39,13 +39,13 @@
     self.editing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
     
-    doneDelete     = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+    doneDelete       = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
                                                                    target: self
                                                                    action: @selector(doneDeleteAction:)];
     doneDelete.style = UIBarButtonItemStyleDone;
-    singleDelete   = self.navigationController.topViewController.navigationItem.leftBarButtonItem;
-    barButtonItem0 = self.navigationController.topViewController.navigationItem.rightBarButtonItems[0];
-    barButtonItem1 = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
+    singleDelete     = self.navigationController.topViewController.navigationItem.leftBarButtonItem;
+    barButtonItem0   = self.navigationController.topViewController.navigationItem.rightBarButtonItems[0];
+    barButtonItem1   = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     
     UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
     

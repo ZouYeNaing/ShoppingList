@@ -70,7 +70,7 @@
 - (NSString *)getTabBarTitle : (NSInteger)selectedTabIndex {
 
     NSLog(@"selectedTabIndex %ld", selectedTabIndex);
-    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
+    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
     NSString *title = [tabSetting objectAtIndex: selectedTabIndex][@"data"];
     
     return title;

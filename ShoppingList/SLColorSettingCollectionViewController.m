@@ -80,14 +80,8 @@ static NSString * const reuseIdentifier = @"Cell";
     UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
     if([color isEqual: [colorCode objectAtIndex: indexPath.row]]) {
-        NSLog(@"Color Equals");
         UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag: 100];
         recipeImageView.image = [UIImage imageNamed: @"checkmark"];
-        /*
-        cell.contentView.backgroundColor = [UIColor blackColor];
-        cell.layer.borderWidth = 0.5f;
-        cell.layer.cornerRadius = 5.0f;
-         */
     }
     
     cell.contentView.backgroundColor = [colorCode objectAtIndex: indexPath.row];
@@ -127,7 +121,6 @@ static NSString * const reuseIdentifier = @"Cell";
         self.tabBarController.tabBar.tintColor = color;
         self.navigationController.navigationBar.tintColor = color;
     }
-    
 }
 
 #pragma mark <UICollectionViewDelegate>

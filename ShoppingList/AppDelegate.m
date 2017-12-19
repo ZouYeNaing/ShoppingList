@@ -43,17 +43,10 @@
     NSDictionary *newDic5 = @{@"status": @YES, @"data": @"設定"};
     
     NSMutableArray *tabSettingArray = [@[newDic1, newDic2, newDic3, newDic4, newDic5] mutableCopy];
-//    [tabSettingArray addObject: newDic1];
-//    [tabSettingArray addObject: newDic2];
-//    [tabSettingArray addObject: newDic3];
-//    [tabSettingArray addObject: newDic4];
-//    [tabSettingArray addObject: newDic5];
     
-    // NSMutableArray *newMutableArr = [@[@"value4", @"value5", @"value6"] mutableCopy];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"SavedTab": tabSettingArray}];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"Tab": tabSettingArray}];
-    
-    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
+    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
     [[SLTabMManager sharedInstance] setTabBarTitle: tabSetting];
     [[SLTabMManager sharedInstance] hideTabBarItem: tabSetting];
 

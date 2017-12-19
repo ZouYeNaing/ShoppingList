@@ -31,10 +31,10 @@
     
     tabTitleMArray = [NSMutableArray array];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]){
-        tabSettingArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
+    if([[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]){
+        tabSettingArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
     } else {
-        
+        /*
         NSDictionary *newDic1 = @{@"status": @YES, @"data": @"リスト 1"};
         NSDictionary *newDic2 = @{@"status": @YES, @"data": @"リスト 2"};
         NSDictionary *newDic3 = @{@"status": @YES, @"data": @"リスト 3"};
@@ -45,17 +45,17 @@
         [tabSettingArray addObject: newDic3];
         [tabSettingArray addObject: newDic4];
         [tabSettingArray addObject: newDic5];
+         */
     }
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
     
     longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(onLongPress:)];
     longPressRecognizer.minimumPressDuration = 1.0f;
     [self.tableView addGestureRecognizer: longPressRecognizer];
     
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action: @selector(hideKeyboard)];
     [self.tableView addGestureRecognizer:gestureRecognizer];
-    
     
     //UISwitchColor
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
@@ -117,7 +117,7 @@
     
     [tabSettingArray replaceObjectAtIndex: self.indexpath.row withObject: changeTitle];
     
-    [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"Tab"];
+    [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     self.tabBarController.tabBar.items[self.indexpath.row].title = textField.text;
@@ -197,84 +197,10 @@
     [changeStatus setValue: [tabSettingArray objectAtIndex: rowIndex][@"data"] forKey: @"data"];
     
     [tabSettingArray replaceObjectAtIndex: rowIndex withObject: changeStatus];
-    [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"Tab"];
+    [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [[SLTabMManager sharedInstance] hideTabBarItem: tabSettingArray];
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*UIAlertController *alert = [UIAlertController alertControllerWithTitle: @"Change List Title"
- message: @""
- preferredStyle: UIAlertControllerStyleAlert];
- 
- UIAlertAction *saveAction = [UIAlertAction actionWithTitle: @"Save" style:UIAlertActionStyleDefault
- handler: ^(UIAlertAction * action) {
- 
- NSLog(@"Save Text : %@", alert.textFields[0].text);
- 
- // [tabTitleMArray replaceObjectAtIndex: self.indexpath.row withObject: alert.textFields[0].text];
- 
- NSMutableDictionary *changeTitle = [NSMutableDictionary dictionary];
- [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
- [changeTitle setValue: alert.textFields[0].text  forKey: @"data"];
- 
- [tabSettingArray replaceObjectAtIndex: self.indexpath.row withObject: changeTitle];
- 
- [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"Tab"];
- [[NSUserDefaults standardUserDefaults] synchronize];
- 
- self.tabBarController.tabBar.items[self.indexpath.row].title = alert.textFields[0].text;
- 
- [self.tableView reloadData];
- }];
- UIAlertAction* cancelAction = [UIAlertAction actionWithTitle: @"Cancel" style:UIAlertActionStyleDefault
- handler: ^(UIAlertAction * action) {
- //cancel action
- }];
- [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
- // A block for configuring the text field prior to displaying the alert
- // textField.placeholder = [tabTitleMArray objectAtIndex: self.indexpath.row];
- textField.placeholder = [tabSettingArray objectAtIndex: self.indexpath.row][@"data"];
- 
- }];
- [alert addAction: saveAction];
- [alert addAction: cancelAction];
- [self presentViewController: alert animated: YES completion: nil];
- */
-
 
 @end
