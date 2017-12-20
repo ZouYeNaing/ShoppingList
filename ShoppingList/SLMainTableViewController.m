@@ -258,6 +258,229 @@
     }
 }
 
+
+// Add List from VC Delegate.
+-(void)addListData {
+    
+    NSMutableArray *indexArray = [NSMutableArray array];
+    
+    for (int i=0; i < [_listAdded count]; i++) {
+        
+        [indexArray addObject: [NSNumber numberWithInt: i]];
+        
+    }
+    //animation
+    
+    [CATransaction begin];
+    [self.tableView setUserInteractionEnabled:NO];
+    
+    [CATransaction setCompletionBlock:^{
+        
+        [self.tableView reloadData];
+        [_listAdded removeAllObjects]; // for unconflict adding data.
+        
+        [self.tableView setUserInteractionEnabled:YES];
+    }];
+    
+    [self.tableView beginUpdates];
+    
+    for (int i=0; i < [indexArray count]; i++) {
+        
+        NSInteger addIndex = [indexArray[i] integerValue];
+        NSLog(@"indexex: %ld", (long)addIndex);
+        
+        if ([_listAdded[i] isEqualToString:@""]) {
+            
+            NSLog(@"Added Empty.");
+            
+        } else {
+            
+            [self.tableView insertRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: addIndex inSection: 0]] withRowAnimation:UITableViewRowAnimationTop];
+            
+            NSMutableDictionary *addListDict = [NSMutableDictionary dictionary];
+            [addListDict setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
+            [addListDict setValue: _listAdded[i] forKey: @"data"];
+            
+            [mainVCArray insertObject: addListDict atIndex: 0];
+            
+        }
+        
+    }
+    
+    [self.tableView endUpdates];
+    
+    [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+    [self changeTrashButtom: mainVCArray];
+    [[SLShoppingListData sharedInstance] saveData];
+    
+    [CATransaction commit];
+    
+}
+
+// Edit List from VC Delegate.
+-(void)editListData {
+    
+    if (_EditedText.length > 0) {
+        
+        // animation.
+        [CATransaction begin];
+        [self.tableView setUserInteractionEnabled:NO];
+        
+        [CATransaction setCompletionBlock:^{
+            
+            [self.tableView reloadData];
+            _EditedText = NULL; // for unconflict adding data.
+            
+            [self.tableView setUserInteractionEnabled:YES];
+            
+            [self editData];
+            
+        }];
+        
+        [self.tableView beginUpdates];
+        // if (i == 0) {
+            
+            NSMutableDictionary *editList = [NSMutableDictionary dictionary];
+            [editList setValue: [mainVCArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
+            [editList setValue: _EditedText forKey: @"data"];
+            
+            [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: self.indexpath.row inSection: 0]] withRowAnimation:UITableViewRowAnimationFade];
+            
+            [mainVCArray replaceObjectAtIndex: self.indexpath.row withObject: editList];
+            
+            // [mainVCArray insertObject: editList atIndex: 0];
+            
+        // }
+        
+        [self.tableView endUpdates];
+        
+        [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+        [self changeTrashButtom: mainVCArray];
+        [[SLShoppingListData sharedInstance] saveData];
+        
+        
+        [CATransaction commit];
+        
+    }
+    
+    return;
+}
+
+- (void)editData {
+    
+    NSMutableArray *indexArray = [NSMutableArray array];
+    
+    for (int i=0; i < [_listEdited count]; i++) {
+        
+        [indexArray addObject: [NSNumber numberWithInt: i]];
+        
+    }
+    // animation.
+    [CATransaction begin];
+    [self.tableView setUserInteractionEnabled:NO];
+    
+    [CATransaction setCompletionBlock:^{
+        
+        [self.tableView reloadData];
+        [_listEdited removeAllObjects]; // for unconflict adding data.
+        
+        [self.tableView setUserInteractionEnabled:YES];
+    }];
+    
+    [self.tableView beginUpdates];
+    
+    for (int i = 0; i < [indexArray count]; i++) {
+        
+        NSInteger editIndex = [indexArray[i] integerValue];
+        NSLog(@"indexex: %ld", (long)editIndex);
+        
+        if ([_listEdited[i] isEqualToString:@""]) {
+            
+            NSLog(@"Edited Empty.");
+            
+        } else {
+            
+            [self.tableView insertRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: editIndex inSection: 0]] withRowAnimation:UITableViewRowAnimationTop];
+            
+            NSMutableDictionary *editListDict = [NSMutableDictionary dictionary];
+            [editListDict setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
+            [editListDict setValue: _listEdited[i] forKey: @"data"];
+            
+            [mainVCArray insertObject: editListDict atIndex: 0];
+        }
+    }
+    
+    [self.tableView endUpdates];
+    
+    [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+    [self changeTrashButtom: mainVCArray];
+    [[SLShoppingListData sharedInstance] saveData];
+    
+    [CATransaction commit];
+    
+}
+
+-(void)onLongPress: (UILongPressGestureRecognizer*)longPress {
+    
+    NSLog(@"UILongPressGestureRecognizer");
+    
+    if (longPress.state != UIGestureRecognizerStateBegan) {
+        
+        return;
+        
+    }
+    
+    CGPoint p = [longPress locationInView: self.tableView];
+    self.indexpath = [self.tableView indexPathForRowAtPoint: p];
+    
+    if (self.indexpath == nil) {
+        
+        return;
+        
+    }
+    
+    [self performSegueWithIdentifier: @"showEditViewController" sender: nil];
+    
+}
+
+#pragma mark - Single Delete.
+// Delete List One by One.
+- (IBAction)SingleDelete: (id)sender {
+    
+    NSLog(@"SingleDeleteAction");
+    
+    self.editing = NO;
+    self.navigationItem.leftBarButtonItem = doneDelete;
+    self.tableView.allowsSelection = NO;
+    
+    barButtonItem0.enabled = NO;
+    barButtonItem1.enabled = NO;
+    
+}
+
+// Change NavigationBar button after delete.
+-(IBAction) doneDeleteAction: (id)sender
+{
+    NSLog(@"doneDeleteAction");
+    
+    self.editing = YES;
+    self.navigationItem.leftBarButtonItem = singleDelete;
+    self.tableView.allowsSelection = YES;
+    
+    barButtonItem0.enabled = YES;
+    barButtonItem1.enabled = YES;
+    
+}
+
+#pragma mark - Add Button.
+// Add Button.
+- (IBAction)addButton: (id)sender {
+    
+    [self performSegueWithIdentifier: @"showAddViewController" sender: nil];
+}
+
+#pragma mark - Trash Button and Delete.
+// TrashButton appear if deleted list has.
 - (void)changeTrashButtom: (NSArray *)VCArray {
     
     for (int i=0; i < [VCArray count]; i++) {
@@ -272,41 +495,16 @@
     }
 }
 
-- (IBAction)SingleDelete: (id)sender {
+//Trash Button.
+- (IBAction)trashButton: (id)sender {
     
-    NSLog(@"SingleDeleteAction");
-    
-    self.editing = NO;
-    self.navigationItem.leftBarButtonItem = doneDelete;
-    self.tableView.allowsSelection = NO;
-    
-    barButtonItem0.enabled = NO;
-    barButtonItem1.enabled = NO;
-    
-}
-
--(IBAction) doneDeleteAction: (id)sender
-{
-    NSLog(@"doneDeleteAction");
-    
-    self.editing = YES;
-    self.navigationItem.leftBarButtonItem = singleDelete;
-    self.tableView.allowsSelection = YES;
-    
-    barButtonItem0.enabled = YES;
-    barButtonItem1.enabled = YES;
-    
-}
-
-- (IBAction)deleteAllList: (id)sender {
-    
-    NSLog(@"deleteAllList");
+    NSLog(@"trashButton");
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle: nil
                                                                              message: nil
                                                                       preferredStyle: UIAlertControllerStyleActionSheet];
     [alertController addAction: [UIAlertAction actionWithTitle: @"Delete" style: UIAlertActionStyleDefault handler: ^(UIAlertAction *action) {
-        [self deleteData];
+        [self deleteAllList];
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: @"Cancel" style: UIAlertActionStyleCancel handler: ^(UIAlertAction *action) {
         // [self cancelButtonPushed];
@@ -316,7 +514,7 @@
     
 }
 
--(void)deleteData {
+-(void)deleteAllList {
     
     NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
     
@@ -361,195 +559,39 @@
     
 }
 
+#pragma mark - Middle Line of Deleted List.
 
--(void)addListData {
+-(NSAttributedString *)deletedListLine: (NSString *) deleteString {
     
+    NSDictionary *attributesDict = [NSDictionary dictionary];
     
-    NSMutableArray *indexArray = [NSMutableArray array];
+    UIFont *font = [UIFont fontWithName:@"HiraKakuProN-W3" size: 15];
     
-    for (int i=0; i < [_listAdded count]; i++) {
+    if(selectedColor != NULL) {
         
-        [indexArray addObject: [NSNumber numberWithInt: i]];
+        attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
+                            NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                            NSStrikethroughColorAttributeName: selectedColor,
+                            NSFontAttributeName: font};
+    } else {
         
-    }
-    //animation
-    
-    [CATransaction begin];
-    [self.tableView setUserInteractionEnabled:NO];
-    
-    [CATransaction setCompletionBlock:^{
-        
-        [self.tableView reloadData];
-        [_listAdded removeAllObjects]; // for unconflict adding data.
-        
-        [self.tableView setUserInteractionEnabled:YES];
-    }];
-    
-    [self.tableView beginUpdates];
-    
-    for (int i=0; i < [indexArray count]; i++) {
-        
-        NSInteger addIndex = [indexArray[i] integerValue];
-        NSLog(@"indexex: %ld", (long)addIndex);
-        
-        if ([_listAdded[i] isEqualToString:@""]) {
-            
-            NSLog(@"Added Empty.");
-            
-        } else {
-            
-            [self.tableView insertRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: addIndex inSection: 0]] withRowAnimation:UITableViewRowAnimationTop];
-            
-            NSMutableDictionary *addList = [NSMutableDictionary dictionary];
-            [addList setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
-            [addList setValue: _listAdded[i] forKey: @"data"];
-            
-            [mainVCArray insertObject: addList atIndex: 0];
-            
-        }
+        attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
+                            NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                            NSStrikethroughColorAttributeName: [UIColor redColor],
+                            NSFontAttributeName: font};
         
     }
     
-    [self.tableView endUpdates];
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString: deleteString
+                                                                         attributes: attributesDict];
+    CGSize size = [attributedText size];
+    [attributedText drawInRect:CGRectMake(0, 0, size.width, size.height)];
     
-    [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-    [self changeTrashButtom: mainVCArray];
-    [[SLShoppingListData sharedInstance] saveData];
-    
-    [CATransaction commit];
+    return attributedText;
     
 }
 
--(void)editListData {
-    
-    if (_EditedText.length > 0) {
-        
-        // animation.
-        [CATransaction begin];
-        [self.tableView setUserInteractionEnabled:NO];
-        
-        [CATransaction setCompletionBlock:^{
-            
-            [self.tableView reloadData];
-            _EditedText = NULL; // for unconflict adding data.
-            
-            [self.tableView setUserInteractionEnabled:YES];
-            
-            [self addList];
-            
-        }];
-        
-        [self.tableView beginUpdates];
-        // if (i == 0) {
-            
-            NSMutableDictionary *editList = [NSMutableDictionary dictionary];
-            [editList setValue: [mainVCArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
-            [editList setValue: _EditedText forKey: @"data"];
-            
-            [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: self.indexpath.row inSection: 0]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [mainVCArray replaceObjectAtIndex: self.indexpath.row withObject: editList];
-            
-            // [mainVCArray insertObject: editList atIndex: 0];
-            
-        // }
-        
-        [self.tableView endUpdates];
-        
-        [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-        [self changeTrashButtom: mainVCArray];
-        [[SLShoppingListData sharedInstance] saveData];
-        
-        
-        [CATransaction commit];
-        
-    }
-    
-    return;
-}
-
-- (void)addList {
-    
-    NSMutableArray *indexArray = [NSMutableArray array];
-    
-    for (int i=0; i < [_listEdited count]; i++) {
-        
-        [indexArray addObject: [NSNumber numberWithInt: i]];
-        
-    }
-    // animation.
-    [CATransaction begin];
-    [self.tableView setUserInteractionEnabled:NO];
-    
-    [CATransaction setCompletionBlock:^{
-        
-        [self.tableView reloadData];
-        [_listEdited removeAllObjects]; // for unconflict adding data.
-        
-        [self.tableView setUserInteractionEnabled:YES];
-    }];
-    
-    [self.tableView beginUpdates];
-    
-    for (int i = 0; i < [indexArray count]; i++) {
-        
-        NSInteger editIndex = [indexArray[i] integerValue];
-        NSLog(@"indexex: %ld", (long)editIndex);
-        
-        if ([_listEdited[i] isEqualToString:@""]) {
-            
-            NSLog(@"Edited Empty.");
-            
-        } else {
-            
-            /*
-             if (i == 0) {
-             
-             NSMutableDictionary *editList = [NSMutableDictionary dictionary];
-             [editList setValue: [mainVCArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
-             [editList setValue: _listEdited[0] forKey: @"data"];
-             
-             [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: self.indexpath.row inSection: 0]] withRowAnimation:UITableViewRowAnimationFade];
-             
-             [mainVCArray replaceObjectAtIndex: self.indexpath.row withObject: editList];
-             
-             // [mainVCArray insertObject: editList atIndex: 0];
-             
-             } else {
-             */
-            
-            [self.tableView insertRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: editIndex inSection: 0]] withRowAnimation:UITableViewRowAnimationTop];
-            
-            NSMutableDictionary *editList = [NSMutableDictionary dictionary];
-            [editList setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
-            [editList setValue: _listEdited[i] forKey: @"data"];
-            
-            [mainVCArray insertObject: editList atIndex: 0];
-            // }
-        }
-    }
-    
-    [self.tableView endUpdates];
-    
-    [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-    [self changeTrashButtom: mainVCArray];
-    [[SLShoppingListData sharedInstance] saveData];
-    
-    [CATransaction commit];
-    
-
-}
-
-- (IBAction)addList: (id)sender {
-    
-    [self performSegueWithIdentifier: @"showAddViewController" sender: nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
-    
-}
+#pragma mark - Table view data source
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section {
     
@@ -570,7 +612,7 @@
     if ([[mainVCArray objectAtIndex: indexPath.row][@"status"] boolValue] == YES) {
         
         cell.textLabel.text = nil;
-        cell.textLabel.attributedText = [self deletedText: [mainVCArray objectAtIndex: indexPath.row][@"data"]];
+        cell.textLabel.attributedText = [self deletedListLine: [mainVCArray objectAtIndex: indexPath.row][@"data"]];
         
     } else {
         
@@ -583,61 +625,6 @@
     }
     
     return cell;
-}
-
--(NSAttributedString *)deletedText: (NSString *) deleteString {
-    
-    NSDictionary *attributesDict = [NSDictionary dictionary];
-    
-    UIFont *font = [UIFont fontWithName:@"HiraKakuProN-W3" size: 15];
-    
-    if(selectedColor != NULL) {
-        
-        attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
-                                          NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                          NSStrikethroughColorAttributeName: selectedColor,
-                                          NSFontAttributeName: font};
-    } else {
-        
-        attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
-                            NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                            NSStrikethroughColorAttributeName: [UIColor redColor],
-                            NSFontAttributeName: font};
-        
-    }
-    
-    
-    
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString: deleteString
-                                                                         attributes: attributesDict];
-    CGSize size = [attributedText size];
-    [attributedText drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    
-    return attributedText;
-    
-}
-
--(void)onLongPress: (UILongPressGestureRecognizer*)longPress {
-    
-    NSLog(@"UILongPressGestureRecognizer");
-    
-    if (longPress.state != UIGestureRecognizerStateBegan) {
-        
-        return;
-        
-    }
-    
-    CGPoint p = [longPress locationInView: self.tableView];
-    self.indexpath = [self.tableView indexPathForRowAtPoint: p];
-    
-    if (self.indexpath == nil) {
-        
-        return;
-        
-    }
-    
-    [self performSegueWithIdentifier: @"showEditViewController" sender: nil];
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -824,16 +811,6 @@
         
     }
 }
-
-#pragma mark - SLAddViewControllerDelegate
-
-/*
--(void)addedList:(NSArray *)list {
-    
-    _listAdded = list.mutableCopy;
-    
-}
-*/
 
 #pragma mark - SLEditViewControllerDelegate
 

@@ -92,13 +92,13 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="jUt-c9-zga">
                                 <connections>
-                                    <action selector="addList:" destination="4p6-NT-efO" id="4VP-X7-haX"/>
+                                    <action selector="addButton:" destination="4p6-NT-efO" id="vbB-hK-p5A"/>
                                     <segue destination="nuN-Cd-yan" kind="presentation" identifier="showAddViewController" modalTransitionStyle="crossDissolve" id="Vey-ij-NSD"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="gyt-go-mdY">
                                 <connections>
-                                    <action selector="deleteAllList:" destination="4p6-NT-efO" id="E0D-gj-Myf"/>
+                                    <action selector="trashButton:" destination="4p6-NT-efO" id="YGv-qQ-Gfu"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -160,13 +160,13 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="sGs-tb-vbb">
                                 <connections>
-                                    <action selector="addList:" destination="gSM-W8-paa" id="RqC-0p-2Ve"/>
+                                    <action selector="addButton:" destination="gSM-W8-paa" id="xu4-Pi-Z8m"/>
                                     <segue destination="7uV-hq-PdH" kind="presentation" identifier="showAddViewController" modalTransitionStyle="crossDissolve" id="Ilz-4B-l7O"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="Hjh-p7-po5">
                                 <connections>
-                                    <action selector="deleteAllList:" destination="gSM-W8-paa" id="rG1-qT-Ead"/>
+                                    <action selector="trashButton:" destination="gSM-W8-paa" id="w38-QV-kue"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -380,13 +380,13 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="I0N-cY-zJE">
                                 <connections>
-                                    <action selector="addList:" destination="3ui-no-vzm" id="QKa-Xe-yMd"/>
+                                    <action selector="addButton:" destination="3ui-no-vzm" id="OfL-3F-ZWd"/>
                                     <segue destination="7wu-7Z-qcn" kind="presentation" identifier="showAddViewController" modalTransitionStyle="crossDissolve" id="GIf-TU-gSI"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="sQQ-YL-ud8">
                                 <connections>
-                                    <action selector="deleteAllList:" destination="3ui-no-vzm" id="Qef-CM-QAj"/>
+                                    <action selector="trashButton:" destination="3ui-no-vzm" id="tC5-hS-HlA"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -514,13 +514,13 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="LYr-Cj-VMM">
                                 <connections>
-                                    <action selector="addList:" destination="eps-8M-Roy" id="kXy-sf-NmW"/>
+                                    <action selector="addButton:" destination="eps-8M-Roy" id="cMV-ib-0S6"/>
                                     <segue destination="oqS-H6-Abb" kind="presentation" identifier="showAddViewController" modalTransitionStyle="crossDissolve" id="9Yu-49-aFe"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="BXs-x3-A1u">
                                 <connections>
-                                    <action selector="deleteAllList:" destination="eps-8M-Roy" id="nhE-OE-3XD"/>
+                                    <action selector="trashButton:" destination="eps-8M-Roy" id="l02-zO-MYy"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -756,7 +756,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IyT-i9-hQl" id="Fb7-Ta-G1x">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
