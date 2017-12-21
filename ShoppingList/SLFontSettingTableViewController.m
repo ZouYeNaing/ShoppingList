@@ -40,7 +40,11 @@
     
     [super viewWillAppear: animated];
     
+    // selectedRow = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedIndex"] intValue];
+
     selectedRow = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedIndex"] intValue];
+    
+    
 
 }
 
@@ -49,6 +53,7 @@
     [super viewDidAppear: animated];
     
     [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: selectedRow inSection: 0] atScrollPosition: UITableViewScrollPositionTop animated: YES];
+    
 }
 
 #pragma mark - Table view data source
@@ -68,6 +73,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if(indexPath.row == selectedRow){
         
@@ -99,6 +106,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(selectedRow) forKey: @"selectedIndex"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat: @"%@", [fontFamily objectAtIndex: selectedRow]] forKey: @"selectedFont"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.tableView reloadData];
     
     // [self.navigationController popViewControllerAnimated:YES];
     
