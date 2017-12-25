@@ -47,6 +47,9 @@
     barButtonItem0   = self.navigationController.topViewController.navigationItem.rightBarButtonItems[0];
     barButtonItem1   = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     
+    barButtonTrash = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
+    [SLShoppingListData sharedInstance].trashButtonItem = barButtonTrash;
+    
     UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
     
     selectedTabIndex = vc.tabBarItem.tag;
@@ -199,7 +202,6 @@
     [self.tableView addGestureRecognizer: longPressRecognizer];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -219,6 +221,8 @@
     
     [self.tableView reloadData];
     
+    [self checkButtonEnable: mainVCArray];
+    
 }
 
 -(void)viewDidAppear: (BOOL)animated {
@@ -229,6 +233,13 @@
     
     barButtonTrash = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     [SLShoppingListData sharedInstance].trashButtonItem = barButtonTrash;
+    
+    if (mainVCArray.count == 0) {
+        
+        singleDelete.enabled = NO;
+        barButtonTrash.enabled = NO;
+        
+    }
     
     mainVCArray = [SLShoppingListData sharedInstance].getSLDataArray;
     [self changeTrashButtom: mainVCArray];
@@ -280,6 +291,8 @@
         [_listAdded removeAllObjects]; // for unconflict adding data.
         
         [self.tableView setUserInteractionEnabled:YES];
+        
+        [self checkButtonEnable: mainVCArray];
     }];
     
     [self.tableView beginUpdates];
@@ -480,6 +493,19 @@
 }
 
 #pragma mark - Trash Button and Delete.
+// Check TrashButton and Edit Button is Enable or not.
+- (void) checkButtonEnable: (NSMutableArray *) checkMainVCArray {
+    
+    if (checkMainVCArray.count == 0) {
+        barButtonTrash.enabled = NO;
+        singleDelete.enabled   = NO;
+    }else {
+        barButtonTrash.enabled = YES;
+        singleDelete.enabled   = YES;
+    }
+    
+}
+
 // TrashButton appear if deleted list has.
 - (void)changeTrashButtom: (NSArray *)VCArray {
     
@@ -536,6 +562,7 @@
     [CATransaction setCompletionBlock:^{
         [self.tableView reloadData];
         [self.tableView setUserInteractionEnabled:YES];
+        [self checkButtonEnable: mainVCArray];
     }];
     
     [self.tableView beginUpdates];
@@ -785,6 +812,7 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [self checkButtonEnable: mainVCArray];
         });
     }
 }

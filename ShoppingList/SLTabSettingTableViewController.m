@@ -203,4 +203,24 @@
     [[SLTabMManager sharedInstance] hideTabBarItem: tabSettingArray];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    UIView *footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    
+    UILabel *detailLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 0, self.view.frame.size.width - 20, 40)];
+    detailLabel.textColor = [UIColor darkGrayColor];
+    detailLabel.numberOfLines = 0;
+    detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    detailLabel.text = @"Long Pressed On Each List Can Edit List Name.";
+    detailLabel.textAlignment = NSTextAlignmentCenter;
+    [detailLabel setFont: [UIFont systemFontOfSize: 14]];
+    [footerView addSubview: detailLabel];
+    
+    return footerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 40;
+}
+
 @end
