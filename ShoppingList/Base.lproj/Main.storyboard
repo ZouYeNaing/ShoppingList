@@ -608,7 +608,7 @@
         <scene sceneID="LnJ-s9-96B">
             <objects>
                 <navigationController id="UQr-aG-y5j" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Setting" image="setting" id="Cti-kQ-zqV"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="Setting" image="setting" id="Cti-kQ-zqV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1gG-rj-nZW">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

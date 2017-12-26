@@ -201,7 +201,18 @@
     longPressRecognizer.minimumPressDuration = 1.0f;
     [self.tableView addGestureRecognizer: longPressRecognizer];
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.tableView addGestureRecognizer: swipeLeft];
+    swipeLeft.delegate = self;
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:swipeRight];
+    swipeRight.delegate = self;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -453,6 +464,21 @@
     }
     
     [self performSegueWithIdentifier: @"showEditViewController" sender: nil];
+    
+}
+
+#pragma mark - Swipe Gesture.
+
+-(void) swipe:(UISwipeGestureRecognizer *) recognizer {
+    
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionRight){
+        NSLog(@"swipe right");
+        [SLShoppingListData sharedInstance].tabBarController.selectedIndex -= 1;
+    }
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"Swipe left");
+        [SLShoppingListData sharedInstance].tabBarController.selectedIndex += 1;
+    }
     
 }
 

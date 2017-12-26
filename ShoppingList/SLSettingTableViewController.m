@@ -32,6 +32,16 @@
     
     NSLog(@"Count : %ld", [settingDataArray count]);
     NSLog(@"viewDidLoad SLSettingTableViewController");
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.tableView addGestureRecognizer: swipeLeft];
+    swipeLeft.delegate = self;
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:swipeRight];
+    swipeRight.delegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -57,6 +67,21 @@
     
     NSLog(@"Count : %ld", [settingDataArray count]);
 
+}
+
+#pragma mark - Swipe Gesture.
+
+-(void) swipe:(UISwipeGestureRecognizer *) recognizer {
+    
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionRight){
+        NSLog(@"swipe right");
+        [SLShoppingListData sharedInstance].tabBarController.selectedIndex -= 1;
+    }
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"Swipe left");
+        [SLShoppingListData sharedInstance].tabBarController.selectedIndex += 1;
+    }
+    
 }
 
 #pragma mark - Table view data source
