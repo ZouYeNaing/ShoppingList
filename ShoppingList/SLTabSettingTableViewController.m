@@ -24,7 +24,9 @@
 @implementation SLTabSettingTableViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     switchMArray =  [@[@YES, @YES, @YES, @YES, @YES] mutableCopy];
     
     tabSettingArray = [NSMutableArray array];
@@ -34,18 +36,6 @@
     if([[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]){
         tabSettingArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
     } else {
-        /*
-        NSDictionary *newDic1 = @{@"status": @YES, @"data": @"リスト 1"};
-        NSDictionary *newDic2 = @{@"status": @YES, @"data": @"リスト 2"};
-        NSDictionary *newDic3 = @{@"status": @YES, @"data": @"リスト 3"};
-        NSDictionary *newDic4 = @{@"status": @YES, @"data": @"リスト 4"};
-        NSDictionary *newDic5 = @{@"status": @YES, @"data": @"設定"};
-        [tabSettingArray addObject: newDic1];
-        [tabSettingArray addObject: newDic2];
-        [tabSettingArray addObject: newDic3];
-        [tabSettingArray addObject: newDic4];
-        [tabSettingArray addObject: newDic5];
-         */
     }
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
@@ -61,6 +51,16 @@
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     switchColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
+}
+
+- (IBAction)moveRow:(id)sender {
+
+    if(self.editing == NO) {
+        self.editing = YES;
+    } else {
+        self.editing = NO;
+    }
+    [self.tableView reloadData];
 }
 
 - (void) hideKeyboard {
@@ -162,8 +162,12 @@
     textField.text = [tabSettingArray objectAtIndex: indexPath.row][@"data"];
     
     // UISwitch.
-    UISwitch *switchView = [[UISwitch alloc] initWithFrame: CGRectMake(120, 13, 375, 30)];
-    cell.accessoryView = switchView;
+    UISwitch *switchView = [[UISwitch alloc] initWithFrame: CGRectMake(800, 13, 175, 30)];
+    if (self.editing == YES) {
+        cell.editingAccessoryView = switchView;
+    } else {
+        cell.accessoryView = switchView;
+    }
     switchView.tag = (int)indexPath.row;
     switchView.tintColor = switchColor;
     switchView.onTintColor = switchColor;
@@ -221,6 +225,58 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 40;
+}
+
+- (UITableViewCellEditingStyle)tableView: (UITableView *)tableView editingStyleForRowAtIndexPath: (NSIndexPath *)indexPath {
+    
+    if (self.editing == YES) {
+        
+        return UITableViewCellEditingStyleNone;
+        
+    } else {
+        
+        return UITableViewCellEditingStyleDelete;
+        
+    }
+    
+}
+
+- (BOOL)tableView: (UITableView *)tableView canMoveRowAtIndexPath: (NSIndexPath *)indexPath {
+    
+    return YES;
+    
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle: (UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+- (BOOL)tableView: (UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath: (NSIndexPath *)indexPath {
+    
+    return NO;
+    
+}
+
+- (void)tableView: (UITableView *)tableView moveRowAtIndexPath: (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath {
+    self.tableView.delegate = self;
+    if (fromIndexPath != toIndexPath ) {
+        
+        NSMutableDictionary *toMoveDict = tabSettingArray[fromIndexPath.row];
+        
+        [tabSettingArray removeObjectAtIndex: fromIndexPath.row];
+        [tabSettingArray insertObject: toMoveDict atIndex: toIndexPath.row];
+        
+        [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[SLTabMManager sharedInstance] moveTabBarItem: fromIndexPath toIndexPath: toIndexPath];
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
+    }
 }
 
 @end

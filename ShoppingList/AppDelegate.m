@@ -43,8 +43,13 @@
     NSDictionary *newDic5 = @{@"status": @YES, @"data": @"設定"};
     
     NSMutableArray *tabSettingArray = [@[newDic1, newDic2, newDic3, newDic4, newDic5] mutableCopy];
-    
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"SavedTab": tabSettingArray}];
+    
+    NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [UIColor redColor]];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedColor": colorData}];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedIndex": @(46)}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedFont": @"Helvetica"}];
     
     NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
     [[SLTabMManager sharedInstance] setTabBarTitle: tabSetting];

@@ -20,4 +20,5 @@
 - (void)hideTabBarItem : (NSMutableArray *)indexes;
 - (void)setTabBarTitle : (NSMutableArray *)tabSettingArray;
 - (NSString *)getTabBarTitle : (NSInteger)selectedTabIndex;
+- (void)moveTabBarItem : (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath;
 @end

@@ -25,6 +25,8 @@
     UIBarButtonItem *barButtonItem0, *barButtonItem1, *barButtonTrash, *singleDelete, *doneDelete;
     
     NSInteger selectedTabIndex;
+    
+    UISwipeGestureRecognizer *swipeLeft, *swipeRight;
 }
 
 @end
@@ -203,12 +205,12 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
     
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.tableView addGestureRecognizer: swipeLeft];
     swipeLeft.delegate = self;
     
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.tableView addGestureRecognizer:swipeRight];
     swipeRight.delegate = self;
@@ -488,12 +490,17 @@
     
     NSLog(@"SingleDeleteAction");
     
-    self.editing = NO;
+    
     self.navigationItem.leftBarButtonItem = doneDelete;
     self.tableView.allowsSelection = NO;
     
     barButtonItem0.enabled = NO;
     barButtonItem1.enabled = NO;
+    
+    swipeRight.enabled = NO;
+    swipeLeft.enabled = NO;
+    
+    self.editing = NO;
     
 }
 
@@ -508,6 +515,9 @@
     
     barButtonItem0.enabled = YES;
     barButtonItem1.enabled = YES;
+    
+    swipeRight.enabled = YES;
+    swipeLeft.enabled = YES;
     
 }
 
@@ -561,6 +571,11 @@
     [alertController addAction: [UIAlertAction actionWithTitle: @"Cancel" style: UIAlertActionStyleCancel handler: ^(UIAlertAction *action) {
         // [self cancelButtonPushed];
     }]];
+    
+    if(selectedColor != Nil)
+    {
+        alertController.view.tintColor = selectedColor;
+    }
     
     [self presentViewController: alertController animated: YES completion: nil];
     
