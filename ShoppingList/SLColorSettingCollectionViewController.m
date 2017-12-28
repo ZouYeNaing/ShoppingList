@@ -74,22 +74,18 @@ static NSString * const reuseIdentifier = @"Cell";
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: reuseIdentifier forIndexPath: indexPath];
     
-    // cell.backgroundColor = [colorCode objectAtIndex: indexPath.row];
-    
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     UIColor *color = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
+    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag: 100];
+    recipeImageView.image = nil;
+    
     if([color isEqual: [colorCode objectAtIndex: indexPath.row]]) {
-        UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag: 100];
+        // UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag: 100];
         recipeImageView.image = [UIImage imageNamed: @"checkmark"];
     }
     
     cell.contentView.backgroundColor = [colorCode objectAtIndex: indexPath.row];
-    
-    /*
-    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag: 100];
-    recipeImageView.backgroundColor = [colorCode objectAtIndex: indexPath.row];
-     */
     
     return cell;
 }
@@ -101,9 +97,16 @@ static NSString * const reuseIdentifier = @"Cell";
     NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [colorCode objectAtIndex: indexPath.row]];
     [[NSUserDefaults standardUserDefaults] setObject: colorData forKey: @"selectedColor"];
     
+//    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath: indexPath];
+//    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag: 100];
+//    recipeImageView.image = [UIImage imageNamed: @"checkmark"];
+    
     [self updateColor];
     
-    [self.navigationController popViewControllerAnimated: YES];
+    [self.collectionView reloadData];
+     
+    
+    // [self.navigationController popViewControllerAnimated: YES];
     
 }
 
@@ -115,11 +118,13 @@ static NSString * const reuseIdentifier = @"Cell";
     if (color) {
         
         [[UINavigationBar appearance] setTintColor: color];
+        // [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName: color}];
         [[UITextView appearance]      setTintColor: color];
         // [[UITabBar appearance]        setBarTintColor: color];
         [[UITabBar appearance]        setTintColor: color];
         self.tabBarController.tabBar.tintColor = color;
         self.navigationController.navigationBar.tintColor = color;
+        [self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName: color}];
     }
 }
 

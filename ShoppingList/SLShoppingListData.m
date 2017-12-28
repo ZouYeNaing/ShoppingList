@@ -96,6 +96,7 @@
     if (selectedColor) {
         
         [[UINavigationBar appearance] setTintColor: selectedColor];
+        [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName: selectedColor}];
         [[UITextView appearance]      setTintColor: selectedColor];
         [[UITabBar appearance]        setTintColor: selectedColor];
         self.tabBarController.tabBar.tintColor = selectedColor;
