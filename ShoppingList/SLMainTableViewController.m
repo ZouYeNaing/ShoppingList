@@ -71,10 +71,10 @@
             
             // Yes => Delete
             
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 2"};
+            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
             
             [mainVCArray addObject: newDic1];
             [mainVCArray addObject: newDic2];
@@ -105,10 +105,10 @@
             
             // Yes => Delete
             
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 2"};
+            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
             
             [mainVCArray addObject: newDic1];
             [mainVCArray addObject: newDic2];
@@ -140,10 +140,10 @@
             
             // Yes => Delete
             
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 2"};
+            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
             
             [mainVCArray addObject: newDic1];
             [mainVCArray addObject: newDic2];
@@ -175,10 +175,10 @@
             
             // Yes => Delete
             
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Pressed"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Pressed"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 1"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Delete Row 2"};
+            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
             
             [mainVCArray addObject: newDic1];
             [mainVCArray addObject: newDic2];

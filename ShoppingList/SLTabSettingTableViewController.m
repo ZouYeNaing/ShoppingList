@@ -259,6 +259,7 @@
 
 - (void)tableView: (UITableView *)tableView moveRowAtIndexPath: (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath {
     self.tableView.delegate = self;
+    /*
     if (fromIndexPath != toIndexPath ) {
         
         NSMutableDictionary *toMoveDict = tabSettingArray[fromIndexPath.row];
@@ -277,6 +278,7 @@
         });
         
     }
+     */
 }
 
 @end
