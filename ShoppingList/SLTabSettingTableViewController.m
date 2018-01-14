@@ -259,7 +259,7 @@
 
 - (void)tableView: (UITableView *)tableView moveRowAtIndexPath: (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath {
     self.tableView.delegate = self;
-    /*
+    
     if (fromIndexPath != toIndexPath ) {
         
         NSMutableDictionary *toMoveDict = tabSettingArray[fromIndexPath.row];
@@ -278,7 +278,16 @@
         });
         
     }
-     */
+    UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
+    
+    
+    
+    for (NSInteger i=0; i < [SLShoppingListData sharedInstance].tabBarController.viewControllers.count
+         ; i++) {
+        UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: i];
+         NSLog(@"tag item : %ld", vc.tabBarItem.tag);
+    }
+    
 }
 
 @end

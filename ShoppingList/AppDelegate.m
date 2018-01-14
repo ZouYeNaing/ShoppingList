@@ -36,7 +36,7 @@
     [[SLTabMManager sharedInstance] saveDefaultTabBarMArray];
     
     
-    NSDictionary *newDic1 = @{@"status": @YES, @"data": @"リスト 1"};
+    NSDictionary *newDic1 = @{@"status": @YES, @"data": @"リスト 1", @"path":@"FinalList0", @"key":@"List0"};
     NSDictionary *newDic2 = @{@"status": @YES, @"data": @"リスト 2"};
     NSDictionary *newDic3 = @{@"status": @YES, @"data": @"リスト 3"};
     NSDictionary *newDic4 = @{@"status": @YES, @"data": @"リスト 4"};

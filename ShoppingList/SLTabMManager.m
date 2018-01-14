@@ -80,7 +80,7 @@
         [[NSUserDefaults standardUserDefaults] setObject: data forKey: @"DefaultTabBarMArray"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        self.tabBarController.viewControllers = tabSettingArray;
+        //self.tabBarController.viewControllers = tabSettingArray;
         [self.tabBarController setViewControllers: tabSettingArray animated:YES];
         
     }
@@ -99,7 +99,7 @@
         }
     }
     
-    self.tabBarController.viewControllers = tabArray;
+    //self.tabBarController.viewControllers = tabArray;
     [self.tabBarController setViewControllers: tabArray animated:YES];
     
 }
