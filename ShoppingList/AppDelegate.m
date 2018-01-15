@@ -33,9 +33,11 @@
             [tabArray replaceObjectAtIndex:i withObject: [tab objectAtIndex: i]];
             
             NSLog(@"Title(AppDelegateSave) : %@", vc.tabBarItem.title);
+            NSLog(@"VC : %@", vc);
             
         }
         
+        // [tabBarController setViewControllers: tabArray.mutableCopy];
         [tabBarController setTabBarItem: tabArray.mutableCopy];
         
         [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
@@ -43,12 +45,11 @@
         for (int i=0; i < tabBarController.viewControllers.count; i++) {
             UIViewController *vc = [tabBarController.viewControllers objectAtIndex: i];
             NSLog(@"Title(AppDelegateSave) : %@", vc.tabBarItem.title);
-
+        }
         
         [SLShoppingListData sharedInstance].tabBarController = tabBarController;
         [SLTabMManager sharedInstance].tabBarControllertest = tabBarController;
-        
-        }
+
         
     } else {
         
