@@ -27,6 +27,8 @@
 
 - (NSMutableArray *)getSLDataArray;
 
+- (NSMutableArray *)getSLDataArray : (NSInteger)selectedTabIndex;
+
 - (void)setSLDataArray:(NSMutableArray *)SLDataArray;
 
 - (void)saveData;

@@ -21,25 +21,62 @@
     // Override point for customization after application launch.
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     
-    NSMutableArray *tabArray = [tabBarController.viewControllers mutableCopy];
-    
-    for (int i=0; i < tabArray.count; i++) {
-        UIViewController *vc = [tabArray objectAtIndex: i];
-        vc.tabBarItem.tag = i;
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"changeTabbar"]){
+        
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"changeTabbar"];
+        NSMutableArray *tab = [NSKeyedUnarchiver unarchiveObjectWithData: data];
+        
+        NSMutableArray *tabArray = [tabBarController.viewControllers mutableCopy];
+        
+        for (int i=0; i < tabArray.count; i++) {
+            UIViewController *vc = [tab objectAtIndex: i];
+            [tabArray replaceObjectAtIndex:i withObject: [tab objectAtIndex: i]];
+            
+            NSLog(@"Title(AppDelegateSave) : %@", vc.tabBarItem.title);
+            
+        }
+        
+        [tabBarController setTabBarItem: tabArray.mutableCopy];
+        
+        [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
+        
+        for (int i=0; i < tabBarController.viewControllers.count; i++) {
+            UIViewController *vc = [tabBarController.viewControllers objectAtIndex: i];
+            NSLog(@"Title(AppDelegateSave) : %@", vc.tabBarItem.title);
+
+        
+        [SLShoppingListData sharedInstance].tabBarController = tabBarController;
+        [SLTabMManager sharedInstance].tabBarControllertest = tabBarController;
+        
+        }
+        
+    } else {
+        
+        NSMutableArray *tabArray = [tabBarController.viewControllers mutableCopy];
+        
+        for (int i=0; i < tabArray.count; i++) {
+            UIViewController *vc = [tabArray objectAtIndex: i];
+            vc.tabBarItem.tag = i;
+            NSLog(@"Title(AppDelegate) : %@", vc.tabBarItem.title);
+            
+        }
+        
+        [tabBarController setTabBarItem: tabArray.mutableCopy];
+        [SLShoppingListData sharedInstance].tabBarController = tabBarController;
+        [SLTabMManager sharedInstance].tabBarController = tabBarController;
+         [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
     }
     
-    [tabBarController setTabBarItem: tabArray.mutableCopy];
     
+    /*
     [SLShoppingListData sharedInstance].tabBarController = tabBarController;
     [SLTabMManager sharedInstance].tabBarController = tabBarController;
+    */
     
-    [[SLTabMManager sharedInstance] saveDefaultTabBarMArray];
-    
-    
-    NSDictionary *newDic1 = @{@"status": @YES, @"data": @"リスト 1", @"path":@"FinalList0", @"key":@"List0"};
-    NSDictionary *newDic2 = @{@"status": @YES, @"data": @"リスト 2"};
-    NSDictionary *newDic3 = @{@"status": @YES, @"data": @"リスト 3"};
-    NSDictionary *newDic4 = @{@"status": @YES, @"data": @"リスト 4"};
+    NSDictionary *newDic1 = @{@"status": @YES, @"data": @"リスト 1", @"path":@"FinalList0", @"key":@"List0", @"tab":@"0"};
+    NSDictionary *newDic2 = @{@"status": @YES, @"data": @"リスト 2", @"path":@"FinalList1", @"key":@"List1", @"tab":@"1"};
+    NSDictionary *newDic3 = @{@"status": @YES, @"data": @"リスト 3", @"path":@"FinalList2", @"key":@"List2", @"tab":@"2"};
+    NSDictionary *newDic4 = @{@"status": @YES, @"data": @"リスト 4", @"path":@"FinalList3", @"key":@"List3", @"tab":@"3"};
     NSDictionary *newDic5 = @{@"status": @YES, @"data": @"設定"};
     
     NSMutableArray *tabSettingArray = [@[newDic1, newDic2, newDic3, newDic4, newDic5] mutableCopy];
@@ -52,6 +89,8 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedFont": @"Helvetica"}];
     
     NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
+    
+    
     [[SLTabMManager sharedInstance] setTabBarTitle: tabSetting];
     [[SLTabMManager sharedInstance] hideTabBarItem: tabSetting];
 

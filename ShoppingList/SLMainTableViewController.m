@@ -42,8 +42,8 @@
     self.tableView.allowsSelectionDuringEditing = YES;
     
     doneDelete       = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-                                                                   target: self
-                                                                   action: @selector(doneDeleteAction:)];
+                                                                     target: self
+                                                                     action: @selector(doneDeleteAction:)];
     doneDelete.style = UIBarButtonItemStyleDone;
     singleDelete     = self.navigationController.topViewController.navigationItem.leftBarButtonItem;
     barButtonItem0   = self.navigationController.topViewController.navigationItem.rightBarButtonItems[0];
@@ -58,146 +58,190 @@
     
     [[SLShoppingListData sharedInstance] createNSDictionary];
     
-    if (selectedTabIndex == 0) { // For first tab.
+    
+    NSMutableArray *saveData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
+    
+    NSString *path = [saveData objectAtIndex: selectedTabIndex][@"path"];
+    NSString *key = [saveData objectAtIndex: selectedTabIndex][@"key"];
+    
+    
+    [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: path]] forKey: key];
+    
+    if (![[SLShoppingListData sharedInstance].SLDict objectForKey: key]) {
         
-        [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList0"]]
-                                                       forKey: @"List0"];
+        NSLog(@"No SLDataArray");
         
-        if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List0"]) {
-            
-            NSLog(@"No SLDataArray");
-            
-            mainVCArray = [NSMutableArray array];
-            
-            // Yes => Delete
-            
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
-            
-            [mainVCArray addObject: newDic1];
-            [mainVCArray addObject: newDic2];
-            [mainVCArray addObject: newDic3];
-            [mainVCArray addObject: newDic4];
-            
-            [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-            [self changeTrashButtom: mainVCArray];
-            [[SLShoppingListData sharedInstance] saveData];
-            
-        } else {
-            
-            NSLog(@"Is SLDataDict");
-            
-            mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List0"];
-            
-        }
-    } else if (selectedTabIndex == 1) { // For second tab.
+        mainVCArray = [NSMutableArray array];
         
-        [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList1"]]
-                                                      forKey: @"List1"];
+        // Yes => Delete
         
-        if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List1"]) {
-            
-            NSLog(@"No SLData2Array");
-            
-            mainVCArray = [NSMutableArray array];
-            
-            // Yes => Delete
-            
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
-            
-            [mainVCArray addObject: newDic1];
-            [mainVCArray addObject: newDic2];
-            [mainVCArray addObject: newDic3];
-            [mainVCArray addObject: newDic4];
-            
-            [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-            [self changeTrashButtom: mainVCArray];
-            [[SLShoppingListData sharedInstance] saveData];
-            
-        } else {
-            
-            NSLog(@"Is SLDataDict");
-            
-            mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List1"];
-            
-        }
+        NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": key};
+        NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+        NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Press for Edit Data"};
+        NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Press for Delete"};
         
-    } else if (selectedTabIndex == 2) { // For third tab.
+        [mainVCArray addObject: newDic1];
+        [mainVCArray addObject: newDic2];
+        [mainVCArray addObject: newDic3];
+        [mainVCArray addObject: newDic4];
         
-        [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList2"]]
-                                                      forKey: @"List2"];
+        [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+        [self changeTrashButtom: mainVCArray];
+        [[SLShoppingListData sharedInstance] saveData];
         
-        if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List2"]) {
-            
-            NSLog(@"No SLData3Array");
-            
-            mainVCArray = [NSMutableArray array];
-            
-            // Yes => Delete
-            
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
-            
-            [mainVCArray addObject: newDic1];
-            [mainVCArray addObject: newDic2];
-            [mainVCArray addObject: newDic3];
-            [mainVCArray addObject: newDic4];
-            
-            [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-            [self changeTrashButtom: mainVCArray];
-            [[SLShoppingListData sharedInstance] saveData];
-            
-        } else {
-            
-            NSLog(@"Is SLDataDict");
-            
-            mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List2"];
-            
-        }
+    } else {
         
-    } else { // For second tab.
+        NSLog(@"Is SLDataDict");
         
-        [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList3"]]
-                                                      forKey: @"List3"];
+        mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: key];
         
-        if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List3"]) {
-            
-            NSLog(@"No SLData4Array");
-            
-            mainVCArray = [NSMutableArray array];
-            
-            // Yes => Delete
-            
-            NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
-            NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
-            NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
-            
-            [mainVCArray addObject: newDic1];
-            [mainVCArray addObject: newDic2];
-            [mainVCArray addObject: newDic3];
-            [mainVCArray addObject: newDic4];
-            
-            [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-            [self changeTrashButtom: mainVCArray];
-            [[SLShoppingListData sharedInstance] saveData];
-            
-        } else {
-            
-            NSLog(@"Is SLDataDict");
-            
-            mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List3"];
-            
-        }
+        NSLog(@"mainVCArray : %@", mainVCArray);
         
     }
+    
+    
+    
+    /*
+     if (selectedTabIndex == 0) { // For first tab.
+     
+     [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList0"]] forKey: @"List0"];
+     
+     if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List0"]) {
+     
+     NSLog(@"No SLDataArray");
+     
+     mainVCArray = [NSMutableArray array];
+     
+     // Yes => Delete
+     
+     NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+     NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
+     
+     [mainVCArray addObject: newDic1];
+     [mainVCArray addObject: newDic2];
+     [mainVCArray addObject: newDic3];
+     [mainVCArray addObject: newDic4];
+     
+     [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+     [self changeTrashButtom: mainVCArray];
+     [[SLShoppingListData sharedInstance] saveData];
+     
+     } else {
+     
+     NSLog(@"Is SLDataDict");
+     
+     mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List0"];
+     
+     }
+     } else if (selectedTabIndex == 1) { // For second tab.
+     
+     [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList1"]]
+     forKey: @"List1"];
+     
+     if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List1"]) {
+     
+     NSLog(@"No SLData2Array");
+     
+     mainVCArray = [NSMutableArray array];
+     
+     // Yes => Delete
+     
+     NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+     NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
+     
+     [mainVCArray addObject: newDic1];
+     [mainVCArray addObject: newDic2];
+     [mainVCArray addObject: newDic3];
+     [mainVCArray addObject: newDic4];
+     
+     [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+     [self changeTrashButtom: mainVCArray];
+     [[SLShoppingListData sharedInstance] saveData];
+     
+     } else {
+     
+     NSLog(@"Is SLDataDict");
+     
+     mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List1"];
+     
+     }
+     
+     } else if (selectedTabIndex == 2) { // For third tab.
+     
+     [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList2"]]
+     forKey: @"List2"];
+     
+     if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List2"]) {
+     
+     NSLog(@"No SLData3Array");
+     
+     mainVCArray = [NSMutableArray array];
+     
+     // Yes => Delete
+     
+     NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+     NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
+     
+     [mainVCArray addObject: newDic1];
+     [mainVCArray addObject: newDic2];
+     [mainVCArray addObject: newDic3];
+     [mainVCArray addObject: newDic4];
+     
+     [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+     [self changeTrashButtom: mainVCArray];
+     [[SLShoppingListData sharedInstance] saveData];
+     
+     } else {
+     
+     NSLog(@"Is SLDataDict");
+     
+     mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List2"];
+     
+     }
+     
+     } else { // For second tab.
+     
+     [[SLShoppingListData sharedInstance].SLDict setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: @"FinalList3"]]
+     forKey: @"List3"];
+     
+     if (![[SLShoppingListData sharedInstance].SLDict objectForKey: @"List3"]) {
+     
+     NSLog(@"No SLData4Array");
+     
+     mainVCArray = [NSMutableArray array];
+     
+     // Yes => Delete
+     
+     NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+     NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Long Press for Edit Data"};
+     NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: YES], @"data": @"Short Press for Delete"};
+     
+     [mainVCArray addObject: newDic1];
+     [mainVCArray addObject: newDic2];
+     [mainVCArray addObject: newDic3];
+     [mainVCArray addObject: newDic4];
+     
+     [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
+     [self changeTrashButtom: mainVCArray];
+     [[SLShoppingListData sharedInstance] saveData];
+     
+     } else {
+     
+     NSLog(@"Is SLDataDict");
+     
+     mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: @"List3"];
+     
+     }
+     
+     }
+     */
     
     longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(onLongPress:)];
     longPressRecognizer.minimumPressDuration = 1.0f;
@@ -223,6 +267,8 @@
     
     NSLog(@"viewWillAppear");
     
+    NSLog(@"selectedTabIndex(viewWillAppear) : %ld", selectedTabIndex);
+    
     self.title = [[SLTabMManager sharedInstance] getTabBarTitle: selectedTabIndex];
     
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
@@ -243,7 +289,7 @@
     [super viewDidAppear: animated];
     
     NSLog(@"viewDidAppear");
-    
+    NSLog(@"selectedTabIndex(viewDidAppear) : %ld", selectedTabIndex);
     barButtonTrash = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     [SLShoppingListData sharedInstance].trashButtonItem = barButtonTrash;
     
@@ -254,7 +300,8 @@
         
     }
     
-    mainVCArray = [SLShoppingListData sharedInstance].getSLDataArray;
+    mainVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: selectedTabIndex];
+    
     [self changeTrashButtom: mainVCArray];
     
     if (_listAdded.count > 0) {
@@ -365,17 +412,17 @@
         
         [self.tableView beginUpdates];
         // if (i == 0) {
-            
-            NSMutableDictionary *editList = [NSMutableDictionary dictionary];
-            [editList setValue: [mainVCArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
-            [editList setValue: _EditedText forKey: @"data"];
-            
-            [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: self.indexpath.row inSection: 0]] withRowAnimation:UITableViewRowAnimationFade];
-            
-            [mainVCArray replaceObjectAtIndex: self.indexpath.row withObject: editList];
-            
-            // [mainVCArray insertObject: editList atIndex: 0];
-            
+        
+        NSMutableDictionary *editList = [NSMutableDictionary dictionary];
+        [editList setValue: [mainVCArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
+        [editList setValue: _EditedText forKey: @"data"];
+        
+        [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: self.indexpath.row inSection: 0]] withRowAnimation:UITableViewRowAnimationFade];
+        
+        [mainVCArray replaceObjectAtIndex: self.indexpath.row withObject: editList];
+        
+        // [mainVCArray insertObject: editList atIndex: 0];
+        
         // }
         
         [self.tableView endUpdates];
@@ -826,7 +873,7 @@
         return UITableViewCellEditingStyleNone;
         
     } else {
-    
+        
         return UITableViewCellEditingStyleDelete;
         
     }

@@ -35,9 +35,11 @@
 }
 */
 
+/*
 - (NSMutableArray *)getSLDataArray {
     
     NSString *key = [NSString stringWithFormat:@"List%ld", _tabBarController.selectedIndex];
+    NSLog(@"selectedIndex(getSLDataArray) : %ld", _tabBarController.selectedIndex);
     // [self changeTrashButtom: [_SLDict objectForKey: key]];
     return [_SLDict objectForKey: key];
     
@@ -46,6 +48,23 @@
     NSLog(@"tab* 0");
     [self changeTrashButtom: [_SLDict objectForKey: @"List0"]];
     return [_SLDict objectForKey: @"List0"];
+     * /
+    
+}
+*/
+
+- (NSMutableArray *)getSLDataArray : (NSInteger)selectedTabIndex {
+    
+    NSString *key = [NSString stringWithFormat:@"List%ld", selectedTabIndex];
+    NSLog(@"selectedIndex(getSLDataArray) : %ld", selectedTabIndex);
+    // [self changeTrashButtom: [_SLDict objectForKey: key]];
+    return [_SLDict objectForKey: key];
+    
+    /*
+     case 0:
+     NSLog(@"tab* 0");
+     [self changeTrashButtom: [_SLDict objectForKey: @"List0"]];
+     return [_SLDict objectForKey: @"List0"];
      */
     
 }
