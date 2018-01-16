@@ -52,14 +52,25 @@
     barButtonTrash = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     [SLShoppingListData sharedInstance].trashButtonItem = barButtonTrash;
     
-    UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
-    
-    selectedTabIndex = vc.tabBarItem.tag;
+    NSMutableArray *saveData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
+    if(saveData) {
+        
+       UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
+        
+        
+        selectedTabIndex = vc.tabBarItem.tag;
+        selectedTabIndex = [[saveData objectAtIndex: selectedTabIndex][@"tab"] integerValue];
+        
+
+    } else {
+        
+        UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
+        
+        selectedTabIndex = vc.tabBarItem.tag;
+        
+    }
     
     [[SLShoppingListData sharedInstance] createNSDictionary];
-    
-    
-    NSMutableArray *saveData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
     
     NSString *path = [saveData objectAtIndex: selectedTabIndex][@"path"];
     NSString *key = [saveData objectAtIndex: selectedTabIndex][@"key"];

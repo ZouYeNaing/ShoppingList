@@ -20,7 +20,7 @@
 + (instancetype)sharedInstance;
 - (void)saveDefaultTabBarMArray: (UITabBarController*)tabbar;
 - (void)hideTabBarItem : (NSMutableArray *)indexes;
-- (void)setTabBarTitle : (NSMutableArray *)tabSettingArray;
+- (void)setTabBarTitle : (NSMutableArray *)tabSettingArray tabBarVCArray: (NSMutableArray *)tabBarVCArray;
 - (NSString *)getTabBarTitle : (NSInteger)selectedTabIndex;
 - (void)moveTabBarItem : (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath;
 @end

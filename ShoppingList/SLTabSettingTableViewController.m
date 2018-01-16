@@ -278,8 +278,6 @@
         });
         
     }
-    UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
-    
     
     
     for (NSInteger i=0; i < [SLShoppingListData sharedInstance].tabBarController.viewControllers.count

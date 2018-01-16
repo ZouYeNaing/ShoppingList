@@ -19,61 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"changeTabbar"]){
-        
-        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"changeTabbar"];
-        NSMutableArray *tab = [NSKeyedUnarchiver unarchiveObjectWithData: data];
-        
-        NSMutableArray *tabArray = [tabBarController.viewControllers mutableCopy];
-        
-        for (int i=0; i < tabArray.count; i++) {
-            UIViewController *vc = [tab objectAtIndex: i];
-            [tabArray replaceObjectAtIndex:i withObject: [tab objectAtIndex: i]];
-            
-            NSLog(@"Title(AppDelegateSave) : %@", vc.tabBarItem.title);
-            NSLog(@"VC : %@", vc);
-            
-        }
-        
-        // [tabBarController setViewControllers: tabArray.mutableCopy];
-        [tabBarController setTabBarItem: tabArray.mutableCopy];
-        
-        [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
-        
-        for (int i=0; i < tabBarController.viewControllers.count; i++) {
-            UIViewController *vc = [tabBarController.viewControllers objectAtIndex: i];
-            NSLog(@"Title(AppDelegateSave) : %@", vc.tabBarItem.title);
-        }
-        
-        [SLShoppingListData sharedInstance].tabBarController = tabBarController;
-        [SLTabMManager sharedInstance].tabBarControllertest = tabBarController;
-
-        
-    } else {
-        
-        NSMutableArray *tabArray = [tabBarController.viewControllers mutableCopy];
-        
-        for (int i=0; i < tabArray.count; i++) {
-            UIViewController *vc = [tabArray objectAtIndex: i];
-            vc.tabBarItem.tag = i;
-            NSLog(@"Title(AppDelegate) : %@", vc.tabBarItem.title);
-            
-        }
-        
-        [tabBarController setTabBarItem: tabArray.mutableCopy];
-        [SLShoppingListData sharedInstance].tabBarController = tabBarController;
-        [SLTabMManager sharedInstance].tabBarController = tabBarController;
-         [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
-    }
-    
-    
-    /*
-    [SLShoppingListData sharedInstance].tabBarController = tabBarController;
-    [SLTabMManager sharedInstance].tabBarController = tabBarController;
-    */
-    
     NSDictionary *newDic1 = @{@"status": @YES, @"data": @"リスト 1", @"path":@"FinalList0", @"key":@"List0", @"tab":@"0"};
     NSDictionary *newDic2 = @{@"status": @YES, @"data": @"リスト 2", @"path":@"FinalList1", @"key":@"List1", @"tab":@"1"};
     NSDictionary *newDic3 = @{@"status": @YES, @"data": @"リスト 3", @"path":@"FinalList2", @"key":@"List2", @"tab":@"2"};
@@ -89,13 +34,63 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedIndex": @(46)}];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedFont": @"Helvetica"}];
     
-    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
     
     
-    [[SLTabMManager sharedInstance] setTabBarTitle: tabSetting];
-    [[SLTabMManager sharedInstance] hideTabBarItem: tabSetting];
-
-    [[SLShoppingListData sharedInstance] updateColor];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"changedTabbar"]){
+        
+        UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+        
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"changedTabbar"];
+        UITabBarController *savedTab = [NSKeyedUnarchiver unarchiveObjectWithData: data];
+        
+        NSMutableArray *savedTabVC         = [savedTab.viewControllers mutableCopy];
+        NSMutableArray *tabBarControllerVC = [tabBarController.viewControllers mutableCopy];
+        
+        
+        for (int i=0; i < tabBarControllerVC.count; i++) {
+            [tabBarControllerVC replaceObjectAtIndex: i withObject: [savedTabVC objectAtIndex: i]];
+        }
+        
+        [tabBarController setTabBarItem: tabBarControllerVC.mutableCopy];
+        // [tabBarController setViewControllers: tabBarControllerVC.mutableCopy];
+        
+        
+        [SLShoppingListData sharedInstance].tabBarController   = tabBarController;
+        [SLTabMManager sharedInstance].tabBarController = tabBarController;
+        [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
+        
+        NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
+        
+        [[SLTabMManager sharedInstance] hideTabBarItem: tabSetting];
+        [[SLTabMManager sharedInstance] setTabBarTitle:tabSetting tabBarVCArray: tabBarControllerVC];
+        
+        [[SLShoppingListData sharedInstance] updateColor];
+        
+    } else {
+    
+        UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+        NSMutableArray *tabArray = [tabBarController.viewControllers mutableCopy];
+        
+        for (int i=0; i < tabArray.count; i++) {
+            UIViewController *vc = [tabArray objectAtIndex: i];
+            vc.tabBarItem.tag = i;
+            NSLog(@"Title(AppDelegate) : %@", vc.tabBarItem.title);
+            
+        }
+        
+        [tabBarController setTabBarItem: tabArray.mutableCopy];
+        
+        [SLShoppingListData sharedInstance].tabBarController = tabBarController;
+        [SLTabMManager sharedInstance].tabBarController = tabBarController;
+        [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
+        
+        NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
+        
+        [[SLTabMManager sharedInstance] setTabBarTitle: tabSetting tabBarVCArray: tabArray];
+        [[SLTabMManager sharedInstance] hideTabBarItem: tabSetting];
+        
+        [[SLShoppingListData sharedInstance] updateColor];
+    }
     
     return YES;
 }

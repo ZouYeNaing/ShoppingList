@@ -82,7 +82,10 @@
 
 - (void)setSLDataArray:(NSMutableArray *)SLDataArray {
     
+     NSLog(@"selectedIndex(setSLDataArray) : %ld", _tabBarController.selectedIndex);
+    
     NSString *key = [NSString stringWithFormat:@"List%ld", _tabBarController.selectedIndex];
+    
     [_SLDict setValue: SLDataArray forKey: key];
     // [self changeTrashButtom: SLDataArray];
     
