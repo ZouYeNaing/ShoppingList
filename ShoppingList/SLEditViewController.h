@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeightTxtView;
 
 @property (strong, nonatomic) NSIndexPath *indexpath;
+@property (nonatomic) NSInteger selectedTabIndex;
+
 @property (nonatomic) BOOL isEditing;
 
 @property (nonatomic, weak) id <SLEditViewControllerDelegate> delegate;

@@ -38,7 +38,7 @@
         
         NSLog(@"indexPath : %@", self.indexpath);
         
-        editVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: self.indexpath ];
+        editVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: _selectedTabIndex ];
         
         _editTextView.text = [editVCArray objectAtIndex: indexpath.row][@"data"];
     }

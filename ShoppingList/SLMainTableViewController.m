@@ -791,6 +791,7 @@
         SLEditViewController *eventsController = (SLEditViewController *)[navController topViewController];
         eventsController.delegate = self;
         [eventsController setIndexpath: self.indexpath];
+        [eventsController setSelectedTabIndex: selectedTabIndex];
         eventsController.isEditing = YES;
         
     } else if([segue.identifier isEqualToString: @"showAddViewController"]) {
