@@ -36,7 +36,9 @@
         
     } else {
         
-        editVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: self.indexpath];
+        NSLog(@"indexPath : %@", self.indexpath);
+        
+        editVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: self.indexpath ];
         
         _editTextView.text = [editVCArray objectAtIndex: indexpath.row][@"data"];
     }
