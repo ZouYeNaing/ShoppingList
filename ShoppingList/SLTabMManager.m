@@ -34,14 +34,16 @@
         
         _defaultTabBarMArray = [[NSMutableArray arrayWithArray: [SLShoppingListData sharedInstance].tabBarController.viewControllers] mutableCopy];
         
-       
-        
-        
-        // _defaultTabBarMArray = [NSMutableArray arrayWithArray: [tabbar.viewControllers mutableCopy]];
+        NSMutableArray *tabtest = [NSMutableArray arrayWithArray: [tabbar.viewControllers mutableCopy]];
         
         for (int i=0; i < _defaultTabBarMArray.count; i++) {
             UIViewController *vc = [_defaultTabBarMArray objectAtIndex: i];
-            NSLog(@"Title(...) : %@", vc.tabBarItem.title);
+            NSLog(@"Title(TabM) : %@, %ld", vc.tabBarItem.title, vc.tabBarItem.tag);
+        }
+        
+        for (int i=0; i < tabtest.count; i++) {
+            UIViewController *vc = [tabtest objectAtIndex: i];
+            NSLog(@"Title(TabMTest) : %@, %ld", vc.tabBarItem.title, vc.tabBarItem.tag);
         }
 
     });
@@ -104,19 +106,29 @@
 -(void)setTabBarTitle:(NSMutableArray *)tabSettingArray tabBarVCArray:(NSMutableArray *)tabBarVCArray {
     
     
-    NSMutableArray *tabArray         = [tabBarVCArray mutableCopy];
+    NSMutableArray *tabArray         = [_defaultTabBarMArray mutableCopy];
+    
+    for (int i=0; i < tabArray.count; i++) {
+        UIViewController *vc = [tabArray objectAtIndex: i];
+        NSLog(@"Title(setTabBarTitle) : %@", vc.tabBarItem.title);
+    }
+    
     // NSMutableArray *tabArray = [self.tabBarController.viewControllers mutableCopy];
-//    NSMutableArray *tabArray = [[NSMutableArray arrayWithArray: [SLShoppingListData sharedInstance].tabBarController.viewControllers] mutableCopy];
+    // NSMutableArray *tabArray = [[NSMutableArray arrayWithArray: [SLShoppingListData sharedInstance].tabBarController.viewControllers] mutableCopy];
     NSLog(@"setTabBarTitle : %@", tabSettingArray);
     
-    /*
+    
     if(tabSettingArray.count > 0)
     {
         for (int i=0; i < tabArray.count; i++) {
-            [[tabArray objectAtIndex: i]setTitle: [tabSettingArray objectAtIndex: i][@"data"]];
+            [[tabArray objectAtIndex: i]setTitle: [tabSettingArray objectAtIndex: i][@"title"]];
         }
     }
-    */
+    
+    for (int i=0; i < tabArray.count; i++) {
+        UIViewController *vc = [tabArray objectAtIndex: i];
+        NSLog(@"Title(setTabBarTitle) : %@", vc.tabBarItem.title);
+    }
     
     [self.tabBarController setViewControllers: tabArray animated:YES];
     
@@ -133,11 +145,11 @@
     
     for (int i=0; i < [tabSetting count]-1; i++) {
         if (selectedTabIndex == [[tabSetting objectAtIndex:i][@"tab"] integerValue]) {
-            title = [tabSetting objectAtIndex: i][@"data"];
+            title = [tabSetting objectAtIndex: i][@"title"];
         }
     }
     
-    // NSString *title = [tabSetting objectAtIndex: selectedTabIndex][@"data"];
+    // NSString *title = [tabSetting objectAtIndex: selectedTabIndex][@"title"];
     
     return title;
 

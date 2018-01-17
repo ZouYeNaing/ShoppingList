@@ -112,8 +112,11 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
     NSMutableDictionary *changeTitle = [NSMutableDictionary dictionary];
+    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"key"] forKey: @"key"];
+    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"path"] forKey: @"path"];
     [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
-    [changeTitle setValue: textField.text  forKey: @"data"];
+    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"tab"] forKey: @"tab"];
+    [changeTitle setValue: textField.text  forKey: @"title"];
     
     [tabSettingArray replaceObjectAtIndex: self.indexpath.row withObject: changeTitle];
     
@@ -159,7 +162,7 @@
         [cell.contentView addSubview: textField];
     }
     textField.userInteractionEnabled = NO;
-    textField.text = [tabSettingArray objectAtIndex: indexPath.row][@"data"];
+    textField.text = [tabSettingArray objectAtIndex: indexPath.row][@"title"];
     
     // UISwitch.
     UISwitch *switchView = [[UISwitch alloc] initWithFrame: CGRectMake(800, 13, 175, 30)];
@@ -197,8 +200,11 @@
     int rowIndex = (int)[switchControl tag];
     
     NSMutableDictionary *changeStatus = [NSMutableDictionary dictionary];
+    [changeStatus setValue: [tabSettingArray objectAtIndex: rowIndex][@"key"] forKey: @"key"];
+    [changeStatus setValue: [tabSettingArray objectAtIndex: rowIndex][@"path"] forKey: @"path"];
     [changeStatus setValue: [NSNumber numberWithBool:switchControl.on] forKey: @"status"];
-    [changeStatus setValue: [tabSettingArray objectAtIndex: rowIndex][@"data"] forKey: @"data"];
+    [changeStatus setValue: [tabSettingArray objectAtIndex: rowIndex][@"tab"] forKey: @"tab"];
+    [changeStatus setValue: [tabSettingArray objectAtIndex: rowIndex][@"title"] forKey: @"title"];
     
     [tabSettingArray replaceObjectAtIndex: rowIndex withObject: changeStatus];
     [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
