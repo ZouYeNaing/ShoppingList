@@ -55,18 +55,24 @@
 
 - (NSMutableArray *)getSLDataArray : (NSInteger)selectedTabIndex {
     
-    NSString *key = [NSString stringWithFormat:@"List%ld", selectedTabIndex];
+    NSString *key;
+    // NSString *key = [NSString stringWithFormat:@"List%ld", selectedTabIndex];
     NSLog(@"selectedIndex(getSLDataArray) : %ld", selectedTabIndex);
-    // [self changeTrashButtom: [_SLDict objectForKey: key]];
+    NSLog(@"key(getSLDataArray)           : %@", key);
+    NSLog(@"index           : %ld", _tabBarController.selectedIndex);
+    NSLog(@"savedtab         : %@", [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]);
+    NSLog(@"_SLDict(getSLDataArray)       : %@", _SLDict);
+    
+    NSMutableArray *savedTab = [[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"] mutableCopy];
+    if(savedTab)
+    {
+        key = [NSString stringWithFormat:@"List%ld", [[savedTab objectAtIndex: _tabBarController.selectedIndex][@"tab"] integerValue]];
+    } else {
+        key = [NSString stringWithFormat:@"List%ld", selectedTabIndex];
+    }
+   
     return [_SLDict objectForKey: key];
-    
-    /*
-     case 0:
-     NSLog(@"tab* 0");
-     [self changeTrashButtom: [_SLDict objectForKey: @"List0"]];
-     return [_SLDict objectForKey: @"List0"];
-     */
-    
+    // [self changeTrashButtom: [_SLDict objectForKey: key]];
 }
 
 - (void)createNSDictionary

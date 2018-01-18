@@ -209,8 +209,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6HA-B0-CG1">
-                                <rect key="frame" x="0.0" y="88" width="375" height="424"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HA-B0-CG1">
+                                <rect key="frame" x="0.0" y="88" width="375" height="279"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
@@ -220,6 +220,8 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6HA-B0-CG1" secondAttribute="bottom" constant="300" id="4d9-Hb-71h"/>
                             <constraint firstAttribute="trailing" secondItem="6HA-B0-CG1" secondAttribute="trailing" id="5Aw-8m-pXl"/>
+                            <constraint firstItem="6HA-B0-CG1" firstAttribute="leading" secondItem="pOB-Bi-ZEn" secondAttribute="leading" id="Bxt-Uh-8dP"/>
+                            <constraint firstItem="6HA-B0-CG1" firstAttribute="top" secondItem="RYS-Ta-FAa" secondAttribute="bottom" constant="24" id="l4I-F6-ue3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit" id="Ucp-1a-kKX">
@@ -310,8 +312,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kCO-2Z-4gH">
-                                <rect key="frame" x="0.0" y="88" width="375" height="424"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCO-2Z-4gH">
+                                <rect key="frame" x="0.0" y="88" width="375" height="279"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
@@ -320,6 +322,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="kCO-2Z-4gH" secondAttribute="bottom" constant="300" id="2J2-DF-UXK"/>
+                            <constraint firstItem="kCO-2Z-4gH" firstAttribute="leading" secondItem="vP7-fe-gsV" secondAttribute="leading" id="DrP-5C-0cC"/>
+                            <constraint firstItem="kCO-2Z-4gH" firstAttribute="top" secondItem="5gw-Be-HGS" secondAttribute="bottom" constant="24" id="ZDF-le-dBH"/>
                             <constraint firstAttribute="trailing" secondItem="kCO-2Z-4gH" secondAttribute="trailing" id="liu-ah-P5b"/>
                         </constraints>
                     </view>
@@ -442,8 +446,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRQ-xQ-jF9">
-                                <rect key="frame" x="0.0" y="88" width="375" height="424"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRQ-xQ-jF9">
+                                <rect key="frame" x="0.0" y="88" width="375" height="279"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
@@ -451,7 +455,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="KRQ-xQ-jF9" firstAttribute="top" secondItem="LJx-Ey-7Sr" secondAttribute="bottom" constant="24" id="GLh-uO-dbS"/>
                             <constraint firstAttribute="bottom" secondItem="KRQ-xQ-jF9" secondAttribute="bottom" constant="300" id="ZBF-uO-TVo"/>
+                            <constraint firstItem="KRQ-xQ-jF9" firstAttribute="leading" secondItem="6Eu-N2-pLO" secondAttribute="leading" id="mzj-Yu-FL4"/>
                             <constraint firstAttribute="trailing" secondItem="KRQ-xQ-jF9" secondAttribute="trailing" id="p23-Yf-IR1"/>
                         </constraints>
                     </view>
@@ -627,8 +633,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PRD-7N-R6I">
-                                <rect key="frame" x="0.0" y="88" width="375" height="424"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRD-7N-R6I">
+                                <rect key="frame" x="0.0" y="88" width="375" height="279"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
@@ -636,6 +642,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PRD-7N-R6I" firstAttribute="leading" secondItem="tNF-z3-JsJ" secondAttribute="leading" id="Ixv-AT-c9v"/>
+                            <constraint firstItem="PRD-7N-R6I" firstAttribute="top" secondItem="qbq-7q-aJi" secondAttribute="bottom" constant="24" id="LuY-uK-rW7"/>
                             <constraint firstAttribute="trailing" secondItem="PRD-7N-R6I" secondAttribute="trailing" id="MtC-pV-xte"/>
                             <constraint firstAttribute="bottom" secondItem="PRD-7N-R6I" secondAttribute="bottom" constant="300" id="yuT-6y-bxm"/>
                         </constraints>
