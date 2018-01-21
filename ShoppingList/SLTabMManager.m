@@ -33,30 +33,29 @@
         
         
         _defaultTabBarMArray = [[NSMutableArray arrayWithArray: [SLShoppingListData sharedInstance].tabBarController.viewControllers] mutableCopy];
-        
-        NSMutableArray *tabtest = [NSMutableArray arrayWithArray: [tabbar.viewControllers mutableCopy]];
-        
-        for (int i=0; i < _defaultTabBarMArray.count; i++) {
-            UIViewController *vc = [_defaultTabBarMArray objectAtIndex: i];
-            NSLog(@"Title(TabM) : %@, %ld", vc.tabBarItem.title, vc.tabBarItem.tag);
-        }
-        
-        for (int i=0; i < tabtest.count; i++) {
-            UIViewController *vc = [tabtest objectAtIndex: i];
-            NSLog(@"Title(TabMTest) : %@, %ld", vc.tabBarItem.title, vc.tabBarItem.tag);
-        }
 
     });
 }
 
 - (void)hideTabBarItem : (NSMutableArray *)tabSettingArray {
     
+    NSMutableArray *savedTab = [[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"] mutableCopy];
+    
     NSMutableArray *tabStatus = [tabSettingArray valueForKey: @"status"];
     
     NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
     
+    // _defaultTabBarMArray = [self.tabBarController.viewControllers mutableCopy];
     NSMutableArray *tabBarArray = _defaultTabBarMArray.mutableCopy;
-    // NSLog(@"org : %@", tabBarArray);
+    NSLog(@"org : %@", tabBarArray);
+    
+    for (int i=0; i < tabBarArray.count; i++) {
+        UIViewController *vc = [tabBarArray objectAtIndex: i];
+        //            vc.tabBarItem.tag = i;
+        NSLog(@"Title(before hide) : %@", vc.tabBarItem.title);
+        
+    }
+    
     tabBarArray =[SLTabMManager sharedInstance].defaultTabBarMArray.mutableCopy;
     for (int i=0; i < tabStatus.count; i++) {
         if (NO == [tabStatus[i] boolValue]) {
@@ -64,6 +63,13 @@
         }
     }
     [tabBarArray removeObjectsAtIndexes: indexes];
+    
+    for (int i=0; i < tabBarArray.count; i++) {
+        UIViewController *vc = [tabBarArray objectAtIndex: i];
+        //            vc.tabBarItem.tag = i;
+        NSLog(@"Title(after hide) : %@", vc.tabBarItem.title);
+    }
+    
     // NSLog(@"aft : %@", tabBarArray);
     [self.tabBarController setViewControllers: tabBarArray];
     
@@ -72,8 +78,24 @@
 - (void)moveTabBarItem : (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath{
     
     if (fromIndexPath != toIndexPath ) {
+        NSMutableArray *tabBarItemSettingArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
+        // NSMutableArray *tabSettingArray = [self.tabBarController.viewControllers mutableCopy];
+        // NSMutableArray *saveData = [[NSUserDefaults standardUserDefaults] objectForKey: @""];
+        NSMutableArray *tabSettingArray = [SLTabMManager sharedInstance].defaultTabBarMArray.mutableCopy;
+        for (int i=0; i < tabSettingArray.count; i++) {
+            UIViewController *vc = [tabSettingArray objectAtIndex: i];
+            //            vc.tabBarItem.tag = i;
+            NSLog(@"move(self.tabbar) : %@", vc.tabBarItem.title);
+        }
         
-        NSMutableArray *tabSettingArray = [self.tabBarController.viewControllers mutableCopy];
+        NSMutableArray *tabSetting = _defaultTabBarMArray.mutableCopy;
+        for (int i=0; i < tabSetting.count; i++) {
+            UIViewController *vc = [tabSetting objectAtIndex: i];
+            //            vc.tabBarItem.tag = i;
+            NSLog(@"move(defaulttabbar) : %@", vc.tabBarItem.title);
+        }
+        
+        // NSMutableArray *tabSettingArray = [_defaultTabBarMArray mutableCopy];
         
         NSMutableDictionary *toMoveDict = tabSettingArray[fromIndexPath.row];
         
@@ -92,6 +114,10 @@
         // [SLShoppingListData sharedInstance].tabBarController.viewControllers = tabSettingArray;
         [self.tabBarController setViewControllers: tabSettingArray animated:YES];
         
+        [self hideTabBarItem: tabBarItemSettingArray];
+        
+        
+        
         
         UITabBarController *tab = self.tabBarController;
         
@@ -104,6 +130,7 @@
 }
 
 -(void)setTabBarTitle:(NSMutableArray *)tabSettingArray tabBarVCArray:(NSMutableArray *)tabBarVCArray {
+    
     
     
     NSMutableArray *tabArray         = [_defaultTabBarMArray mutableCopy];

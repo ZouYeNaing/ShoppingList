@@ -278,19 +278,19 @@
         
         [[SLTabMManager sharedInstance] moveTabBarItem: fromIndexPath toIndexPath: toIndexPath];
         
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
         
     }
     
-    
+    /*
     for (NSInteger i=0; i < [SLShoppingListData sharedInstance].tabBarController.viewControllers.count
          ; i++) {
         UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: i];
          NSLog(@"tag item : %ld", vc.tabBarItem.tag);
     }
+    */
     
 }
 

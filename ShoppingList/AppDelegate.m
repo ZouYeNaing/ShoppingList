@@ -51,6 +51,8 @@
             [tabBarVCArray replaceObjectAtIndex: i withObject: [savedTabBarVCArray objectAtIndex: i]];
         }
         
+        
+        
 //        for (int i=0; i < tabBarVCArray.count; i++) {
 //            UIViewController *vc = [tabBarVCArray objectAtIndex: i];
 //            vc.tabBarItem.tag = i;
@@ -65,12 +67,15 @@
 //        [SLShoppingListData sharedInstance].tabBarController   = (UITabBarController *)self.window.rootViewController;
 //        [SLTabMManager sharedInstance].tabBarController        = (UITabBarController *)self.window.rootViewController;
 //        [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: (UITabBarController *)self.window.rootViewController];
+        
+        
         [SLShoppingListData sharedInstance].tabBarController   = tabBarController;
         [SLTabMManager sharedInstance].tabBarController        = tabBarController;
         [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
         
-        [[SLTabMManager sharedInstance] hideTabBarItem: tabBarItemSettingArray];
+        
         [[SLTabMManager sharedInstance] setTabBarTitle: tabBarItemSettingArray tabBarVCArray: tabBarVCArray];
+        [[SLTabMManager sharedInstance] hideTabBarItem: tabBarItemSettingArray];
         
         [[SLShoppingListData sharedInstance] updateColor];
         

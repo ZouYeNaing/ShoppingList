@@ -64,11 +64,18 @@
     NSLog(@"_SLDict(getSLDataArray)       : %@", _SLDict);
     
     NSMutableArray *savedTab = [[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"] mutableCopy];
+    NSMutableArray *afterRemove = [NSMutableArray array];
+    for (int i=0; i < savedTab.count; i++) {
+        if (YES == [[savedTab objectAtIndex: i][@"status"] boolValue]) {
+            // [indexes addIndex : i];
+            [afterRemove addObject: [savedTab objectAtIndex: i]];
+        }
+    }
     if(savedTab)
     {
-        key = [NSString stringWithFormat:@"List%ld", [[savedTab objectAtIndex: _tabBarController.selectedIndex][@"tab"] integerValue]];
-    } else {
-        key = [NSString stringWithFormat:@"List%ld", selectedTabIndex];
+        
+        key = [NSString stringWithFormat:@"List%ld", [[afterRemove objectAtIndex: _tabBarController.selectedIndex][@"tab"] integerValue]];
+        // key = [NSString stringWithFormat:@"List%ld", [[savedTab objectAtIndex: selectedTabIndex][@"tab"] integerValue]];
     }
    
     return [_SLDict objectForKey: key];
