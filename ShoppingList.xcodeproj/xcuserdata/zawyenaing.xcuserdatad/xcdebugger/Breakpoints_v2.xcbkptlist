@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingList/SLMainTableViewController.m"
-            timestampString = "538282159.225713"
+            timestampString = "538316879.3290319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "498"
             endingLineNumber = "498"
-            landmarkName = "-checkButtonEnable:"
+            landmarkName = "-trashButton:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,13 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingList/SLMainTableViewController.m"
-            timestampString = "538282159.225713"
+            timestampString = "538316879.333977"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "839"
-            endingLineNumber = "839"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "7">
+            startingLineNumber = "831"
+            endingLineNumber = "831">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -90,7 +88,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingList/SLMainTableViewController.m"
-            timestampString = "538282159.225713"
+            timestampString = "538316879.334172"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
