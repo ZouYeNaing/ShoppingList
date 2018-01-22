@@ -15,7 +15,7 @@
 
 @interface SLMainTableViewController ()
 {
-    NSMutableArray *mainVCArray;
+    NSMutableArray *mainVCArray, *savedData;
     
     NSString *selectedFont;
     UIColor  *selectedColor;
@@ -54,7 +54,7 @@
     
     NSString *path, *key;
     
-    NSMutableArray *saveData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
+    savedData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
     
     NSMutableArray *changedTab = [[NSUserDefaults standardUserDefaults] objectForKey: @"changedTabbar"];
     if(changedTab) {
@@ -62,36 +62,19 @@
         NSUInteger selectedIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
        UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: selectedIndex];
         
-        
         selectedTabIndex = vc.tabBarItem.tag;
-        path = [saveData objectAtIndex: selectedTabIndex][@"path"];
-        key = [saveData objectAtIndex: selectedTabIndex][@"key"];
-        
-        // selectedTabIndex = [[saveData objectAtIndex: selectedTabIndex][@"tab"] integerValue];
-        
+        path = [savedData objectAtIndex: selectedTabIndex][@"path"];
+        key = [savedData objectAtIndex: selectedTabIndex][@"key"];
         
     } else {
         selectedTabIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
-        
-        NSMutableArray *afterRemove = [NSMutableArray array];
-        for (int i=0; i < saveData.count; i++) {
-            if (YES == [[saveData objectAtIndex: i][@"status"] boolValue]) {
-                // [indexes addIndex : i];
-                [afterRemove addObject: [saveData objectAtIndex: i]];
-            }
-        }
-        
-        // UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: [SLShoppingListData sharedInstance].tabBarController.selectedIndex];
-        
-        // selectedTabIndex = vc.tabBarItem.tag;
-        
-        path = [afterRemove objectAtIndex: selectedTabIndex][@"path"];
-        key = [afterRemove objectAtIndex: selectedTabIndex][@"key"];
-        
+
+        path = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"path"];
+        key = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"key"];
+
     }
     
     [[SLShoppingListData sharedInstance] createNSDictionary];
-    
     
     [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: path]] forKey: key];
     
@@ -103,8 +86,8 @@
         
         // Yes => Delete
         
-        NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": key};
-        NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Sample"};
+        NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Edit for Swipe Delete"};
+        NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"+ Button for Add Data"};
         NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Press for Edit Data"};
         NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Press for Delete"};
         
@@ -145,31 +128,24 @@
     
 }
 
+// Check tab switch status when reload and set tab bar item title.
+-(NSMutableArray *)checkTabStatus: (NSMutableArray *)saved {
+    
+    NSMutableArray *checkTabStatus = [NSMutableArray array];
+    for (int i=0; i < saved.count; i++) {
+        if (YES == [[saved objectAtIndex: i][@"status"] boolValue]) {
+            // [indexes addIndex : i];
+            [checkTabStatus addObject: [saved objectAtIndex: i]];
+        }
+    }
+    return checkTabStatus;
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear: animated];
     
     NSLog(@"viewWillAppear");
-    
-    // NSLog(@"selectedTabIndex(viewWillAppear***) : %ld", selectedTabIndex);
-    
-    
-//    selectedTabIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
-//
-//    NSLog(@"selectedTabIndex(viewWillAppear) : %ld", selectedTabIndex);
-//    NSMutableArray *saveData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
-//    self.title = [saveData objectAtIndex: selectedTabIndex][@"title"];
-//
-//    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
-//
-//    selectedFont = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedFont"];
-//    selectedColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
-//
-//    [[SLShoppingListData sharedInstance] updateColor];
-//
-//    [self.tableView reloadData];
-//
-//    [self checkButtonEnable: mainVCArray];
     
 }
 
@@ -177,30 +153,14 @@
     
     [super viewDidAppear: animated];
     
+    NSLog(@"viewDidAppear");
+    
+    // get selected tab index.
     selectedTabIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
     
-    NSMutableArray *saveData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
-    // self.title = [saveData objectAtIndex: selectedTabIndex][@"title"];
+    savedData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
     
-    // Test
-    // NSMutableArray *tabStatus = [[saveData valueForKey: @"status"] mutableCopy];
-    
-    // NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
-    
-    NSMutableArray *afterRemove = [NSMutableArray array];
-    for (int i=0; i < saveData.count; i++) {
-        if (YES == [[saveData objectAtIndex: i][@"status"] boolValue]) {
-            // [indexes addIndex : i];
-            [afterRemove addObject: [saveData objectAtIndex: i]];
-        }
-    }
-    NSLog(@"afterRemove : %@", afterRemove);
-    
-    self.title = [afterRemove objectAtIndex: selectedTabIndex][@"title"];
-    // [tabBarArray removeObjectsAtIndexes: indexes];
-    
-    
-    // Test
+    self.title = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"title"];
     
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
 
@@ -212,9 +172,7 @@
     [self.tableView reloadData];
 
     [self checkButtonEnable: mainVCArray];
-
     
-    NSLog(@"viewDidAppear");
     NSLog(@"selectedTabIndex(viewDidAppear) : %ld", selectedTabIndex);
     barButtonTrash = self.navigationController.topViewController.navigationItem.rightBarButtonItems[1];
     [SLShoppingListData sharedInstance].trashButtonItem = barButtonTrash;

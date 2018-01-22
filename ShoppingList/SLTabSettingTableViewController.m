@@ -284,14 +284,6 @@
         
     }
     
-    /*
-    for (NSInteger i=0; i < [SLShoppingListData sharedInstance].tabBarController.viewControllers.count
-         ; i++) {
-        UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: i];
-         NSLog(@"tag item : %ld", vc.tabBarItem.tag);
-    }
-    */
-    
 }
 
 @end

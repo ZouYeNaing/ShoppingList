@@ -41,40 +41,11 @@
         
         UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
         
-        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"changedTabbar"];
-        UITabBarController *savedtabBarController = [NSKeyedUnarchiver unarchiveObjectWithData: data];
-        
-        NSMutableArray *savedTabBarVCArray = [savedtabBarController.viewControllers mutableCopy];
-        NSMutableArray *tabBarVCArray      = [tabBarController.viewControllers mutableCopy];
-        
-        for (int i=0; i < tabBarVCArray.count; i++) {
-            [tabBarVCArray replaceObjectAtIndex: i withObject: [savedTabBarVCArray objectAtIndex: i]];
-        }
-        
-        
-        
-//        for (int i=0; i < tabBarVCArray.count; i++) {
-//            UIViewController *vc = [tabBarVCArray objectAtIndex: i];
-//            vc.tabBarItem.tag = i;
-//            NSLog(@"Title(AppDelegateChanged) VC : %@, %ld", vc.tabBarItem.title, vc.tabBarItem.tag);
-//        }
-        
-//        [tabBarController setTabBarItem: tabBarVCArray.mutableCopy];
-//        [tabBarController setViewControllers: tabBarVCArray.mutableCopy];
-        
-        // self.window.rootViewController = tabBarController;
-        
-//        [SLShoppingListData sharedInstance].tabBarController   = (UITabBarController *)self.window.rootViewController;
-//        [SLTabMManager sharedInstance].tabBarController        = (UITabBarController *)self.window.rootViewController;
-//        [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: (UITabBarController *)self.window.rootViewController];
-        
-        
         [SLShoppingListData sharedInstance].tabBarController   = tabBarController;
         [SLTabMManager sharedInstance].tabBarController        = tabBarController;
         [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
         
-        
-        [[SLTabMManager sharedInstance] setTabBarTitle: tabBarItemSettingArray tabBarVCArray: tabBarVCArray];
+        [[SLTabMManager sharedInstance] setTabBarTitle: tabBarItemSettingArray];
         [[SLTabMManager sharedInstance] hideTabBarItem: tabBarItemSettingArray];
         
         [[SLShoppingListData sharedInstance] updateColor];
@@ -88,18 +59,18 @@
         
         for (int i=0; i < tabBarVCArray.count; i++) {
             UIViewController *vc = [tabBarVCArray objectAtIndex: i];
-//            vc.tabBarItem.tag = i;
+        // vc.tabBarItem.tag = i;
             NSLog(@"Title(AppDelegate) : %@", vc.tabBarItem.title);
             
         }
         
-        [tabBarController setTabBarItem: tabBarVCArray.mutableCopy];
+        // [tabBarController setTabBarItem: tabBarVCArray.mutableCopy];
         
         [SLShoppingListData sharedInstance].tabBarController = tabBarController;
         [SLTabMManager sharedInstance].tabBarController = tabBarController;
         [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
         
-        [[SLTabMManager sharedInstance] setTabBarTitle: tabBarItemSettingArray tabBarVCArray: tabBarVCArray];
+        [[SLTabMManager sharedInstance] setTabBarTitle: tabBarItemSettingArray];
         [[SLTabMManager sharedInstance] hideTabBarItem: tabBarItemSettingArray];
         
         [[SLShoppingListData sharedInstance] updateColor];
