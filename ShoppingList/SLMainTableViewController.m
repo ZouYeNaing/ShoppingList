@@ -147,6 +147,19 @@
     
     NSLog(@"viewWillAppear");
     
+    NSLog(@"viewWillAppear_tabIndex : %ld", [SLShoppingListData sharedInstance].tabBarController.selectedIndex);
+    
+    NSLog(@"viewWillAppear_selectedIndex : %ld", selectedTabIndex);
+    
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
+    
+    selectedFont = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedFont"];
+    selectedColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
+    
+    [self.tableView reloadData];
+    
+    [[SLShoppingListData sharedInstance] updateColor];
+
 }
 
 -(void)viewDidAppear: (BOOL)animated {
@@ -161,16 +174,8 @@
     savedData = [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"];
     
     self.title = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"title"];
-    
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
-
-    selectedFont = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedFont"];
-    selectedColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
-
-    [[SLShoppingListData sharedInstance] updateColor];
 
     [self.tableView reloadData];
-
     [self checkButtonEnable: mainVCArray];
     
     NSLog(@"selectedTabIndex(viewDidAppear) : %ld", selectedTabIndex);

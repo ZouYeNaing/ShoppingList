@@ -56,26 +56,16 @@
 - (NSMutableArray *)getSLDataArray : (NSInteger)selectedTabIndex {
     
     NSString *key;
-    // NSString *key = [NSString stringWithFormat:@"List%ld", selectedTabIndex];
-    NSLog(@"selectedIndex(getSLDataArray) : %ld", selectedTabIndex);
-    NSLog(@"key(getSLDataArray)           : %@", key);
-    NSLog(@"index           : %ld", _tabBarController.selectedIndex);
-    NSLog(@"savedtab         : %@", [[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]);
-    NSLog(@"_SLDict(getSLDataArray)       : %@", _SLDict);
-    
     NSMutableArray *savedTab = [[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"] mutableCopy];
-    NSMutableArray *afterRemove = [NSMutableArray array];
+    NSMutableArray *tabStatus = [NSMutableArray array];
     for (int i=0; i < savedTab.count; i++) {
         if (YES == [[savedTab objectAtIndex: i][@"status"] boolValue]) {
-            // [indexes addIndex : i];
-            [afterRemove addObject: [savedTab objectAtIndex: i]];
+            [tabStatus addObject: [savedTab objectAtIndex: i]];
         }
     }
     if(savedTab)
     {
-        
-        key = [NSString stringWithFormat:@"List%ld", [[afterRemove objectAtIndex: _tabBarController.selectedIndex][@"tab"] integerValue]];
-        // key = [NSString stringWithFormat:@"List%ld", [[savedTab objectAtIndex: selectedTabIndex][@"tab"] integerValue]];
+        key = [NSString stringWithFormat:@"List%ld", [[tabStatus objectAtIndex: _tabBarController.selectedIndex][@"tab"] integerValue]];
     }
    
     return [_SLDict objectForKey: key];
@@ -95,24 +85,29 @@
 
 - (void)setSLDataArray:(NSMutableArray *)SLDataArray {
     
-     NSLog(@"selectedIndex(setSLDataArray) : %ld", _tabBarController.selectedIndex);
-    
-    NSString *key = [NSString stringWithFormat:@"List%ld", _tabBarController.selectedIndex];
+    NSString *key;
+    NSMutableArray *savedTab = [[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"] mutableCopy];
+    if(savedTab) {
+        key = [savedTab objectAtIndex: _tabBarController.selectedIndex][@"key"];
+
+    } else {
+        key = [NSString stringWithFormat:@"List%ld", _tabBarController.selectedIndex];
+    }
     
     [_SLDict setValue: SLDataArray forKey: key];
-    // [self changeTrashButtom: SLDataArray];
-    
-    /*
-     case 0:
-     [_SLDict setValue: SLDataArray forKey: @"List0"];
-     */
 }
 
 - (void)saveData {
     
-    NSString *key       = [NSString stringWithFormat: @"List%ld", _tabBarController.selectedIndex];
-    NSString *plistName = [NSString stringWithFormat: @"FinalList%ld", _tabBarController.selectedIndex];
-    
+    NSString *key, *plistName;
+    NSMutableArray *savedTab = [[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"] mutableCopy];
+    if(savedTab) {
+        key       = [savedTab objectAtIndex: _tabBarController.selectedIndex][@"key"];
+        plistName = [savedTab objectAtIndex: _tabBarController.selectedIndex][@"path"];
+    } else {
+        key       = [NSString stringWithFormat: @"List%ld", _tabBarController.selectedIndex];
+        plistName = [NSString stringWithFormat: @"FinalList%ld", _tabBarController.selectedIndex];
+    }
     [[self.SLDict objectForKey: key] writeToFile: [self dataFilePath: plistName] atomically: YES];
  
 }
