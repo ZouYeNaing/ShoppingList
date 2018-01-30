@@ -20,14 +20,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSDictionary *newDic1 = @{@"status": @YES, @"title": @"リスト 1", @"path":@"FinalList0", @"key":@"List0", @"tab":@"0"};
-    NSDictionary *newDic2 = @{@"status": @YES, @"title": @"リスト 2", @"path":@"FinalList1", @"key":@"List1", @"tab":@"1"};
-    NSDictionary *newDic3 = @{@"status": @YES, @"title": @"リスト 3", @"path":@"FinalList2", @"key":@"List2", @"tab":@"2"};
-    NSDictionary *newDic4 = @{@"status": @YES, @"title": @"リスト 4", @"path":@"FinalList3", @"key":@"List3", @"tab":@"3"};
-    NSDictionary *newDic5 = @{@"status": @YES, @"title": @"設定"};
+    NSDictionary *tabItemDic1 = @{@"status": @YES, @"title": @"リスト 1", @"path":@"FinalList0", @"key":@"List0", @"tab":@"0"};
+    NSDictionary *tabItemDic2 = @{@"status": @YES, @"title": @"リスト 2", @"path":@"FinalList1", @"key":@"List1", @"tab":@"1"};
+    NSDictionary *tabItemDic3 = @{@"status": @YES, @"title": @"リスト 3", @"path":@"FinalList2", @"key":@"List2", @"tab":@"2"};
+    NSDictionary *tabItemDic4 = @{@"status": @YES, @"title": @"リスト 4", @"path":@"FinalList3", @"key":@"List3", @"tab":@"3"};
+    NSDictionary *tabItemDic5 = @{@"status": @YES, @"title": @"設定"};
     
-    NSMutableArray *tabBarItemSettingArray = [@[newDic1, newDic2, newDic3, newDic4, newDic5] mutableCopy];
+    NSMutableArray *tabBarItemSettingArray = [@[tabItemDic1, tabItemDic2, tabItemDic3, tabItemDic4, tabItemDic5] mutableCopy];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"SavedTab": tabBarItemSettingArray}];
+    
+    NSDictionary *initListDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Edit Button for Swipe Delete"};
+    NSDictionary *initListDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"+ Button for Add Data"};
+    NSDictionary *initListDic3 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Press for Edit Data"};
+    NSDictionary *initListDic4 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Press for Delete"};
+    
+    NSMutableArray *initListArray = [@[initListDic1, initListDic2, initListDic3, initListDic4] mutableCopy];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"initList": initListArray}];
     
     NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [UIColor redColor]];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedColor": colorData}];

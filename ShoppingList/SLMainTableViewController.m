@@ -37,7 +37,7 @@
     
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
-    
+    mainVCArray = [NSMutableArray array];
     self.editing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
     
@@ -82,19 +82,7 @@
         
         NSLog(@"No SLDataArray");
         
-        mainVCArray = [NSMutableArray array];
-        
-        // Yes => Delete
-        
-        NSDictionary *newDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Edit for Swipe Delete"};
-        NSDictionary *newDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"+ Button for Add Data"};
-        NSDictionary *newDic3 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Press for Edit Data"};
-        NSDictionary *newDic4 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Press for Delete"};
-        
-        [mainVCArray addObject: newDic1];
-        [mainVCArray addObject: newDic2];
-        [mainVCArray addObject: newDic3];
-        [mainVCArray addObject: newDic4];
+        mainVCArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"initList"] mutableCopy];
         
         [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
         [self changeTrashButtom: mainVCArray];
@@ -627,7 +615,6 @@
     if (selectedFont > 0) {
         cell.textLabel.font = [UIFont fontWithName: selectedFont size: 15];
     }
-    
     return cell;
 }
 
