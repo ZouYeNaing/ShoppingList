@@ -64,18 +64,46 @@
         
         selectedTabIndex = vc.tabBarItem.tag;
         path = [savedData objectAtIndex: selectedTabIndex][@"path"];
-        key = [savedData objectAtIndex: selectedTabIndex][@"key"];
+        key  = [savedData objectAtIndex: selectedTabIndex][@"key"];
         
     } else {
         selectedTabIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
 
         path = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"path"];
-        key = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"key"];
+        key  = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"key"];
 
     }
     
     [[SLShoppingListData sharedInstance] createNSDictionary];
     
+    [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: path]] forKey: key];
+    
+    if ([[SLShoppingListData sharedInstance].SLDict objectForKey: key]) {
+        
+        NSLog(@"Is SLDataDict");
+        
+        mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: key];
+        
+        NSLog(@"mainVCArray : %@", mainVCArray);
+        
+    }
+    else {
+        // Add all list Data at first time.
+        for(int i = 0; i < [savedData count]-1; i++) {
+            
+            [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: [savedData objectAtIndex: i][@"path"]]] forKey: [savedData objectAtIndex: i][@"key"]];
+            
+            mainVCArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"initList"] mutableCopy];
+            
+            [[SLShoppingListData sharedInstance].SLDict setValue: mainVCArray forKey: [savedData objectAtIndex: i][@"key"]];
+            [self changeTrashButtom: mainVCArray];
+            [[[SLShoppingListData sharedInstance].SLDict objectForKey: [savedData objectAtIndex: i][@"key"]] writeToFile: [[SLShoppingListData sharedInstance]dataFilePath: [savedData objectAtIndex: i][@"path"]] atomically: YES];
+            
+        }
+    }
+    
+    
+    /*
     [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: path]] forKey: key];
     
     if (![[SLShoppingListData sharedInstance].SLDict objectForKey: key]) {
@@ -87,7 +115,7 @@
         [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
         [self changeTrashButtom: mainVCArray];
         [[SLShoppingListData sharedInstance] saveData];
-        
+
     } else {
         
         NSLog(@"Is SLDataDict");
@@ -97,6 +125,7 @@
         NSLog(@"mainVCArray : %@", mainVCArray);
         
     }
+    */
     
     longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(onLongPress:)];
     longPressRecognizer.minimumPressDuration = 1.0f;
@@ -115,6 +144,8 @@
     swipeRight.delegate = self;
     
 }
+
+
 
 // Check tab switch status when reload and set tab bar item title.
 -(NSMutableArray *)checkTabStatus: (NSMutableArray *)saved {

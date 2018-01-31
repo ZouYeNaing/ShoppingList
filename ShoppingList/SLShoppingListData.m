@@ -21,37 +21,16 @@
     return sharedInstance;
 }
 
-/*
-- (void)changeTrashButtom: (NSArray *)mainVCArray {
-    for (int i=0; i < [mainVCArray count]; i++) {
-        
-        if ([[mainVCArray objectAtIndex: i][@"status"] boolValue] == YES) {
-            _trashButtonItem.enabled = YES;
-        } else
-        {
-            _trashButtonItem.enabled = NO;
-        }
+- (void)createNSDictionary
+{
+    if(_SLDict) {
+        NSLog(@"Already Exists");
     }
-}
-*/
-
-/*
-- (NSMutableArray *)getSLDataArray {
-    
-    NSString *key = [NSString stringWithFormat:@"List%ld", _tabBarController.selectedIndex];
-    NSLog(@"selectedIndex(getSLDataArray) : %ld", _tabBarController.selectedIndex);
-    // [self changeTrashButtom: [_SLDict objectForKey: key]];
-    return [_SLDict objectForKey: key];
-    
-    /*
-    case 0:
-    NSLog(@"tab* 0");
-    [self changeTrashButtom: [_SLDict objectForKey: @"List0"]];
-    return [_SLDict objectForKey: @"List0"];
-     * /
+    else {
+        _SLDict = [NSMutableDictionary dictionary];
+    }
     
 }
-*/
 
 - (NSMutableArray *)getSLDataArray : (NSInteger)selectedTabIndex {
     
@@ -67,20 +46,9 @@
     {
         key = [NSString stringWithFormat:@"List%ld", [[tabStatus objectAtIndex: _tabBarController.selectedIndex][@"tab"] integerValue]];
     }
-   
+    
     return [_SLDict objectForKey: key];
     // [self changeTrashButtom: [_SLDict objectForKey: key]];
-}
-
-- (void)createNSDictionary
-{
-    if(_SLDict) {
-        NSLog(@"Already Exists");
-    }
-    else {
-        _SLDict = [NSMutableDictionary dictionary];
-    }
-    
 }
 
 - (void)setSLDataArray:(NSMutableArray *)SLDataArray {
@@ -93,7 +61,7 @@
     } else {
         key = [NSString stringWithFormat:@"List%ld", _tabBarController.selectedIndex];
     }
-    
+    NSLog(@"SetSlDataArray Key : %@", key);
     [_SLDict setValue: SLDataArray forKey: key];
 }
 
@@ -102,12 +70,12 @@
     NSString *key, *plistName;
     NSMutableArray *savedTab = [[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"] mutableCopy];
     if(savedTab) {
-        key       = [savedTab objectAtIndex: _tabBarController.selectedIndex][@"key"];
-        plistName = [savedTab objectAtIndex: _tabBarController.selectedIndex][@"path"];
-    } else {
+        key       = [[self checkTabStatus: savedTab] objectAtIndex: _tabBarController.selectedIndex][@"key"];
+        plistName = [[self checkTabStatus: savedTab] objectAtIndex: _tabBarController.selectedIndex][@"path"];
+    }/* else {
         key       = [NSString stringWithFormat: @"List%ld", _tabBarController.selectedIndex];
         plistName = [NSString stringWithFormat: @"FinalList%ld", _tabBarController.selectedIndex];
-    }
+    }*/
     [[self.SLDict objectForKey: key] writeToFile: [self dataFilePath: plistName] atomically: YES];
  
 }
@@ -131,6 +99,19 @@
         [[UITabBar appearance]        setTintColor: selectedColor];
         self.tabBarController.tabBar.tintColor = selectedColor;
     }
+}
+
+// Check tab switch status when reload and set tab bar item title.
+-(NSMutableArray *)checkTabStatus: (NSMutableArray *)saved {
+    
+    NSMutableArray *checkTabStatus = [NSMutableArray array];
+    for (int i=0; i < saved.count; i++) {
+        if (YES == [[saved objectAtIndex: i][@"status"] boolValue]) {
+            // [indexes addIndex : i];
+            [checkTabStatus addObject: [saved objectAtIndex: i]];
+        }
+    }
+    return checkTabStatus;
 }
 
 @end
