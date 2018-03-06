@@ -24,17 +24,20 @@
     NSDictionary *tabItemDic2 = @{@"status": @YES, @"title": @"リスト 2", @"path":@"FinalList1", @"key":@"List1", @"tab":@"1"};
     NSDictionary *tabItemDic3 = @{@"status": @YES, @"title": @"リスト 3", @"path":@"FinalList2", @"key":@"List2", @"tab":@"2"};
     NSDictionary *tabItemDic4 = @{@"status": @YES, @"title": @"リスト 4", @"path":@"FinalList3", @"key":@"List3", @"tab":@"3"};
-    NSDictionary *tabItemDic5 = @{@"status": @YES, @"title": @"設定"};
+    NSDictionary *tabItemDic5 = @{@"status": @YES, @"title": @"Setting"};
     
     NSMutableArray *tabBarItemSettingArray = [@[tabItemDic1, tabItemDic2, tabItemDic3, tabItemDic4, tabItemDic5] mutableCopy];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"SavedTab": tabBarItemSettingArray}];
     
-    NSDictionary *initListDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Edit Button for Swipe Delete"};
-    NSDictionary *initListDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"+ Button for Add Data"};
-    NSDictionary *initListDic3 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Long Press for Edit Data"};
-    NSDictionary *initListDic4 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Short Press for Delete"};
+    NSDictionary *initListDic1 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Apple"};
+    NSDictionary *initListDic2 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Banana"};
+    NSDictionary *initListDic3 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Corn"};
+    NSDictionary *initListDic4 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Durian"};
+    NSDictionary *initListDic5 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Onion"};
+    NSDictionary *initListDic6 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Tomato"};
+    NSDictionary *initListDic7 = @{@"status": [NSNumber numberWithBool: NO], @"data": @"Potato"};
     
-    NSMutableArray *initListArray = [@[initListDic1, initListDic2, initListDic3, initListDic4] mutableCopy];
+    NSMutableArray *initListArray = [@[initListDic1, initListDic2, initListDic3, initListDic4, initListDic5, initListDic6, initListDic7] mutableCopy];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"initList": initListArray}];
     
     NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [UIColor redColor]];
