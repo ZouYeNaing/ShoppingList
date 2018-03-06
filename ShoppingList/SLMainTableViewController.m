@@ -59,12 +59,18 @@
     NSMutableArray *changedTab = [[NSUserDefaults standardUserDefaults] objectForKey: @"changedTabbar"];
     if(changedTab) {
         
+        /*
         NSUInteger selectedIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
        UIViewController *vc = [[SLShoppingListData sharedInstance].tabBarController.viewControllers objectAtIndex: selectedIndex];
-        
-        selectedTabIndex = vc.tabBarItem.tag;
+         selectedTabIndex = vc.tabBarItem.tag;
+        */
+        selectedTabIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
+        path = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"path"];
+        key  = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"key"];
+        /*
         path = [savedData objectAtIndex: selectedTabIndex][@"path"];
         key  = [savedData objectAtIndex: selectedTabIndex][@"key"];
+         */
         
     } else {
         selectedTabIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
@@ -86,8 +92,7 @@
         
         NSLog(@"mainVCArray : %@", mainVCArray);
         
-    }
-    else {
+    } else {
         // Add all list Data at first time.
         for(int i = 0; i < [savedData count]-1; i++) {
             
@@ -101,31 +106,6 @@
             
         }
     }
-    
-    
-    /*
-    [[SLShoppingListData sharedInstance].SLDict  setValue: [NSMutableArray arrayWithContentsOfFile: [[SLShoppingListData sharedInstance] dataFilePath: path]] forKey: key];
-    
-    if (![[SLShoppingListData sharedInstance].SLDict objectForKey: key]) {
-        
-        NSLog(@"No SLDataArray");
-        
-        mainVCArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"initList"] mutableCopy];
-        
-        [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
-        [self changeTrashButtom: mainVCArray];
-        [[SLShoppingListData sharedInstance] saveData];
-
-    } else {
-        
-        NSLog(@"Is SLDataDict");
-        
-        mainVCArray = [[SLShoppingListData sharedInstance].SLDict objectForKey: key];
-        
-        NSLog(@"mainVCArray : %@", mainVCArray);
-        
-    }
-    */
     
     longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(onLongPress:)];
     longPressRecognizer.minimumPressDuration = 1.0f;
@@ -144,8 +124,6 @@
     swipeRight.delegate = self;
     
 }
-
-
 
 // Check tab switch status when reload and set tab bar item title.
 -(NSMutableArray *)checkTabStatus: (NSMutableArray *)saved {
