@@ -21,6 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
+    backButton.title = @"Setting";
+    self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
+    
     fontFamily = [[NSArray alloc] initWithArray:[UIFont familyNames]];
     
     for (NSString *familyName in [UIFont familyNames]){

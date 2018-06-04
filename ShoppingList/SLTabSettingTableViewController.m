@@ -27,6 +27,10 @@
     
     [super viewDidLoad];
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
+    backButton.title = @"Setting";
+    self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
+    
     switchMArray =  [@[@YES, @YES, @YES, @YES, @YES] mutableCopy];
     
     tabSettingArray = [NSMutableArray array];
