@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,53 +19,43 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grE-mm-kiE">
-                                <rect key="frame" x="27" y="219" width="320" height="77"/>
+                                <rect key="frame" x="25" y="351" width="364" height="35.666666666666686"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Memo Everything You Need">
                                         <attributes>
-                                            <color key="NSColor" red="0.0" green="0.20000000000000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="24" name="ChalkboardSE-Regular"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="25" name="ChalkboardSE-Regular"/>
                                             <font key="NSOriginalFont" size="24" name="ChalkboardSE-Regular"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=".">
                                         <attributes>
-                                            <color key="NSColor" red="0.0" green="0.20000000000000001" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="24" name="ChalkboardSE-Regular"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="25" name="ChalkboardSE-Regular"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchimage" translatesAutoresizingMaskIntoConstraints="NO" id="TC8-om-ZRp">
-                                <rect key="frame" x="141" y="325" width="93" height="108"/>
-                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="grE-mm-kiE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="11" id="BTR-sa-Htj"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="grE-mm-kiE" secondAttribute="bottom" constant="371" id="I3e-9K-v5e"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="TC8-om-ZRp" secondAttribute="trailing" constant="125" id="JSP-Ak-Udb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="grE-mm-kiE" secondAttribute="trailing" constant="12" id="JbZ-Yj-8iD"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="TC8-om-ZRp" secondAttribute="bottom" constant="234" id="Nfe-kI-7zn"/>
-                            <constraint firstItem="TC8-om-ZRp" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="125" id="TZI-4N-aHc"/>
-                            <constraint firstItem="TC8-om-ZRp" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="305" id="W5U-9K-2wN"/>
-                            <constraint firstItem="grE-mm-kiE" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="199" id="zI2-rP-GNs"/>
+                            <constraint firstItem="grE-mm-kiE" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="8PD-DG-kee"/>
+                            <constraint firstItem="grE-mm-kiE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="5" id="Ven-8o-LNK"/>
+                            <constraint firstItem="grE-mm-kiE" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Yir-mj-Mlz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="grE-mm-kiE" secondAttribute="trailing" constant="5" id="n2f-uF-gC5"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+            <point key="canvasLocation" x="-1266.4000000000001" y="469.1154422788606"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="launchimage" width="76" height="76"/>
-    </resources>
 </document>

@@ -19,6 +19,7 @@
 		9A298D071F65382D009C2BCB /* SLColorSettingCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A298D061F65382D009C2BCB /* SLColorSettingCollectionViewController.m */; };
 		9A4C52C31F309611002AB587 /* SLShoppingListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4C52C21F309611002AB587 /* SLShoppingListData.m */; };
 		9A85A6B21F64505C00D66D5F /* SLTabSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A85A6B11F64505C00D66D5F /* SLTabSettingTableViewController.m */; };
+		9A92114420C51B9200C8FA18 /* App2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A92114320C51B9200C8FA18 /* App2@2x.png */; };
 		9AA9CFD01F643EAE00B025A1 /* SLSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */; };
 		9AAA90211FBAFE9F009D1E58 /* SLTabMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		9A7902F91FA8870400BE4F70 /* ShoppingList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShoppingList.entitlements; sourceTree = "<group>"; };
 		9A85A6B01F64505C00D66D5F /* SLTabSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLTabSettingTableViewController.h; sourceTree = "<group>"; };
 		9A85A6B11F64505C00D66D5F /* SLTabSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLTabSettingTableViewController.m; sourceTree = "<group>"; };
+		9A92114320C51B9200C8FA18 /* App2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App2@2x.png"; sourceTree = "<group>"; };
 		9AA9CFCE1F643EAE00B025A1 /* SLSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSettingTableViewController.h; sourceTree = "<group>"; };
 		9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSettingTableViewController.m; sourceTree = "<group>"; };
 		9AAA901F1FBAFE9F009D1E58 /* SLTabMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLTabMManager.h; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		9A0472471F2B21710046E845 /* ShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				9A92114320C51B9200C8FA18 /* App2@2x.png */,
 				9A7902F91FA8870400BE4F70 /* ShoppingList.entitlements */,
 				9A04724B1F2B21710046E845 /* AppDelegate.h */,
 				9A04724C1F2B21710046E845 /* AppDelegate.m */,
@@ -197,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A0472581F2B21710046E845 /* LaunchScreen.storyboard in Resources */,
+				9A92114420C51B9200C8FA18 /* App2@2x.png in Resources */,
 				19FDCCF5204E791200E49CD6 /* Images.xcassets in Resources */,
 				9A0472551F2B21710046E845 /* Assets.xcassets in Resources */,
 				9A0472531F2B21710046E845 /* Main.storyboard in Resources */,

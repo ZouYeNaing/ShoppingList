@@ -108,9 +108,12 @@ static NSString * const reuseIdentifier = @"Cell";
     [self updateColor];
     
     [self.collectionView reloadData];
-     
     
-    // [self.navigationController popViewControllerAnimated: YES];
+//    [[UIApplication sharedApplication] setAlternateIconName:@"App2" completionHandler:^(NSError * _Nullable error) {
+//        if(error) {
+//            NSLog(@"Error : %@", error.localizedDescription);
+//        }
+//    }];
     
 }
 
