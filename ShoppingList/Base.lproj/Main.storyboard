@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZHH-9g-Y28">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZHH-9g-Y28">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2320" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -685,13 +685,7 @@
                             <outlet property="delegate" destination="Lqu-Ag-EgS" id="Pc7-gq-xfe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tab Setting" id="TEX-AE-gvM">
-                        <barButtonItem key="rightBarButtonItem" image="move" style="plain" id="mTR-Vk-ROw">
-                            <connections>
-                                <action selector="moveRow:" destination="Lqu-Ag-EgS" id="dz2-Oe-Z9X"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Tab Setting" id="TEX-AE-gvM"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pND-VN-qoe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -775,7 +769,6 @@
     <resources>
         <image name="ic_settings_36pt" width="36" height="36"/>
         <image name="icon" width="36" height="36"/>
-        <image name="move" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="b5E-K9-cXR"/>

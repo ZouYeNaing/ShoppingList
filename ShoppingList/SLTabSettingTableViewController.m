@@ -55,17 +55,19 @@
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     switchColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
+    self.editing = YES;
+    
 }
 
-- (IBAction)moveRow:(id)sender {
-
-    if(self.editing == NO) {
-        self.editing = YES;
-    } else {
-        self.editing = NO;
-    }
-    [self.tableView reloadData];
-}
+//- (IBAction)moveRow:(id)sender {
+//
+//    if(self.editing == NO) {
+//        self.editing = YES;
+//    } else {
+//        self.editing = NO;
+//    }
+//    [self.tableView reloadData];
+//}
 
 - (void) hideKeyboard {
 
@@ -170,11 +172,12 @@
     
     // UISwitch.
     UISwitch *switchView = [[UISwitch alloc] initWithFrame: CGRectMake(800, 13, 175, 30)];
-    if (self.editing == YES) {
-        cell.editingAccessoryView = switchView;
-    } else {
-        cell.accessoryView = switchView;
-    }
+    cell.editingAccessoryView = switchView;
+//    if (self.editing == YES) {
+//        cell.editingAccessoryView = switchView;
+//    } else {
+//        cell.accessoryView = switchView;
+//    }
     switchView.tag = (int)indexPath.row;
     switchView.tintColor = switchColor;
     switchView.onTintColor = switchColor;
@@ -238,17 +241,17 @@
 }
 
 - (UITableViewCellEditingStyle)tableView: (UITableView *)tableView editingStyleForRowAtIndexPath: (NSIndexPath *)indexPath {
-    
-    if (self.editing == YES) {
-        
-        return UITableViewCellEditingStyleNone;
-        
-    } else {
-        
-        return UITableViewCellEditingStyleDelete;
-        
-    }
-    
+//
+//    if (self.editing == YES) {
+//
+//        return UITableViewCellEditingStyleNone;
+//
+//    } else {
+//
+//        return UITableViewCellEditingStyleDelete;
+//
+//    }
+    return UITableViewCellEditingStyleNone;
 }
 
 - (BOOL)tableView: (UITableView *)tableView canMoveRowAtIndexPath: (NSIndexPath *)indexPath {

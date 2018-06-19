@@ -12,11 +12,81 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>App2</key>
+			<key>icon_000000</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>App2</string>
+					<string>icon_000000</string>
+				</array>
+			</dict>
+			<key>icon_0000FF</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_0000FF</string>
+				</array>
+			</dict>
+			<key>icon_009687</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_009687</string>
+				</array>
+			</dict>
+			<key>icon_1C1170</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_1C1170</string>
+				</array>
+			</dict>
+			<key>icon_4CAF4F</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_4CAF4F</string>
+				</array>
+			</dict>
+			<key>icon_775447</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_775447</string>
+				</array>
+			</dict>
+			<key>icon_BF00FF</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_BF00FF</string>
+				</array>
+			</dict>
+			<key>icon_FF003F</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_FF003F</string>
+				</array>
+			</dict>
+			<key>icon_FF00BF</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_FF00BF</string>
+				</array>
+			</dict>
+			<key>icon_FF7F00</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_FF7F00</string>
+				</array>
+			</dict>
+			<key>icon_FFBF00</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>icon_FFBF00</string>
 				</array>
 			</dict>
 		</dict>

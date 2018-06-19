@@ -22,6 +22,18 @@
 		9A92114420C51B9200C8FA18 /* App2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A92114320C51B9200C8FA18 /* App2@2x.png */; };
 		9AA9CFD01F643EAE00B025A1 /* SLSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */; };
 		9AAA90211FBAFE9F009D1E58 /* SLTabMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */; };
+		9AF8BBCC20C58757000CA6CE /* icon_orange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */; };
+		9AF8BBD820CF979E000CA6CE /* icon_775447@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */; };
+		9AF8BBD920CF979E000CA6CE /* icon_FF003F@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */; };
+		9AF8BBDA20CF979E000CA6CE /* icon_FF00BF@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCF20CF979B000CA6CE /* icon_FF00BF@2x.png */; };
+		9AF8BBDB20CF979E000CA6CE /* icon_4CAF4F@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD020CF979B000CA6CE /* icon_4CAF4F@2x.png */; };
+		9AF8BBDC20CF979E000CA6CE /* icon_FFBF00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD120CF979C000CA6CE /* icon_FFBF00@2x.png */; };
+		9AF8BBDD20CF979E000CA6CE /* icon_009687@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD220CF979C000CA6CE /* icon_009687@2x.png */; };
+		9AF8BBDE20CF979E000CA6CE /* icon_000000@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD320CF979C000CA6CE /* icon_000000@2x.png */; };
+		9AF8BBDF20CF979E000CA6CE /* icon_0000FF@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD420CF979D000CA6CE /* icon_0000FF@2x.png */; };
+		9AF8BBE020CF979E000CA6CE /* icon_BF00FF@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD520CF979D000CA6CE /* icon_BF00FF@2x.png */; };
+		9AF8BBE120CF979E000CA6CE /* icon_1C1170@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD620CF979D000CA6CE /* icon_1C1170@2x.png */; };
+		9AF8BBE220CF979E000CA6CE /* icon_FF7F00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBD720CF979D000CA6CE /* icon_FF7F00@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +66,18 @@
 		9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSettingTableViewController.m; sourceTree = "<group>"; };
 		9AAA901F1FBAFE9F009D1E58 /* SLTabMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLTabMManager.h; sourceTree = "<group>"; };
 		9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLTabMManager.m; sourceTree = "<group>"; };
+		9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_orange@2x.png"; sourceTree = "<group>"; };
+		9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_775447@2x.png"; sourceTree = "<group>"; };
+		9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_FF003F@2x.png"; sourceTree = "<group>"; };
+		9AF8BBCF20CF979B000CA6CE /* icon_FF00BF@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_FF00BF@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD020CF979B000CA6CE /* icon_4CAF4F@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_4CAF4F@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD120CF979C000CA6CE /* icon_FFBF00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_FFBF00@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD220CF979C000CA6CE /* icon_009687@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_009687@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD320CF979C000CA6CE /* icon_000000@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_000000@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD420CF979D000CA6CE /* icon_0000FF@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_0000FF@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD520CF979D000CA6CE /* icon_BF00FF@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_BF00FF@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD620CF979D000CA6CE /* icon_1C1170@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_1C1170@2x.png"; sourceTree = "<group>"; };
+		9AF8BBD720CF979D000CA6CE /* icon_FF7F00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_FF7F00@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +110,18 @@
 		9A0472471F2B21710046E845 /* ShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				9AF8BBD320CF979C000CA6CE /* icon_000000@2x.png */,
+				9AF8BBD420CF979D000CA6CE /* icon_0000FF@2x.png */,
+				9AF8BBD620CF979D000CA6CE /* icon_1C1170@2x.png */,
+				9AF8BBD020CF979B000CA6CE /* icon_4CAF4F@2x.png */,
+				9AF8BBD220CF979C000CA6CE /* icon_009687@2x.png */,
+				9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */,
+				9AF8BBD520CF979D000CA6CE /* icon_BF00FF@2x.png */,
+				9AF8BBCF20CF979B000CA6CE /* icon_FF00BF@2x.png */,
+				9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */,
+				9AF8BBD720CF979D000CA6CE /* icon_FF7F00@2x.png */,
+				9AF8BBD120CF979C000CA6CE /* icon_FFBF00@2x.png */,
+				9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */,
 				9A92114320C51B9200C8FA18 /* App2@2x.png */,
 				9A7902F91FA8870400BE4F70 /* ShoppingList.entitlements */,
 				9A04724B1F2B21710046E845 /* AppDelegate.h */,
@@ -166,8 +202,7 @@
 				TargetAttributes = {
 					9A0472441F2B21710046E845 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = NA5BTE5432;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -199,11 +234,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AF8BBD820CF979E000CA6CE /* icon_775447@2x.png in Resources */,
+				9AF8BBDE20CF979E000CA6CE /* icon_000000@2x.png in Resources */,
+				9AF8BBDD20CF979E000CA6CE /* icon_009687@2x.png in Resources */,
 				9A0472581F2B21710046E845 /* LaunchScreen.storyboard in Resources */,
+				9AF8BBE120CF979E000CA6CE /* icon_1C1170@2x.png in Resources */,
 				9A92114420C51B9200C8FA18 /* App2@2x.png in Resources */,
+				9AF8BBDF20CF979E000CA6CE /* icon_0000FF@2x.png in Resources */,
+				9AF8BBDA20CF979E000CA6CE /* icon_FF00BF@2x.png in Resources */,
 				19FDCCF5204E791200E49CD6 /* Images.xcassets in Resources */,
+				9AF8BBD920CF979E000CA6CE /* icon_FF003F@2x.png in Resources */,
 				9A0472551F2B21710046E845 /* Assets.xcassets in Resources */,
+				9AF8BBDB20CF979E000CA6CE /* icon_4CAF4F@2x.png in Resources */,
+				9AF8BBDC20CF979E000CA6CE /* icon_FFBF00@2x.png in Resources */,
 				9A0472531F2B21710046E845 /* Main.storyboard in Resources */,
+				9AF8BBCC20C58757000CA6CE /* icon_orange@2x.png in Resources */,
+				9AF8BBE220CF979E000CA6CE /* icon_FF7F00@2x.png in Resources */,
+				9AF8BBE020CF979E000CA6CE /* icon_BF00FF@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,12 +393,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = NA5BTE5432;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 83J5748TKW;
 				INFOPLIST_FILE = ShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zyn.ShoppingList;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.shopping-memo.co";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1091a5ef-0c87-402f-bc45-4500fb4c5d23";
+				PROVISIONING_PROFILE_SPECIFIER = "Shopping Memo";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -360,12 +411,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = NA5BTE5432;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 83J5748TKW;
 				INFOPLIST_FILE = ShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zyn.ShoppingList;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.shopping-memo.co";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1091a5ef-0c87-402f-bc45-4500fb4c5d23";
+				PROVISIONING_PROFILE_SPECIFIER = "Shopping Memo";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
