@@ -8,10 +8,15 @@
 
 #import "SLSettingTableViewController.h"
 #import "SLTabSettingTableViewController.h"
+#import "SLTabMManager.h"
+#import "SLShoppingListData.h"
 
 @interface SLSettingTableViewController ()
 {
     NSMutableArray *settingDataArray;
+    
+    NSString *selectedFont;
+    UIColor  *selectedColor;
 }
 @end
 
@@ -23,8 +28,37 @@
     
     settingDataArray = [NSMutableArray arrayWithObjects: @"Tab Setting", @"Color Setting", @"Font Setting", nil];
     
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
+    
     NSLog(@"Count : %ld", [settingDataArray count]);
     NSLog(@"viewDidLoad SLSettingTableViewController");
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.tableView addGestureRecognizer: swipeLeft];
+    swipeLeft.delegate = self;
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:swipeRight];
+    swipeRight.delegate = self;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear: animated];
+    
+    NSLog(@"viewWillAppear");
+    
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
+    
+    selectedFont = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedFont"];
+    selectedColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
+    
+    [[SLShoppingListData sharedInstance] updateColor];
+    
+    [self.tableView reloadData];
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -35,8 +69,18 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+#pragma mark - Swipe Gesture.
+
+-(void) swipe:(UISwipeGestureRecognizer *) recognizer {
+    
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionRight){
+        NSLog(@"swipe right");
+        [SLShoppingListData sharedInstance].tabBarController.selectedIndex -= 1;
+    }
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"Swipe left");
+        [SLShoppingListData sharedInstance].tabBarController.selectedIndex += 1;
+    }
     
 }
 
@@ -52,8 +96,13 @@
     NSString *CellIdentifier = @"SettingCell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
     
+    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier];
+    }
+    
+    if (selectedFont > 0) {
+        cell.textLabel.font = [UIFont fontWithName: selectedFont size: 15];
     }
     
     cell.textLabel.text = [settingDataArray objectAtIndex: indexPath.row];

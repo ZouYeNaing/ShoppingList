@@ -22,56 +22,124 @@
     return sharedInstance;
 }
 
-- (void)saveDefaultTabBarMArray {
+- (void)saveDefaultTabBarMArray: (UITabBarController*)tabbar {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
         _defaultTabBarMArray = [[NSMutableArray arrayWithArray: [SLShoppingListData sharedInstance].tabBarController.viewControllers] mutableCopy];
+
     });
 }
 
 - (void)hideTabBarItem : (NSMutableArray *)tabSettingArray {
     
     NSMutableArray *tabStatus = [tabSettingArray valueForKey: @"status"];
-    
     NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
-    
     NSMutableArray *tabBarArray = _defaultTabBarMArray.mutableCopy;
-    // NSLog(@"org : %@", tabBarArray);
-    tabBarArray =[SLTabMManager sharedInstance].defaultTabBarMArray.mutableCopy;
+    // tabBarArray =[SLTabMManager sharedInstance].defaultTabBarMArray.mutableCopy;
     for (int i=0; i < tabStatus.count; i++) {
         if (NO == [tabStatus[i] boolValue]) {
             [indexes addIndex : i];
         }
     }
     [tabBarArray removeObjectsAtIndexes: indexes];
-    // NSLog(@"aft : %@", tabBarArray);
+    
     [self.tabBarController setViewControllers: tabBarArray];
     
 }
 
-- (void)setTabBarTitle : (NSMutableArray *)tabSettingArray {
+- (void)moveTabBarItem : (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath{
     
-    NSMutableArray *tabArray = [self.tabBarController.viewControllers mutableCopy];
+    if (fromIndexPath != toIndexPath ) {
+        NSMutableArray *tabBarItemSettingArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
+        NSMutableArray *tabSettingArray = _defaultTabBarMArray.mutableCopy;
+        NSMutableDictionary *toMoveDict = tabSettingArray[fromIndexPath.row];
+        
+        [tabSettingArray removeObjectAtIndex: fromIndexPath.row];
+        [tabSettingArray insertObject: toMoveDict atIndex: toIndexPath.row];
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject: tabSettingArray];
+        [[NSUserDefaults standardUserDefaults] setObject: data forKey: @"DefaultTabBarMArray"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self.tabBarController setViewControllers: tabSettingArray animated:YES];
+        _defaultTabBarMArray = [self.tabBarController.viewControllers mutableCopy];
+        [self hideTabBarItem: tabBarItemSettingArray];
+        
+        // Test
+        /*
+        NSMutableArray *tabStatus = [tabBarItemSettingArray valueForKey: @"status"];
+        NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
+        
+        _defaultTabBarMArray = [self.tabBarController.viewControllers mutableCopy];
+        NSMutableArray *tabBarArray = _defaultTabBarMArray.mutableCopy;
+        NSLog(@"org : %@", tabBarArray);
+        for (int i=0; i < tabBarArray.count; i++) {
+            if (NO == [tabStatus[i] boolValue]) {
+                [indexes addIndex : i];
+            }
+        }
+        [tabBarArray removeObjectsAtIndexes: indexes];
+        
+        for (int i=0; i < tabBarArray.count; i++) {
+            UIViewController *vc = [tabBarArray objectAtIndex: i];
+            NSLog(@"Title(after hide) : %@", vc.tabBarItem.title);
+        }
+        
+        [self.tabBarController setViewControllers: tabBarArray];
+         */
+        //Test
+        
+        UITabBarController *tab = self.tabBarController;
+        
+        NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject: tab];
+        [[NSUserDefaults standardUserDefaults] setObject: data1 forKey: @"changedTabbar"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
+}
+
+-(void)setTabBarTitle:(NSMutableArray *)tabSettingArray {
+    
+    NSMutableArray *tabArray = [_defaultTabBarMArray mutableCopy];
+    
+    for (int i=0; i < tabArray.count; i++) {
+        UIViewController *vc = [tabArray objectAtIndex: i];
+        NSLog(@"Title(setTabBarTitle) : %@", vc.tabBarItem.title);
+    }
+    
     NSLog(@"setTabBarTitle : %@", tabSettingArray);
     
     if(tabSettingArray.count > 0)
     {
-        for (int i=0; i < tabArray.count-1; i++) {
-            [[tabArray objectAtIndex: i]setTitle: [tabSettingArray objectAtIndex: i][@"data"]];
+        for (int i=0; i < tabArray.count; i++) {
+            [[tabArray objectAtIndex: i]setTitle: [tabSettingArray objectAtIndex: i][@"title"]];
         }
     }
     
-    self.tabBarController.viewControllers = tabArray;
+    for (int i=0; i < tabArray.count; i++) {
+        UIViewController *vc = [tabArray objectAtIndex: i];
+        NSLog(@"Title(setTabBarTitle) : %@", vc.tabBarItem.title);
+    }
+    
     [self.tabBarController setViewControllers: tabArray animated:YES];
     
 }
 
 
-- (NSString *)getTabBarTitle : (int)selectedTabIndex {
-
-    NSLog(@"selectedTabIndex %d", selectedTabIndex);
-    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"Tab"]];
-    NSString *title = [tabSetting objectAtIndex: (int)selectedTabIndex][@"data"];
+- (NSString *)getTabBarTitle : (NSInteger)selectedTabIndex {
+    
+    NSLog(@"selectedTab(getTabBarTitle) %ld", selectedTabIndex);
+    NSString *title;
+    NSMutableArray *tabSetting = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
+    
+    for (int i=0; i < [tabSetting count]-1; i++) {
+        if (selectedTabIndex == [[tabSetting objectAtIndex:i][@"tab"] integerValue]) {
+            title = [tabSetting objectAtIndex: i][@"title"];
+        }
+    }
+    // NSString *title = [tabSetting objectAtIndex: selectedTabIndex][@"title"];
     
     return title;
 

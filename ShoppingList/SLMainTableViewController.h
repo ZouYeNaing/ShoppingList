@@ -10,7 +10,7 @@
 #import "SLAddViewController.h"
 #import "SLEditViewController.h"
 
-@interface SLMainTableViewController : UITableViewController<SLAddViewControllerDelegate, SLEditViewControllerDelegate>
+@interface SLMainTableViewController : UITableViewController<SLAddViewControllerDelegate, SLEditViewControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) NSIndexPath *indexpath;
 

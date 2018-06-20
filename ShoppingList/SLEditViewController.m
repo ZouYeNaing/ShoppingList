@@ -26,7 +26,7 @@
     
     if (!_isEditing) {
         
-        UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd
+        UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
                                                                                 target: self
                                                                                 action: @selector(addListDataAction:)];
         self.navigationItem.rightBarButtonItem = addBtn;
@@ -36,11 +36,8 @@
         
     } else {
         
-        NSLog(@"editVCArray : %ld", indexpath.row);
         
-        editVCArray = [SLShoppingListData sharedInstance].getSLDataArray;
-        
-        NSLog(@"editVCArray : %@", editVCArray);
+        editVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: self.indexpath];
         
         _editTextView.text = [editVCArray objectAtIndex: indexpath.row][@"data"];
     }

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SLSettingTableViewController : UITableViewController
+@interface SLSettingTableViewController : UITableViewController< UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) NSIndexPath *indexpath;
 

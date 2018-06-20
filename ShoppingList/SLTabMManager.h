@@ -15,9 +15,12 @@
 
 @property (weak, nonatomic) UITabBarController *tabBarController;
 
+@property (weak, nonatomic) UITabBarController *tabBarControllertest;
+
 + (instancetype)sharedInstance;
-- (void)saveDefaultTabBarMArray;
+- (void)saveDefaultTabBarMArray: (UITabBarController*)tabbar;
 - (void)hideTabBarItem : (NSMutableArray *)indexes;
 - (void)setTabBarTitle : (NSMutableArray *)tabSettingArray;
-- (NSString *)getTabBarTitle : (int)selectedTabIndex;
+- (NSString *)getTabBarTitle : (NSInteger)selectedTabIndex;
+- (void)moveTabBarItem : (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath;
 @end
