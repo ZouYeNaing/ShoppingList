@@ -49,6 +49,9 @@
     
 }
 
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    return YES;
+}
 - (void)viewWillAppear: (BOOL)animated {
     
     [super viewWillAppear: animated];
@@ -105,25 +108,23 @@
     
     NSString *edited = _editTextView.text;
     NSLog(@"edited : %@", edited);
-    
     NSCharacterSet *separator = [NSCharacterSet newlineCharacterSet];
     NSArray *rows = [edited componentsSeparatedByCharactersInSet:separator];
-    
-    NSArray *newAdded = [rows subarrayWithRange:NSMakeRange(1, rows.count-1)];
-    
-    
-    if (!_isEditing) {
-        NSLog(@"is ADD");
-    } else {
+    NSMutableArray *newAdded = [[rows subarrayWithRange:NSMakeRange(1, rows.count-1)] mutableCopy];
+    if (_isEditing) {
         
         if ([self.delegate respondsToSelector: @selector(editedList:newAdded:)]) {
-            
+            NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
+            for (int i=0; i < [newAdded count]; i++) {
+                if ([[newAdded objectAtIndex:i] isEqualToString:@""]) {
+                    [indexes addIndex: i];
+                }
+            }
+            [newAdded removeObjectsAtIndexes: indexes];
             [self.delegate editedList: rows[0] newAdded: newAdded];
-            
         }
     }
     [self dismissViewControllerAnimated: YES completion: nil];
-    
 }
 
 -(IBAction) addListDataAction: (id)sender
@@ -132,14 +133,19 @@
     
     NSString *addText = _editTextView.text;
     NSLog(@"addText : %@", addText);
-    
     NSCharacterSet *separator = [NSCharacterSet newlineCharacterSet];
-    NSArray *rows = [addText componentsSeparatedByCharactersInSet: separator];
+    NSMutableArray *rows = [[addText componentsSeparatedByCharactersInSet: separator] mutableCopy];
     
     if ([self.delegate respondsToSelector: @selector(addedList:)]) {
         
+        NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
+        for (int i=0; i < [rows count]; i++) {
+            if ([[rows objectAtIndex:i] isEqualToString:@""]) {
+                [indexes addIndex: i];
+            }
+        }
+        [rows removeObjectsAtIndexes: indexes];
         [self.delegate addedList: rows];
-        
     }
     [self dismissViewControllerAnimated: YES completion: nil];
 }
