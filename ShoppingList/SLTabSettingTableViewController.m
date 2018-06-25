@@ -56,7 +56,6 @@
     switchColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
     self.editing = YES;
-    
 }
 
 //- (IBAction)moveRow:(id)sender {
@@ -77,45 +76,42 @@
 
 -(void)onLongPress: (UILongPressGestureRecognizer*)longPress {
     
-    NSLog(@"UILongPressGestureRecognizer");
-    
     if (longPress.state != UIGestureRecognizerStateBegan) {
-        
-        return;
-        
-    }
     
+        return;
+    }
     CGPoint p = [longPress locationInView: self.tableView];
     self.indexpath = [self.tableView indexPathForRowAtPoint: p];
-    
     if (self.indexpath == nil) {
-        
         return;
-        
     }
     NSLog(@"indexpath : %ld", self.indexpath.row);
-    
     UITextField *textField = (UITextField *)[[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: 999];
-    
     textField.userInteractionEnabled = YES;
     textField.returnKeyType = UIReturnKeyDone;
     [textField becomeFirstResponder];
 }
 
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-    NSLog(@"textFieldDidBeginEditing : %@", textField.text);
-    
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    
-    return YES;
-    
-}
-
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+//    NSMutableDictionary *changeTitle = [NSMutableDictionary dictionary];
+//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"key"] forKey: @"key"];
+//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"path"] forKey: @"path"];
+//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
+//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"tab"] forKey: @"tab"];
+//    [changeTitle setValue: textField.text  forKey: @"title"];
+//
+//    [tabSettingArray replaceObjectAtIndex: self.indexpath.row withObject: changeTitle];
+//
+//    [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//    self.tabBarController.tabBar.items[self.indexpath.row].title = textField.text;
+//
+//    [self.tableView reloadData];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     NSMutableDictionary *changeTitle = [NSMutableDictionary dictionary];
     [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"key"] forKey: @"key"];
@@ -132,13 +128,8 @@
     self.tabBarController.tabBar.items[self.indexpath.row].title = textField.text;
     
     [self.tableView reloadData];
-}
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     [textField resignFirstResponder];
     return YES;
-    
 }
 
 #pragma mark - Table view data source
@@ -146,7 +137,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [tabSettingArray count]-1;
-    
 }
 
 
@@ -188,17 +178,12 @@
     NSLog(@"myTextField.text : %@", myTextField.text);
     
     if([[tabSettingArray objectAtIndex: indexPath.row][@"status"] boolValue] == YES) {
-        
         [switchView setOn: YES animated: NO];
-        
     }
     else {
-        
         [switchView setOn: NO animated: NO];
-        
     }
     return cell;
-    
 }
 
 -(void)switchChanged: (id)sender {
@@ -257,7 +242,6 @@
 - (BOOL)tableView: (UITableView *)tableView canMoveRowAtIndexPath: (NSIndexPath *)indexPath {
     
     return YES;
-    
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle: (UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -267,16 +251,13 @@
 - (BOOL)tableView: (UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath: (NSIndexPath *)indexPath {
     
     return NO;
-    
 }
 
 - (void)tableView: (UITableView *)tableView moveRowAtIndexPath: (NSIndexPath *)fromIndexPath toIndexPath: (NSIndexPath *)toIndexPath {
     self.tableView.delegate = self;
     
     if (fromIndexPath != toIndexPath ) {
-        
         NSMutableDictionary *toMoveDict = tabSettingArray[fromIndexPath.row];
-        
         [tabSettingArray removeObjectAtIndex: fromIndexPath.row];
         [tabSettingArray insertObject: toMoveDict atIndex: toIndexPath.row];
         
@@ -284,13 +265,10 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[SLTabMManager sharedInstance] moveTabBarItem: fromIndexPath toIndexPath: toIndexPath];
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
-        
     }
-    
 }
 
 @end
