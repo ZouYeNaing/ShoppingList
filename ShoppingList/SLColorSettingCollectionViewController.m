@@ -27,14 +27,14 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
     
     colorCode = [[NSArray alloc] initWithObjects:
+                 [UIColor colorWithRed:0.56 green:0.56 blue:0.58 alpha:1.0],
                  [UIColor colorWithRed:1 green:0 blue:0.25 alpha:1],
                  [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1],
                  [UIColor colorWithRed:1 green:0.75 blue:0 alpha:1],
-                 [UIColor colorWithRed:0 green:0 blue:1 alpha:1],
                  
                  [UIColor colorWithRed:0.75 green:0 blue:1 alpha:1],
                  [UIColor colorWithRed:1 green:0 blue:0.75 alpha:1],
-                 [UIColor colorWithRed:0.56 green:0.56 blue:0.58 alpha:1.0],
+                 [UIColor colorWithRed:0 green:0 blue:1 alpha:1],
                  [UIColor colorWithRed:0.11 green:0.07 blue:0.44 alpha:1.0],
                  
                  [UIColor colorWithRed:0.00 green:0.59 blue:0.53 alpha:1.0],
