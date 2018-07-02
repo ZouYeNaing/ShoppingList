@@ -412,7 +412,9 @@
     }
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
         NSLog(@"Swipe left");
-        [SLShoppingListData sharedInstance].tabBarController.selectedIndex += 1;
+        if ([SLShoppingListData sharedInstance].tabBarController.selectedIndex < 3) {
+            [SLShoppingListData sharedInstance].tabBarController.selectedIndex += 1;
+        }
     }
     
 }

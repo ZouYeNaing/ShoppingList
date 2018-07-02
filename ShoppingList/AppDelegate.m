@@ -40,7 +40,7 @@
     NSMutableArray *initListArray = [@[initListDic1, initListDic2, initListDic3, initListDic4, initListDic5, initListDic6, initListDic7] mutableCopy];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"initList": initListArray}];
     
-    NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [UIColor redColor]];
+    NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject: [UIColor colorWithRed:0.00 green:0.00 blue:0.00 alpha:1.0]];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedColor": colorData}];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedIndex": @(46)}];

@@ -77,7 +77,6 @@
 -(void)onLongPress: (UILongPressGestureRecognizer*)longPress {
     
     if (longPress.state != UIGestureRecognizerStateBegan) {
-    
         return;
     }
     CGPoint p = [longPress locationInView: self.tableView];
@@ -85,30 +84,25 @@
     if (self.indexpath == nil) {
         return;
     }
-    NSLog(@"indexpath : %ld", self.indexpath.row);
-    UITextField *textField = (UITextField *)[[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: 999];
-    textField.userInteractionEnabled = YES;
-    textField.returnKeyType = UIReturnKeyDone;
-    [textField becomeFirstResponder];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-//    NSMutableDictionary *changeTitle = [NSMutableDictionary dictionary];
-//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"key"] forKey: @"key"];
-//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"path"] forKey: @"path"];
-//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
-//    [changeTitle setValue: [tabSettingArray objectAtIndex: self.indexpath.row][@"tab"] forKey: @"tab"];
-//    [changeTitle setValue: textField.text  forKey: @"title"];
-//
-//    [tabSettingArray replaceObjectAtIndex: self.indexpath.row withObject: changeTitle];
-//
-//    [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//    self.tabBarController.tabBar.items[self.indexpath.row].title = textField.text;
-//
-//    [self.tableView reloadData];
+    if([[tabSettingArray objectAtIndex:self.indexpath.row][@"status"] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+        UITextField *textField = (UITextField *)[[self.tableView cellForRowAtIndexPath: self.indexpath] viewWithTag: 999];
+        textField.userInteractionEnabled = YES;
+        textField.returnKeyType = UIReturnKeyDone;
+        [textField becomeFirstResponder];
+    } else {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Cannot Editable"
+                                     message:@"Memo name cannot be editable\nwhile switch is off."
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:@"OK"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                    }];
+        [alert addAction:yesButton];
+        alert.view.tintColor = switchColor;
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -125,8 +119,15 @@
     [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    self.tabBarController.tabBar.items[self.indexpath.row].title = textField.text;
-    
+    NSMutableArray *currentTabBarItems = [self.tabBarController.tabBar.items mutableCopy];
+    for(UITabBarItem *tabBarItem in currentTabBarItems) {
+        if(tabBarItem.tag == self.indexpath.row) {
+            tabBarItem.title = textField.text;
+        }
+    }
+//    if(self.indexpath.row < 4) {
+//       self.tabBarController.tabBar.items[self.indexpath.row].title = textField.text;
+//    }
     [self.tableView reloadData];
     [textField resignFirstResponder];
     return YES;
@@ -210,10 +211,10 @@
     UIView *footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 40)];
     
     UILabel *detailLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 0, self.view.frame.size.width - 20, 40)];
-    detailLabel.textColor = [UIColor darkGrayColor];
+    detailLabel.textColor = [UIColor grayColor];
     detailLabel.numberOfLines = 0;
     detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    detailLabel.text = @"Long Pressed On Each List Can Edit List Name.";
+    detailLabel.text = @"Long pressed on each memo can edit memo name.";
     detailLabel.textAlignment = NSTextAlignmentCenter;
     [detailLabel setFont: [UIFont systemFontOfSize: 14]];
     [footerView addSubview: detailLabel];
