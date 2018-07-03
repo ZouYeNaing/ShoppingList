@@ -74,7 +74,6 @@
         
     } else {
         selectedTabIndex = [SLShoppingListData sharedInstance].tabBarController.selectedIndex;
-
         path = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"path"];
         key  = [[self checkTabStatus: savedData] objectAtIndex: selectedTabIndex][@"key"];
 
