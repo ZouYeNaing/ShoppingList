@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19FDCCF5204E791200E49CD6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FDCCF4204E791200E49CD6 /* Images.xcassets */; };
+		8B0918F0D4B5D5639585A9DC /* libPods-ShoppingList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C653C512825FAF9B91DC837A /* libPods-ShoppingList.a */; };
 		9A04724A1F2B21710046E845 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0472491F2B21710046E845 /* main.m */; };
 		9A04724D1F2B21710046E845 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A04724C1F2B21710046E845 /* AppDelegate.m */; };
 		9A0472531F2B21710046E845 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A0472511F2B21710046E845 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 		9A0472581F2B21710046E845 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A0472561F2B21710046E845 /* LaunchScreen.storyboard */; };
 		9A0472641F2B91EB0046E845 /* SLMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0472631F2B91EB0046E845 /* SLMainTableViewController.m */; };
 		9A0472671F2B92430046E845 /* SLEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0472661F2B92430046E845 /* SLEditViewController.m */; };
+		9A21C6532133A31C00BC25F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A21C6522133A31B00BC25F9 /* GoogleService-Info.plist */; };
 		9A298D041F652BD1009C2BCB /* SLFontSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A298D031F652BD1009C2BCB /* SLFontSettingTableViewController.m */; };
 		9A298D071F65382D009C2BCB /* SLColorSettingCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A298D061F65382D009C2BCB /* SLColorSettingCollectionViewController.m */; };
 		9A4C52C31F309611002AB587 /* SLShoppingListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4C52C21F309611002AB587 /* SLShoppingListData.m */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		19FDCCF4204E791200E49CD6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		346EE38AA899B144DC3ED244 /* Pods-ShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShoppingList/Pods-ShoppingList.release.xcconfig"; sourceTree = "<group>"; };
+		6E1E3B6F2A42EB7CE2EC5D92 /* Pods-ShoppingList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShoppingList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShoppingList/Pods-ShoppingList.debug.xcconfig"; sourceTree = "<group>"; };
 		9A0472451F2B21710046E845 /* ShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0472491F2B21710046E845 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9A04724B1F2B21710046E845 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,6 +56,7 @@
 		9A0472661F2B92430046E845 /* SLEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLEditViewController.m; sourceTree = "<group>"; };
 		9A0472681F2BA0FC0046E845 /* SLAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLAddViewController.h; sourceTree = "<group>"; };
 		9A0472691F2BA0FC0046E845 /* SLAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLAddViewController.m; sourceTree = "<group>"; };
+		9A21C6522133A31B00BC25F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A298D021F652BD1009C2BCB /* SLFontSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFontSettingTableViewController.h; sourceTree = "<group>"; };
 		9A298D031F652BD1009C2BCB /* SLFontSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFontSettingTableViewController.m; sourceTree = "<group>"; };
 		9A298D051F65382D009C2BCB /* SLColorSettingCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLColorSettingCollectionViewController.h; sourceTree = "<group>"; };
@@ -78,6 +83,7 @@
 		9AF8BBD520CF979D000CA6CE /* icon_BF00FF@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_BF00FF@2x.png"; sourceTree = "<group>"; };
 		9AF8BBD620CF979D000CA6CE /* icon_1C1170@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_1C1170@2x.png"; sourceTree = "<group>"; };
 		9AF8BBD720CF979D000CA6CE /* icon_FF7F00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_FF7F00@2x.png"; sourceTree = "<group>"; };
+		C653C512825FAF9B91DC837A /* libPods-ShoppingList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShoppingList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B0918F0D4B5D5639585A9DC /* libPods-ShoppingList.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +103,8 @@
 			children = (
 				9A0472471F2B21710046E845 /* ShoppingList */,
 				9A0472461F2B21710046E845 /* Products */,
+				E2C8A86F5526E20ABE2B6623 /* Pods */,
+				DD5D167B8B18269AE61CDB09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +119,7 @@
 		9A0472471F2B21710046E845 /* ShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				9A21C6522133A31B00BC25F9 /* GoogleService-Info.plist */,
 				9AF8BBD320CF979C000CA6CE /* icon_000000@2x.png */,
 				9AF8BBD420CF979D000CA6CE /* icon_0000FF@2x.png */,
 				9AF8BBD620CF979D000CA6CE /* icon_1C1170@2x.png */,
@@ -170,6 +180,23 @@
 			name = Singleton;
 			sourceTree = "<group>";
 		};
+		DD5D167B8B18269AE61CDB09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C653C512825FAF9B91DC837A /* libPods-ShoppingList.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E2C8A86F5526E20ABE2B6623 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E1E3B6F2A42EB7CE2EC5D92 /* Pods-ShoppingList.debug.xcconfig */,
+				346EE38AA899B144DC3ED244 /* Pods-ShoppingList.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -177,6 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9A04725C1F2B21710046E845 /* Build configuration list for PBXNativeTarget "ShoppingList" */;
 			buildPhases = (
+				7119B9EF768D12859CDD7047 /* [CP] Check Pods Manifest.lock */,
 				9A0472411F2B21710046E845 /* Sources */,
 				9A0472421F2B21710046E845 /* Frameworks */,
 				9A0472431F2B21710046E845 /* Resources */,
@@ -245,6 +273,7 @@
 				19FDCCF5204E791200E49CD6 /* Images.xcassets in Resources */,
 				9AF8BBD920CF979E000CA6CE /* icon_FF003F@2x.png in Resources */,
 				9A0472551F2B21710046E845 /* Assets.xcassets in Resources */,
+				9A21C6532133A31C00BC25F9 /* GoogleService-Info.plist in Resources */,
 				9AF8BBDB20CF979E000CA6CE /* icon_4CAF4F@2x.png in Resources */,
 				9AF8BBDC20CF979E000CA6CE /* icon_FFBF00@2x.png in Resources */,
 				9A0472531F2B21710046E845 /* Main.storyboard in Resources */,
@@ -255,6 +284,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7119B9EF768D12859CDD7047 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ShoppingList-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A0472411F2B21710046E845 /* Sources */ = {
@@ -406,11 +456,16 @@
 		};
 		9A04725D1F2B21710046E845 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E1E3B6F2A42EB7CE2EC5D92 /* Pods-ShoppingList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 83J5748TKW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -424,11 +479,16 @@
 		};
 		9A04725E1F2B21710046E845 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 346EE38AA899B144DC3ED244 /* Pods-ShoppingList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 83J5748TKW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

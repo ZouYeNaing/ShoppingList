@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "SLShoppingListData.h"
 #import "SLTabMManager.h"
-
+@import Firebase;
 @interface AppDelegate ()
 
 @end
@@ -76,6 +76,7 @@
         [[SLShoppingListData sharedInstance] updateColor];
     }
     [self addEventsFor3DTouchEvents];
+    [FIRApp configure];
     return YES;
 }
 
