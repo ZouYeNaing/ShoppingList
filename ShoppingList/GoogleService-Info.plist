@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>386112924175-gmeblgmkhd49oe8gkvuvfct7d79a09ab.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.386112924175-gmeblgmkhd49oe8gkvuvfct7d79a09ab</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDvj7nqead1wVl30M20t4IUa-EyQiio-Rc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>386112924175</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>jp.shopping-memo.co</string>
+	<key>PROJECT_ID</key>
+	<string>shoppingmemo-7334b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shoppingmemo-7334b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:386112924175:ios:89a62e82705008ca</string>
+	<key>DATABASE_URL</key>
+	<string>https://shoppingmemo-7334b.firebaseio.com</string>
+</dict>
+</plist>
