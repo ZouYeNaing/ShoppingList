@@ -7,5 +7,7 @@ target 'ShoppingList' do
 
   # Pods for ShoppingList
 pod 'Firebase/Core'
+pod 'Fabric'
+pod 'Crashlytics'
 
 end

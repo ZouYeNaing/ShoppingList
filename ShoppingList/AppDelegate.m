@@ -9,7 +9,10 @@
 #import "AppDelegate.h"
 #import "SLShoppingListData.h"
 #import "SLTabMManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @import Firebase;
+
 @interface AppDelegate ()
 
 @end
@@ -77,6 +80,7 @@
     }
     [self addEventsFor3DTouchEvents];
     [FIRApp configure];
+    [Fabric with:@[[Answers class], [Crashlytics class]]];
     return YES;
 }
 
