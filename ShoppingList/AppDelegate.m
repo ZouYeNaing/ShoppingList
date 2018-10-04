@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "SLShoppingListData.h"
 #import "SLTabMManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+@import Firebase;
 
 @interface AppDelegate ()
 
@@ -60,23 +63,12 @@
         [[SLTabMManager sharedInstance] hideTabBarItem: tabBarItemSettingArray];
         
         [[SLShoppingListData sharedInstance] updateColor];
-        
     } else {
-        
         NSMutableArray *tabBarItemSettingArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
         
         UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-        NSMutableArray *tabBarVCArray = [tabBarController.viewControllers mutableCopy];
-        
-        for (int i=0; i < tabBarVCArray.count; i++) {
-            UIViewController *vc = [tabBarVCArray objectAtIndex: i];
-        // vc.tabBarItem.tag = i;
-            NSLog(@"Title(AppDelegate) : %@", vc.tabBarItem.title);
-            
-        }
         
         // [tabBarController setTabBarItem: tabBarVCArray.mutableCopy];
-        
         [SLShoppingListData sharedInstance].tabBarController = tabBarController;
         [SLTabMManager sharedInstance].tabBarController = tabBarController;
         [[SLTabMManager sharedInstance] saveDefaultTabBarMArray: tabBarController];
@@ -86,10 +78,11 @@
         
         [[SLShoppingListData sharedInstance] updateColor];
     }
-    
+    [self addEventsFor3DTouchEvents];
+    [FIRApp configure];
+    [Fabric with:@[[Answers class], [Crashlytics class]]];
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -117,5 +110,42 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void) addEventsFor3DTouchEvents {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
+        NSArray *savedTabBarItems = [[[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]] mutableCopy];
+        NSMutableArray *quickActionItems = [NSMutableArray array];
+        for (NSDictionary *itemDic in savedTabBarItems) {
+            if([itemDic[@"status"] isEqualToNumber:[NSNumber numberWithBool:YES]] && ![itemDic[@"title"] isEqualToString:@"Setting"]) {
+                [quickActionItems addObject:itemDic];
+            }
+        }
+        NSMutableArray *shortcutItems = [NSMutableArray array];
+        for (NSDictionary *tabDic in quickActionItems) {
+            UIApplicationShortcutItem *shortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"" localizedTitle:tabDic[@"title"] localizedSubtitle:@"" icon:[UIApplicationShortcutIcon iconWithTemplateImageName:@"icon"] userInfo:tabDic];
+            [shortcutItems addObject:shortcutItem];
+        }
+        if (shortcutItems.count > 0) {
+            [[UIApplication sharedApplication] setShortcutItems: shortcutItems];
+        }
+    }
+}
+
+#pragma mark - 3DTouch Delegate Methods
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    [self moveThrough3DTouch:shortcutItem];
+}
+
+#pragma MARK for Handling Action for Three D Touch Events
+- (void)moveThrough3DTouch:(UIApplicationShortcutItem *)shortcutItem {
+    
+    NSArray *currentTabBarItems = [[(UITabBarController *)self.window.rootViewController tabBar].items mutableCopy];
+    for (int i=0; i < currentTabBarItems.count; i++) {
+        if([[currentTabBarItems[i] title] isEqualToString:shortcutItem.localizedTitle]) {
+            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+            [tabBarController setSelectedIndex:i];
+            break;
+        }
+    }
+}
 
 @end

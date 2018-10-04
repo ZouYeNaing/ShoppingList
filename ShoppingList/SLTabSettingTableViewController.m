@@ -10,6 +10,7 @@
 #import "SLMainTableViewController.h"
 #import "SLShoppingListData.h"
 #import "SLTabMManager.h"
+#import "AppDelegate.h"
 
 @interface SLTabSettingTableViewController ()
 {
@@ -17,6 +18,7 @@
     UILongPressGestureRecognizer *longPressRecognizer;
     UITextField *myTextField;
     UIColor *switchColor;
+    AppDelegate *appDelegate;
 }
 
 @end
@@ -30,6 +32,8 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
     backButton.title = @"Setting";
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
+    
+    appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     switchMArray =  [@[@YES, @YES, @YES, @YES, @YES] mutableCopy];
     
@@ -118,6 +122,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDelegate addEventsFor3DTouchEvents];
     
     NSMutableArray *currentTabBarItems = [self.tabBarController.tabBar.items mutableCopy];
     for(UITabBarItem *tabBarItem in currentTabBarItems) {
@@ -202,6 +207,7 @@
     [tabSettingArray replaceObjectAtIndex: rowIndex withObject: changeStatus];
     [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDelegate addEventsFor3DTouchEvents];
 
     [[SLTabMManager sharedInstance] hideTabBarItem: tabSettingArray];
 }
@@ -264,6 +270,7 @@
         
         [[NSUserDefaults standardUserDefaults] setObject: tabSettingArray forKey: @"SavedTab"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        [appDelegate addEventsFor3DTouchEvents];
         
         [[SLTabMManager sharedInstance] moveTabBarItem: fromIndexPath toIndexPath: toIndexPath];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
