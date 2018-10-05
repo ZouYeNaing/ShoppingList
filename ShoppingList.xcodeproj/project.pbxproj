@@ -24,6 +24,7 @@
 		9A92114420C51B9200C8FA18 /* App2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A92114320C51B9200C8FA18 /* App2@2x.png */; };
 		9AA9CFD01F643EAE00B025A1 /* SLSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */; };
 		9AAA90211FBAFE9F009D1E58 /* SLTabMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */; };
+		9AC041642167381700C5AADF /* SLReminderSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC041632167381700C5AADF /* SLReminderSettingTableViewController.m */; };
 		9AF8BBCC20C58757000CA6CE /* icon_orange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */; };
 		9AF8BBD820CF979E000CA6CE /* icon_775447@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */; };
 		9AF8BBD920CF979E000CA6CE /* icon_FF003F@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */; };
@@ -71,6 +72,8 @@
 		9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSettingTableViewController.m; sourceTree = "<group>"; };
 		9AAA901F1FBAFE9F009D1E58 /* SLTabMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLTabMManager.h; sourceTree = "<group>"; };
 		9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLTabMManager.m; sourceTree = "<group>"; };
+		9AC041622167381700C5AADF /* SLReminderSettingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLReminderSettingTableViewController.h; sourceTree = "<group>"; };
+		9AC041632167381700C5AADF /* SLReminderSettingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLReminderSettingTableViewController.m; sourceTree = "<group>"; };
 		9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_orange@2x.png"; sourceTree = "<group>"; };
 		9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_775447@2x.png"; sourceTree = "<group>"; };
 		9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_FF003F@2x.png"; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				9A298D051F65382D009C2BCB /* SLColorSettingCollectionViewController.h */,
 				9A298D061F65382D009C2BCB /* SLColorSettingCollectionViewController.m */,
 				19FDCCF4204E791200E49CD6 /* Images.xcassets */,
+				9AC041622167381700C5AADF /* SLReminderSettingTableViewController.h */,
+				9AC041632167381700C5AADF /* SLReminderSettingTableViewController.m */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 				9AA9CFD01F643EAE00B025A1 /* SLSettingTableViewController.m in Sources */,
 				9A85A6B21F64505C00D66D5F /* SLTabSettingTableViewController.m in Sources */,
 				9A0472671F2B92430046E845 /* SLEditViewController.m in Sources */,
+				9AC041642167381700C5AADF /* SLReminderSettingTableViewController.m in Sources */,
 				9A298D071F65382D009C2BCB /* SLColorSettingCollectionViewController.m in Sources */,
 				9A04724A1F2B21710046E845 /* main.m in Sources */,
 			);
