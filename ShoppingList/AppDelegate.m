@@ -81,6 +81,12 @@
     [self addEventsFor3DTouchEvents];
     [FIRApp configure];
     [Fabric with:@[[Answers class], [Crashlytics class]]];
+    
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
+    
     return YES;
 }
 
@@ -129,6 +135,7 @@
         }
     }
 }
+
 
 #pragma mark - 3DTouch Delegate Methods
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {

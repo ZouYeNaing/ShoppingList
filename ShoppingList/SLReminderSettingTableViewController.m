@@ -11,9 +11,11 @@
 @interface SLReminderSettingTableViewController ()
 {
     NSMutableArray *reminderArray;
-    BOOL isPickerVisible;
+    BOOL isPickerVisible, isReminderVisible;
     UIColor *switchColor;
     UIPickerView *datetimePicker;
+    UISwitch *switchView;
+    NSDateFormatter *dateFormatter;
 }
 
 @end
@@ -23,16 +25,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    datetimePicker = [[UIPickerView alloc] init];
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEE MMM dd HH:mm"];
+    dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.doesRelativeDateFormatting = YES;
     
+    datetimePicker = [[UIPickerView alloc] init];
+
     //UISwitchColor
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     switchColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
     NSDictionary *dict1 = @{@"title": @"Reminder", @"status": @YES, @"detail":@""};
-    NSDictionary *dict2 = @{@"title": @"Date Time", @"status": @YES, @"detail":@""};
-    NSDictionary *dict3 = @{@"title": @"", @"status": @YES, @"detail":@""};
-    reminderArray = [@[dict1, dict2, dict3] mutableCopy];
+    NSDictionary *dict2 = @{@"title": @"Date Time", @"status": @YES, @"detail":[dateFormatter stringFromDate:[NSDate date]]};
+    reminderArray = [@[dict1, dict2] mutableCopy];
     
     self.editing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
@@ -40,49 +47,50 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    isPickerVisible = NO;
-    datetimePicker.hidden = YES;
-    datetimePicker.translatesAutoresizingMaskIntoConstraints = NO;
+    isReminderVisible = YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+
 }
 
 -(void)reminderSwitchChanged: (id)sender {
     
+    NSMutableDictionary *changeStatus = [[reminderArray objectAtIndex:0] mutableCopy];
     UISwitch *switchControl = sender;
+    
     int rowIndex = (int)[switchControl tag];
-
+    BOOL switchStatus = switchControl.on;
+    if (switchStatus) {
+        isReminderVisible = YES;
+        [changeStatus setValue: @YES forKey: @"status"];
+    } else {
+        isReminderVisible = NO;
+        [changeStatus setValue: @NO forKey: @"status"];
+    }
+    [reminderArray replaceObjectAtIndex:0 withObject:changeStatus];
+    [self.tableView reloadData];
+    NSLog(@"rowIndex : %d", rowIndex);
 }
 
-- (void)showStatusPickerCell {
-    isPickerVisible = YES;
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-    datetimePicker.alpha = 0.0f;
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self->datetimePicker.alpha = 1.0f;
-                     } completion:^(BOOL finished){
-                         self->datetimePicker.hidden = NO;
-                     }];
+-(void)doneClicked:(id)sender {
+    NSLog(@"Keyboard Done Clicked.");
+    [self.view endEditing:YES];
 }
 
-- (void)hideStatusPickerCell {
-    isPickerVisible = NO;
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self->datetimePicker.alpha = 0.0f;
-                     }
-                     completion:^(BOOL finished){
-                         self->datetimePicker.hidden = YES;
-                     }];
+- (void)dateIsChanged:(id)sender{
+    
+    UIDatePicker *datePicker = (UIDatePicker *)sender;
+    NSString *dateString = [dateFormatter stringFromDate:datePicker.date];
+    
+    NSMutableDictionary *changeStatus = [[reminderArray objectAtIndex:1] mutableCopy];
+    [changeStatus setValue:dateString forKey:@"detail"];
+    
+    [reminderArray replaceObjectAtIndex:1 withObject:changeStatus];
+    [self.tableView reloadData];
 }
-
 
 #pragma mark - Table view data source
 
@@ -93,7 +101,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return reminderArray.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -106,10 +113,11 @@
     
     if (indexPath.row == 0) {
         
-        UISwitch *switchView   = [[UISwitch alloc] initWithFrame: CGRectMake(800, 13, 175, 30)];
-        cell.editingAccessoryView = switchView;
+        switchView   = [[UISwitch alloc] initWithFrame: CGRectMake(800, 13, 175, 30)];
         switchView.tintColor   = switchColor;
         switchView.onTintColor = switchColor;
+        cell.editingAccessoryView = switchView;
+        
         [switchView addTarget: self
                        action: @selector(reminderSwitchChanged:)
              forControlEvents: UIControlEventValueChanged];
@@ -120,10 +128,11 @@
             [switchView setOn: NO animated: NO];
         }
         cell.textLabel.text = [reminderArray objectAtIndex:indexPath.row][@"title"];
+        
     } else if (indexPath.row == 1){
         
         cell.textLabel.text = [reminderArray objectAtIndex:indexPath.row][@"title"];
-        cell.detailTextLabel.text = @"today";
+        cell.detailTextLabel.text = [reminderArray objectAtIndex:indexPath.row][@"detail"];
     }
     return cell;
 }
@@ -131,11 +140,31 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 1) {
-        if (isPickerVisible){
-            [self hideStatusPickerCell];
-        } else {
-            [self showStatusPickerCell];
-        }
+        
+        UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50)];
+        numberToolbar.barStyle = UIBarStyleDefault;
+        numberToolbar.items = [NSArray arrayWithObjects:
+                               [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil],
+                               [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                               [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneClicked:)],
+                               nil];
+        [numberToolbar sizeToFit];
+
+        
+        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+        datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        datePicker.backgroundColor = UIColor.whiteColor;
+        datePicker.minimumDate = [NSDate date];
+        
+        [datePicker setValue:switchColor forKey:@"textColor"];
+        [datePicker addTarget:self action:@selector(dateIsChanged:) forControlEvents:UIControlEventValueChanged];
+        tf.inputView = datePicker;
+        tf.inputAccessoryView = numberToolbar;
+        
+        
+        [self.view addSubview:tf];
+        [tf becomeFirstResponder];
     }
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -145,7 +174,9 @@
 
     CGFloat height = self.tableView.rowHeight;
     if (indexPath.row == 0){
-
+        height = 40.0f;
+    } else if (indexPath.row == 1) {
+        height = isReminderVisible ? 40.0f : 0.0f;
     } else if (indexPath.row == 2) {
         height = isPickerVisible ? 216.0f : 0.0f;
     }
