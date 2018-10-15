@@ -21,7 +21,7 @@
     UIColor  *selectedColor;
     
     UILongPressGestureRecognizer *longPressRecognizer;
-    
+    UITapGestureRecognizer *tapGestureRecognizer;
     UIBarButtonItem *barButtonItem0, *barButtonItem1, *barButtonTrash, *singleDelete, *doneDelete;
     
     NSInteger selectedTabIndex;
@@ -106,11 +106,15 @@
         }
     }
     
+    tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureRecognizer:)];
+    
     longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(onLongPress:)];
     longPressRecognizer.minimumPressDuration = 1.0f;
     [self.tableView addGestureRecognizer: longPressRecognizer];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectZero];
+//    self.tableView.tableFooterView = [UIView new];
     
     swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -182,10 +186,13 @@
         
         singleDelete.enabled = NO;
         barButtonTrash.enabled = NO;
-        
+        [self.view addGestureRecognizer:tapGestureRecognizer];
+    } else {
+        [self.view removeGestureRecognizer:tapGestureRecognizer];
     }
     
     mainVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: selectedTabIndex];
+    
     
     [self changeTrashButtom: mainVCArray];
     
@@ -214,6 +221,9 @@
     }
 }
 
+- (void) handleTapGestureRecognizer: (UITapGestureRecognizer *)recognizer {
+    [self performSegueWithIdentifier: @"showAddViewController" sender: nil];
+}
 
 // Add List from VC Delegate.
 -(void)addListData {
@@ -490,6 +500,12 @@
             barButtonTrash.enabled = NO;
         }
     }
+    
+    if (VCArray.count < 1) {
+        [self.view addGestureRecognizer:tapGestureRecognizer];
+    } else {
+        [self.view removeGestureRecognizer:tapGestureRecognizer];
+    }
 }
 
 //Trash Button.
@@ -553,6 +569,12 @@
     
     [mainVCArray removeObjectsAtIndexes: indexes];
     [self.tableView endUpdates];
+    
+    if (mainVCArray.count < 1) {
+        [self.view addGestureRecognizer:tapGestureRecognizer];
+    } else {
+        [self.view removeGestureRecognizer:tapGestureRecognizer];
+    }
     
     [[SLShoppingListData sharedInstance] setSLDataArray: mainVCArray];
     [self changeTrashButtom: mainVCArray];
@@ -764,13 +786,11 @@
         return UITableViewCellEditingStyleDelete;
         
     }
-    
 }
 
 - (BOOL)tableView: (UITableView *)tableView canMoveRowAtIndexPath: (NSIndexPath *)indexPath {
     
     return YES;
-    
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle: (UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -790,6 +810,55 @@
             [self checkButtonEnable: mainVCArray];
         });
     }
+}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//
+//    UIView *footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 40)];
+//
+//    UILabel *detailLabel = [[UILabel alloc] initWithFrame: CGRectMake(10, 0, self.view.frame.size.width - 20, 40)];
+//    detailLabel.textColor = [UIColor grayColor];
+//    detailLabel.numberOfLines = 0;
+//    detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    detailLabel.text = @"Reminder";
+//    detailLabel.textAlignment = NSTextAlignmentCenter;
+//    [detailLabel setFont: [UIFont systemFontOfSize: 14]];
+//
+//    if (mainVCArray.count < 1) {
+//        [footerView addSubview: detailLabel];
+//    } else {
+//        [footerView willRemoveSubview:detailLabel];
+//    }
+//
+//    return footerView;
+//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (mainVCArray.count < 1) {
+        return 40.0f;
+    } else {
+        return 0.0f;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+        UIView *footerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 40)];
+
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 40)];
+        detailLabel.textColor = [UIColor grayColor];
+        detailLabel.numberOfLines = 0;
+        detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        detailLabel.text = @"Tap anywhere to add new memo.";
+        detailLabel.textAlignment = NSTextAlignmentCenter;
+        [detailLabel setFont: [UIFont systemFontOfSize: 14]];
+    
+        if (mainVCArray.count < 1) {
+            [footerView addSubview: detailLabel];
+        } else {
+            [footerView willRemoveSubview: detailLabel];
+        }
+        return footerView;
 }
 
 #pragma mark - Navigation
