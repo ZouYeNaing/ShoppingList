@@ -22,6 +22,7 @@
 		9A4C52C31F309611002AB587 /* SLShoppingListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4C52C21F309611002AB587 /* SLShoppingListData.m */; };
 		9A85A6B21F64505C00D66D5F /* SLTabSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A85A6B11F64505C00D66D5F /* SLTabSettingTableViewController.m */; };
 		9A92114420C51B9200C8FA18 /* App2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A92114320C51B9200C8FA18 /* App2@2x.png */; };
+		9AA8F14821746CCD00CCCA9F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA8F14721746CCD00CCCA9F /* UserNotifications.framework */; };
 		9AA9CFD01F643EAE00B025A1 /* SLSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */; };
 		9AAA90211FBAFE9F009D1E58 /* SLTabMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */; };
 		9AC041642167381700C5AADF /* SLReminderSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC041632167381700C5AADF /* SLReminderSettingTableViewController.m */; };
@@ -68,6 +69,7 @@
 		9A85A6B01F64505C00D66D5F /* SLTabSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLTabSettingTableViewController.h; sourceTree = "<group>"; };
 		9A85A6B11F64505C00D66D5F /* SLTabSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLTabSettingTableViewController.m; sourceTree = "<group>"; };
 		9A92114320C51B9200C8FA18 /* App2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App2@2x.png"; sourceTree = "<group>"; };
+		9AA8F14721746CCD00CCCA9F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		9AA9CFCE1F643EAE00B025A1 /* SLSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSettingTableViewController.h; sourceTree = "<group>"; };
 		9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSettingTableViewController.m; sourceTree = "<group>"; };
 		9AAA901F1FBAFE9F009D1E58 /* SLTabMManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLTabMManager.h; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA8F14821746CCD00CCCA9F /* UserNotifications.framework in Frameworks */,
 				8B0918F0D4B5D5639585A9DC /* libPods-ShoppingList.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +191,7 @@
 		DD5D167B8B18269AE61CDB09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AA8F14721746CCD00CCCA9F /* UserNotifications.framework */,
 				C653C512825FAF9B91DC837A /* libPods-ShoppingList.a */,
 			);
 			name = Frameworks;

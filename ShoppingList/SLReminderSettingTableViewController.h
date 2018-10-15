@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SLReminderSettingTableViewController : UITableViewController
+@interface SLReminderSettingTableViewController : UITableViewController<UNUserNotificationCenterDelegate>
 
 @end

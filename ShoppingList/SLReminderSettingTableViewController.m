@@ -5,17 +5,19 @@
 //  Created by zawyenaing on 2018/10/05.
 //  Copyright © 2018 Zaw Ye Naing. All rights reserved.
 //
-
+#import <UserNotifications/UserNotifications.h>
 #import "SLReminderSettingTableViewController.h"
 
 @interface SLReminderSettingTableViewController ()
 {
-    NSMutableArray *reminderArray;
-    BOOL isPickerVisible, isReminderVisible;
+    NSMutableArray *reminderInfoArray;
+    BOOL isReminderVisible;
     UIColor *switchColor;
     UIPickerView *datetimePicker;
+    UITextField *datePickerTextfield;
     UISwitch *switchView;
     NSDateFormatter *dateFormatter;
+    UNUserNotificationCenter *center;
 }
 
 @end
@@ -24,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"Reminder";
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEE MMM dd HH:mm"];
     dateFormatter.timeStyle = NSDateFormatterShortStyle;
@@ -37,59 +39,141 @@
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey: @"selectedColor"];
     switchColor = [NSKeyedUnarchiver unarchiveObjectWithData: colorData];
     
-    NSDictionary *dict1 = @{@"title": @"Reminder", @"status": @YES, @"detail":@""};
-    NSDictionary *dict2 = @{@"title": @"Date Time", @"status": @YES, @"detail":[dateFormatter stringFromDate:[NSDate date]]};
-    reminderArray = [@[dict1, dict2] mutableCopy];
-    
     self.editing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    isReminderVisible = YES;
+    reminderInfoArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"reminderInfo"] mutableCopy];
+    if([[reminderInfoArray objectAtIndex: 0][@"status"] boolValue] == YES) {
+        [switchView setOn: YES animated: NO];
+        isReminderVisible = YES;
+        center = [UNUserNotificationCenter currentNotificationCenter];
+//        center.delegate = self;
+    } else {
+        [switchView setOn: NO animated: NO];
+        isReminderVisible = NO;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-
 }
 
 -(void)reminderSwitchChanged: (id)sender {
     
-    NSMutableDictionary *changeStatus = [[reminderArray objectAtIndex:0] mutableCopy];
+    NSMutableDictionary *changeStatus = [[reminderInfoArray objectAtIndex:0] mutableCopy];
+    NSMutableDictionary *changeReminderDetail = [[reminderInfoArray objectAtIndex:1] mutableCopy];
     UISwitch *switchControl = sender;
     
-    int rowIndex = (int)[switchControl tag];
     BOOL switchStatus = switchControl.on;
     if (switchStatus) {
+        center = [UNUserNotificationCenter currentNotificationCenter];
+//        center.delegate = self;
         isReminderVisible = YES;
         [changeStatus setValue: @YES forKey: @"status"];
     } else {
+        [center removeAllPendingNotificationRequests];
         isReminderVisible = NO;
         [changeStatus setValue: @NO forKey: @"status"];
+        [changeReminderDetail setValue:@"" forKey:@"detail"];
     }
-    [reminderArray replaceObjectAtIndex:0 withObject:changeStatus];
+    [reminderInfoArray replaceObjectAtIndex:0 withObject:changeStatus];
+    [reminderInfoArray replaceObjectAtIndex:1 withObject:changeReminderDetail];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[reminderInfoArray mutableCopy] forKey:@"reminderInfo"];
     [self.tableView reloadData];
-    NSLog(@"rowIndex : %d", rowIndex);
 }
 
 -(void)doneClicked:(id)sender {
+    
     NSLog(@"Keyboard Done Clicked.");
-    [self.view endEditing:YES];
+    NSMutableDictionary *changeStatus = [[reminderInfoArray objectAtIndex:1] mutableCopy];
+    NSDate *remindDate = [changeStatus objectForKey:@"detail"];
+    
+    if ([remindDate isKindOfClass:[NSDate class]]) {
+        [datePickerTextfield resignFirstResponder];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Reminder"
+                                                                                 message:[NSString stringWithFormat:@"Remind me at %@", [dateFormatter stringFromDate:remindDate]]
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             
+         NSDateComponents *triggerDate = [[NSCalendar currentCalendar] components:NSCalendarUnitYear + NSCalendarUnitMonth + NSCalendarUnitDay + NSCalendarUnitHour + NSCalendarUnitMinute fromDate:remindDate];
+         UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerDate repeats:NO];
+         
+         UNMutableNotificationContent *localNotification = [UNMutableNotificationContent new];
+         localNotification.title = [NSString localizedUserNotificationStringForKey:@"Reminder" arguments:nil];
+         localNotification.body  = [NSString localizedUserNotificationStringForKey:@"Let's me remind you." arguments:nil];
+         localNotification.sound = [UNNotificationSound defaultSound];
+         
+         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"Reminder" content:localNotification trigger:trigger];
+         [self->center removeAllPendingNotificationRequests];
+//         self->center.delegate = self;
+         [self->center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+             if (nil == error) {
+                 NSLog(@"Notification created");
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [self->reminderInfoArray replaceObjectAtIndex:1 withObject:changeStatus];
+                     [[NSUserDefaults standardUserDefaults] setValue:[self->reminderInfoArray mutableCopy] forKey:@"reminderInfo"];
+                 });
+                 
+             }
+         }];
+                                                         }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * action) {
+                                                                 dispatch_async(dispatch_get_main_queue(),
+                                                                                ^{
+                                                                                    [self->datePickerTextfield becomeFirstResponder];
+                                                                                }
+                                                                                );
+                                                             }];
+        [alertController addAction:okAction];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning"
+                                                                                 message:@"Please select date & time"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                         }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
 }
 
 - (void)dateIsChanged:(id)sender{
     
     UIDatePicker *datePicker = (UIDatePicker *)sender;
-    NSString *dateString = [dateFormatter stringFromDate:datePicker.date];
+    NSMutableDictionary *changeStatus = [[reminderInfoArray objectAtIndex:1] mutableCopy];
     
-    NSMutableDictionary *changeStatus = [[reminderArray objectAtIndex:1] mutableCopy];
-    [changeStatus setValue:dateString forKey:@"detail"];
+    NSString *changedDate = [dateFormatter stringFromDate:datePicker.date];
+    NSString *nowDate         = [dateFormatter stringFromDate:[NSDate date]];
     
-    [reminderArray replaceObjectAtIndex:1 withObject:changeStatus];
-    [self.tableView reloadData];
+    if ([changedDate isEqualToString:nowDate]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning"
+                                                                                 message:@"Please choose different from current date & time."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                         }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        [changeStatus setValue:datePicker.date forKey:@"detail"];
+        
+        [reminderInfoArray replaceObjectAtIndex:1 withObject:changeStatus];
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Table view data source
@@ -99,7 +183,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return reminderArray.count;
+    return reminderInfoArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -122,17 +206,18 @@
                        action: @selector(reminderSwitchChanged:)
              forControlEvents: UIControlEventValueChanged];
         
-        if([[reminderArray objectAtIndex: indexPath.row][@"status"] boolValue] == YES) {
+        if([[reminderInfoArray objectAtIndex: indexPath.row][@"status"] boolValue] == YES) {
             [switchView setOn: YES animated: NO];
         } else {
             [switchView setOn: NO animated: NO];
         }
-        cell.textLabel.text = [reminderArray objectAtIndex:indexPath.row][@"title"];
+        cell.textLabel.text = [reminderInfoArray objectAtIndex:indexPath.row][@"title"];
         
     } else if (indexPath.row == 1){
         
-        cell.textLabel.text = [reminderArray objectAtIndex:indexPath.row][@"title"];
-        cell.detailTextLabel.text = [reminderArray objectAtIndex:indexPath.row][@"detail"];
+        NSDate *date              = [reminderInfoArray objectAtIndex:indexPath.row][@"detail"];
+        cell.textLabel.text       = [reminderInfoArray objectAtIndex:indexPath.row][@"title"];
+        cell.detailTextLabel.text = [dateFormatter stringFromDate:date];
     }
     return cell;
 }
@@ -161,8 +246,7 @@
         [datePicker addTarget:self action:@selector(dateIsChanged:) forControlEvents:UIControlEventValueChanged];
         tf.inputView = datePicker;
         tf.inputAccessoryView = numberToolbar;
-        
-        
+        datePickerTextfield = tf;
         [self.view addSubview:tf];
         [tf becomeFirstResponder];
     }
@@ -177,8 +261,6 @@
         height = 40.0f;
     } else if (indexPath.row == 1) {
         height = isReminderVisible ? 40.0f : 0.0f;
-    } else if (indexPath.row == 2) {
-        height = isPickerVisible ? 216.0f : 0.0f;
     }
     return height;
 }
@@ -208,7 +290,6 @@
     
     return NO;
 }
-
 
 /*
 // Override to support conditional editing of the table view.

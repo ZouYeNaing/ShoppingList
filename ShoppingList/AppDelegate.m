@@ -17,8 +17,8 @@
 
 @end
 
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -49,6 +49,11 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedIndex": @(46)}];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedFont": @"Helvetica"}];
     
+    NSDictionary *reminderStatusDict = @{@"title": @"Enable", @"status": @NO, @"detail":@""};
+    NSDictionary *reminderDetailDict = @{@"title": @"Reminder me at", @"status": @YES, @"detail":@""};
+    NSMutableArray *initReminderArray = [@[reminderStatusDict, reminderDetailDict] mutableCopy];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"reminderInfo": initReminderArray}];
+
     if([[NSUserDefaults standardUserDefaults] objectForKey: @"changedTabbar"]) {
         
         NSMutableArray *tabBarItemSettingArray = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey: @"SavedTab"]];
@@ -81,13 +86,22 @@
     [self addEventsFor3DTouchEvents];
     [FIRApp configure];
     [Fabric with:@[[Answers class], [Crashlytics class]]];
-    
-    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
-    
-    
+    [self registerForRemoteNotifications];
     return YES;
+}
+
+- (void)registerForRemoteNotifications {
+    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if(!error){
+            }
+        }];
+    }
+    else {
+        // Code for old versions
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -136,6 +150,23 @@
     }
 }
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    
+    NSMutableArray *reminderInfoArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"reminderInfo"] mutableCopy];
+    
+    NSMutableDictionary *reminderStatusDict = [[reminderInfoArray objectAtIndex:0] mutableCopy];
+    NSMutableDictionary *reminderDetailDict = [[reminderInfoArray objectAtIndex:1] mutableCopy];
+    
+    [reminderStatusDict setValue:@NO forKey:@"status"];
+    [reminderDetailDict setValue:@"" forKey:@"detail"];
+    
+    [reminderInfoArray replaceObjectAtIndex:0 withObject:reminderStatusDict];
+    [reminderInfoArray replaceObjectAtIndex:1 withObject:reminderDetailDict];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:reminderInfoArray forKey:@"reminderInfo"];
+    NSLog(@"didReceiveNotificationResponse : %@", reminderInfoArray);
+    completionHandler();
+}
 
 #pragma mark - 3DTouch Delegate Methods
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
