@@ -25,12 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    settingDataArray = [NSMutableArray arrayWithObjects: @"Tab", @"Color", @"Font", nil];
+    settingDataArray = [NSMutableArray arrayWithObjects: @"Tab Configuration", @"Color", @"Font", @"Reminder", nil];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
     
-    NSLog(@"Count : %ld", [settingDataArray count]);
     NSLog(@"viewDidLoad SLSettingTableViewController");
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
@@ -113,7 +111,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"didSelectRowAtIndexPath : %ld", indexPath.row);
+    NSLog(@"didSelectRowAtIndexPath : %d", indexPath.row);
     
     self.indexpath = indexPath;
     
@@ -125,9 +123,13 @@
         
         [self performSegueWithIdentifier: @"colorSetting" sender:self];
         
-    } else {
+    } else if(indexPath.row == 2) {
         
         [self performSegueWithIdentifier: @"fontSetting" sender:self];
+        
+    } else {
+        
+        [self performSegueWithIdentifier: @"LocalNofiticationSegue" sender:self];
         
     }
     
