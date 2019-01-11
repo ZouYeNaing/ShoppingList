@@ -1,0 +1,42 @@
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "Cti-kQ-zqV"; */
+"Cti-kQ-zqV.title" = "Setting";
+
+/* Class = "UINavigationItem"; title = "Edit"; ObjectID = "Mwu-cQ-MPt"; */
+"Mwu-cQ-MPt.title" = "Edit";
+
+/* Class = "UITabBarItem"; title = "リスト 3"; ObjectID = "Rz3-TU-jaM"; */
+"Rz3-TU-jaM.title" = "リスト 3";
+
+/* Class = "UINavigationItem"; title = "Edit"; ObjectID = "SXX-ZZ-YVY"; */
+"SXX-ZZ-YVY.title" = "Edit";
+
+/* Class = "UINavigationItem"; title = "Tab Setting"; ObjectID = "TEX-AE-gvM"; */
+"TEX-AE-gvM.title" = "Tab Setting";
+
+/* Class = "UINavigationItem"; title = "Edit"; ObjectID = "Ucp-1a-kKX"; */
+"Ucp-1a-kKX.title" = "Edit";
+
+/* Class = "UINavigationItem"; title = "Setting"; ObjectID = "iCC-PC-CdH"; */
+"iCC-PC-CdH.title" = "Setting";
+
+/* Class = "UITabBarItem"; title = "リスト 1"; ObjectID = "ihz-Dj-6yT"; */
+"ihz-Dj-6yT.title" = "リスト 1";
+
+/* Class = "UITabBarItem"; title = "リスト 2"; ObjectID = "jf9-2A-IXr"; */
+"jf9-2A-IXr.title" = "リスト 2";
+
+/* Class = "UIBarButtonItem"; title = "List"; ObjectID = "pgE-dK-Gfc"; */
+"pgE-dK-Gfc.title" = "List";
+
+/* Class = "UICollectionViewController"; title = "Color Setting"; ObjectID = "uHF-wp-X1x"; */
+"uHF-wp-X1x.title" = "Color Setting";
+
+/* Class = "UINavigationItem"; title = "Edit"; ObjectID = "ujW-0y-e3r"; */
+"ujW-0y-e3r.title" = "Edit";
+
+/* Class = "UINavigationItem"; title = "Font Setting"; ObjectID = "x94-Ye-1NA"; */
+"x94-Ye-1NA.title" = "Font Setting";
+
+/* Class = "UITabBarItem"; title = "リスト 4"; ObjectID = "z4s-YU-iJf"; */
+"z4s-YU-iJf.title" = "リスト 4";

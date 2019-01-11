@@ -26,6 +26,7 @@
 		9AA9CFD01F643EAE00B025A1 /* SLSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA9CFCF1F643EAE00B025A1 /* SLSettingTableViewController.m */; };
 		9AAA90211FBAFE9F009D1E58 /* SLTabMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */; };
 		9AC041642167381700C5AADF /* SLReminderSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC041632167381700C5AADF /* SLReminderSettingTableViewController.m */; };
+		9AD4F34421E8F3BA002385C7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AD4F34621E8F3BA002385C7 /* Localizable.strings */; };
 		9AF8BBCC20C58757000CA6CE /* icon_orange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */; };
 		9AF8BBD820CF979E000CA6CE /* icon_775447@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */; };
 		9AF8BBD920CF979E000CA6CE /* icon_FF003F@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */; };
@@ -76,6 +77,10 @@
 		9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLTabMManager.m; sourceTree = "<group>"; };
 		9AC041622167381700C5AADF /* SLReminderSettingTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLReminderSettingTableViewController.h; sourceTree = "<group>"; };
 		9AC041632167381700C5AADF /* SLReminderSettingTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLReminderSettingTableViewController.m; sourceTree = "<group>"; };
+		9AD4F33F21E89523002385C7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		9AD4F34021E89523002385C7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		9AD4F34521E8F3BA002385C7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9AD4F34721E8F3C0002385C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_orange@2x.png"; sourceTree = "<group>"; };
 		9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_775447@2x.png"; sourceTree = "<group>"; };
 		9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_FF003F@2x.png"; sourceTree = "<group>"; };
@@ -126,19 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				9A21C6522133A31B00BC25F9 /* GoogleService-Info.plist */,
-				9AF8BBD320CF979C000CA6CE /* icon_000000@2x.png */,
-				9AF8BBD420CF979D000CA6CE /* icon_0000FF@2x.png */,
-				9AF8BBD620CF979D000CA6CE /* icon_1C1170@2x.png */,
-				9AF8BBD020CF979B000CA6CE /* icon_4CAF4F@2x.png */,
-				9AF8BBD220CF979C000CA6CE /* icon_009687@2x.png */,
-				9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */,
-				9AF8BBD520CF979D000CA6CE /* icon_BF00FF@2x.png */,
-				9AF8BBCF20CF979B000CA6CE /* icon_FF00BF@2x.png */,
-				9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */,
-				9AF8BBD720CF979D000CA6CE /* icon_FF7F00@2x.png */,
-				9AF8BBD120CF979C000CA6CE /* icon_FFBF00@2x.png */,
-				9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */,
-				9A92114320C51B9200C8FA18 /* App2@2x.png */,
+				9AD4F34121E89561002385C7 /* icon */,
 				9A7902F91FA8870400BE4F70 /* ShoppingList.entitlements */,
 				9A04724B1F2B21710046E845 /* AppDelegate.h */,
 				9A04724C1F2B21710046E845 /* AppDelegate.m */,
@@ -162,9 +155,10 @@
 				9A298D031F652BD1009C2BCB /* SLFontSettingTableViewController.m */,
 				9A298D051F65382D009C2BCB /* SLColorSettingCollectionViewController.h */,
 				9A298D061F65382D009C2BCB /* SLColorSettingCollectionViewController.m */,
-				19FDCCF4204E791200E49CD6 /* Images.xcassets */,
 				9AC041622167381700C5AADF /* SLReminderSettingTableViewController.h */,
 				9AC041632167381700C5AADF /* SLReminderSettingTableViewController.m */,
+				19FDCCF4204E791200E49CD6 /* Images.xcassets */,
+				9AD4F34621E8F3BA002385C7 /* Localizable.strings */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -186,6 +180,26 @@
 				9AAA90201FBAFE9F009D1E58 /* SLTabMManager.m */,
 			);
 			name = Singleton;
+			sourceTree = "<group>";
+		};
+		9AD4F34121E89561002385C7 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				9AF8BBD320CF979C000CA6CE /* icon_000000@2x.png */,
+				9AF8BBD420CF979D000CA6CE /* icon_0000FF@2x.png */,
+				9AF8BBD620CF979D000CA6CE /* icon_1C1170@2x.png */,
+				9AF8BBD020CF979B000CA6CE /* icon_4CAF4F@2x.png */,
+				9AF8BBD220CF979C000CA6CE /* icon_009687@2x.png */,
+				9AF8BBCD20CF979B000CA6CE /* icon_775447@2x.png */,
+				9AF8BBD520CF979D000CA6CE /* icon_BF00FF@2x.png */,
+				9AF8BBCF20CF979B000CA6CE /* icon_FF00BF@2x.png */,
+				9AF8BBCE20CF979B000CA6CE /* icon_FF003F@2x.png */,
+				9AF8BBD720CF979D000CA6CE /* icon_FF7F00@2x.png */,
+				9AF8BBD120CF979C000CA6CE /* icon_FFBF00@2x.png */,
+				9AF8BBCB20C58757000CA6CE /* icon_orange@2x.png */,
+				9A92114320C51B9200C8FA18 /* App2@2x.png */,
+			);
+			name = icon;
 			sourceTree = "<group>";
 		};
 		DD5D167B8B18269AE61CDB09 /* Frameworks */ = {
@@ -288,6 +302,7 @@
 				9AF8BBDC20CF979E000CA6CE /* icon_FFBF00@2x.png in Resources */,
 				9A0472531F2B21710046E845 /* Main.storyboard in Resources */,
 				9AF8BBCC20C58757000CA6CE /* icon_orange@2x.png in Resources */,
+				9AD4F34421E8F3BA002385C7 /* Localizable.strings in Resources */,
 				9AF8BBE220CF979E000CA6CE /* icon_FF7F00@2x.png in Resources */,
 				9AF8BBE020CF979E000CA6CE /* icon_BF00FF@2x.png in Resources */,
 			);
@@ -355,6 +370,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9A0472521F2B21710046E845 /* Base */,
+				9AD4F33F21E89523002385C7 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -363,8 +379,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				9A0472571F2B21710046E845 /* Base */,
+				9AD4F34021E89523002385C7 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9AD4F34621E8F3BA002385C7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AD4F34521E8F3BA002385C7 /* ja */,
+				9AD4F34721E8F3C0002385C7 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -374,6 +400,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -431,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

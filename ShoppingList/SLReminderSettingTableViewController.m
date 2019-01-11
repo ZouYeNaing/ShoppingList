@@ -26,7 +26,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Reminder";
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
+    backButton.title = NSLocalizedString(@"Setting", "");
+    self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
+    
+    self.title = NSLocalizedString(@"Reminder", "");
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEE MMM dd HH:mm"];
     dateFormatter.timeStyle = NSDateFormatterShortStyle;
@@ -95,8 +100,8 @@
     
     if ([remindDate isKindOfClass:[NSDate class]]) {
         [datePickerTextfield resignFirstResponder];
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Reminder"
-                                                                                 message:[NSString stringWithFormat:@"Remind me at %@", [dateFormatter stringFromDate:remindDate]]
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Reminder", "")
+                                                                                 message:[NSString stringWithFormat:NSLocalizedString(@"Remind me at %@", ""), [dateFormatter stringFromDate:remindDate]]
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -125,7 +130,7 @@
          }];
                                                          }];
         
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", "") style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction * action) {
                                                                  dispatch_async(dispatch_get_main_queue(),
                                                                                 ^{
@@ -137,8 +142,8 @@
         [alertController addAction:cancelAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning"
-                                                                                 message:@"Please select date & time"
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warning", "")
+                                                                                 message:NSLocalizedString(@"Please select date & time", "")
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -159,8 +164,8 @@
     NSString *nowDate         = [dateFormatter stringFromDate:[NSDate date]];
     
     if ([changedDate isEqualToString:nowDate]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Warning"
-                                                                                 message:@"Please choose different from current date & time."
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warning", "")
+                                                                                 message:NSLocalizedString(@"Please choose different from current date & time.", "")
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -211,12 +216,12 @@
         } else {
             [switchView setOn: NO animated: NO];
         }
-        cell.textLabel.text = [reminderInfoArray objectAtIndex:indexPath.row][@"title"];
+        cell.textLabel.text = NSLocalizedString(@"Enable", "");
         
     } else if (indexPath.row == 1){
         
         NSDate *date              = [reminderInfoArray objectAtIndex:indexPath.row][@"detail"];
-        cell.textLabel.text       = [reminderInfoArray objectAtIndex:indexPath.row][@"title"];
+        cell.textLabel.text       = NSLocalizedString(@"Reminder me at", "");
         cell.detailTextLabel.text = [dateFormatter stringFromDate:date];
     }
     return cell;
@@ -231,7 +236,7 @@
         numberToolbar.items = [NSArray arrayWithObjects:
                                [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil],
                                [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                               [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneClicked:)],
+                               [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Done", "") style:UIBarButtonItemStyleDone target:self action:@selector(doneClicked:)],
                                nil];
         [numberToolbar sizeToFit];
 
@@ -273,7 +278,7 @@
     detailLabel.textColor = [UIColor grayColor];
     detailLabel.numberOfLines = 0;
     detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    detailLabel.text = @"Reminder";
+    detailLabel.text = NSLocalizedString(@"Reminder", "");
     detailLabel.textAlignment = NSTextAlignmentCenter;
     [detailLabel setFont: [UIFont systemFontOfSize: 14]];
     [footerView addSubview: detailLabel];

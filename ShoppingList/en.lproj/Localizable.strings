@@ -1,0 +1,40 @@
+/* 
+  Localizable.strings
+  ShoppingList
+
+  Created by Zaw Ye Naing on 2019/01/12.
+  Copyright © 2019 Zaw Ye Naing. All rights reserved.
+*/
+//TabBar
+"Add" = "Add";
+"Edit" = "Edit";
+"Setting" = "Setting";
+
+// Setting
+"Tab Configuration" = "Tab Configuration";
+"Color" = "Color";
+"Font" = "Font";
+"Reminder" = "Reminder";
+
+// TabConfiguration setting alert.
+"Cannot Editable" = "Cannot Editable";
+"Memo name cannot be editable\nwhile switch is off." = "Memo name cannot be editable\nwhile switch is off.";
+"Long pressed on each memo can edit memo name." = "Long pressed on each memo can edit memo name.";
+//Color Setting
+"Color Setting" = "Color Setting";
+
+//Font Setting
+"Font Setting" = "Font Setting";
+
+//Reminder setting alert
+"Enable" = "Enable";
+"Reminder me at" = "Reminder me at";
+"Reminder" = "Reminder";
+"Done" = "Done";
+"Reminder" = "Reminder";
+"Remind me at %@" = "Remind me at %@";
+"Cancel" = "Cancel";
+"Warning" = "Warning";
+"Please select date & time" = "Please select date & time";
+"Please choose different from current date & time." = "Please choose different from current date & time.";
+

@@ -22,9 +22,9 @@
     [super viewDidLoad];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
-    backButton.title = @"Setting";
+    backButton.title = NSLocalizedString(@"Setting", "");
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
-    
+    self.title = NSLocalizedString(@"Font Setting", "");
     fontFamily = [[NSArray alloc] initWithArray:[UIFont familyNames]];
     
     for (NSString *familyName in [UIFont familyNames]){

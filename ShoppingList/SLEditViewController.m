@@ -30,13 +30,13 @@
                                                                                 target: self
                                                                                 action: @selector(addListDataAction:)];
         self.navigationItem.rightBarButtonItem = addBtn;
-        self.title = @"Add";
+        self.title = NSLocalizedString(@"Add", "");
 
         // AddList Data.
         
     } else {
         
-        
+        self.title = NSLocalizedString(@"Edit", "");
         editVCArray = [[SLShoppingListData sharedInstance] getSLDataArray: self.indexpath];
         
         _editTextView.text = [editVCArray objectAtIndex: indexpath.row][@"data"];
