@@ -25,7 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    settingDataArray = [NSMutableArray arrayWithObjects: @"Tab Configuration", @"Color", @"Font", @"Reminder", nil];
+    NSString *tabConfiguration = NSLocalizedString(@"Tab Configuration", "");
+    NSString *color = NSLocalizedString(@"Color", "");
+    NSString *font = NSLocalizedString(@"Font", "");
+    NSString *reminder = NSLocalizedString(@"Reminder", "");
+    self.title = NSLocalizedString(@"Setting", "");
+    settingDataArray = [NSMutableArray arrayWithObjects: tabConfiguration, color, font, reminder, nil];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame: CGRectZero];
     

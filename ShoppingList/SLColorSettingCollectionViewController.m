@@ -23,9 +23,9 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
-    backButton.title = @"Setting";
+    backButton.title = NSLocalizedString(@"Setting", "");
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
-    
+    self.title = NSLocalizedString(@"Color Setting", "");
     colorCode = [[NSArray alloc] initWithObjects:
                  [UIColor colorWithRed:0.56 green:0.56 blue:0.58 alpha:1.0],
                  [UIColor colorWithRed:1 green:0 blue:0.25 alpha:1],

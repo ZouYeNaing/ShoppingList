@@ -30,9 +30,9 @@
     [super viewDidLoad];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
-    backButton.title = @"Setting";
+    backButton.title = NSLocalizedString(@"Setting", "");
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
-    
+    self.title = NSLocalizedString(@"Tab Configuration", "");
     appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     switchMArray =  [@[@YES, @YES, @YES, @YES, @YES] mutableCopy];
@@ -95,8 +95,8 @@
         [textField becomeFirstResponder];
     } else {
         UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Cannot Editable"
-                                     message:@"Memo name cannot be editable\nwhile switch is off."
+                                     alertControllerWithTitle:NSLocalizedString(@"Cannot Editable", "")
+                                     message:NSLocalizedString(@"Memo name cannot be editable\nwhile switch is off.", "")
                                      preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* yesButton = [UIAlertAction
                                     actionWithTitle:@"OK"
@@ -220,7 +220,7 @@
     detailLabel.textColor = [UIColor grayColor];
     detailLabel.numberOfLines = 0;
     detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    detailLabel.text = @"Long pressed on each memo can edit memo name.";
+    detailLabel.text = NSLocalizedString(@"Long pressed on each memo can edit memo name.","");
     detailLabel.textAlignment = NSTextAlignmentCenter;
     [detailLabel setFont: [UIFont systemFontOfSize: 14]];
     [footerView addSubview: detailLabel];

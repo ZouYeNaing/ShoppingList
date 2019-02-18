@@ -27,7 +27,7 @@
     NSDictionary *tabItemDic2 = @{@"status": @YES, @"title": @"リスト 2", @"path":@"FinalList1", @"key":@"List1", @"tab":@"1"};
     NSDictionary *tabItemDic3 = @{@"status": @YES, @"title": @"リスト 3", @"path":@"FinalList2", @"key":@"List2", @"tab":@"2"};
     NSDictionary *tabItemDic4 = @{@"status": @YES, @"title": @"リスト 4", @"path":@"FinalList3", @"key":@"List3", @"tab":@"3"};
-    NSDictionary *tabItemDic5 = @{@"status": @YES, @"title": @"Setting"};
+    NSDictionary *tabItemDic5 = @{@"status": @YES, @"title": NSLocalizedString(@"Setting", "")};
     
     NSMutableArray *tabBarItemSettingArray = [@[tabItemDic1, tabItemDic2, tabItemDic3, tabItemDic4, tabItemDic5] mutableCopy];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"SavedTab": tabBarItemSettingArray}];
@@ -49,8 +49,8 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedIndex": @(46)}];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"selectedFont": @"Helvetica"}];
     
-    NSDictionary *reminderStatusDict = @{@"title": @"Enable", @"status": @NO, @"detail":@""};
-    NSDictionary *reminderDetailDict = @{@"title": @"Reminder me at", @"status": @YES, @"detail":@""};
+    NSDictionary *reminderStatusDict = @{@"title": NSLocalizedString(@"Enable", ""), @"status": @NO, @"detail":@""};
+    NSDictionary *reminderDetailDict = @{@"title": NSLocalizedString(@"Reminder me at", ""), @"status": @YES, @"detail":@""};
     NSMutableArray *initReminderArray = [@[reminderStatusDict, reminderDetailDict] mutableCopy];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"reminderInfo": initReminderArray}];
 

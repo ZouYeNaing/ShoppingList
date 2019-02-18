@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  ShoppingList
+
+  Created by Zaw Ye Naing on 2019/01/12.
+  Copyright © 2019 Zaw Ye Naing. All rights reserved.
+*/
+//TabBar
+"Add" = "追加";
+"Edit" = "編集";
+"Setting" = "設定";
+
+// Setting
+"Tab Configuration" = "タブ管理";
+"Color" = "カラー";
+"Font" = "フォント";
+"Reminder" = "リマインダー";
+
+// TabConfiguration setting alert.
+"Cannot Editable" = "編集できない";
+"Memo name cannot be editable\nwhile switch is off." = "スイッチをオンにしないと編集できない。";
+"Long pressed on each memo can edit memo name." = "長押しするとメモタイトルを編集できます。";
+//Color Setting
+"Color Setting" = "カラー設定";
+
+//Font Setting
+"Font Setting" = "フォント設定";
+
+//Reminder setting alert
+"Enable" = "ステータス";
+"Reminder me at" = "リマインド日時";
+"Reminder" = "リマインダー";
+"Done" = "完了";
+"Reminder" = "リマインダー";
+"Remind me at %@" = "%@ にリマインドします。";
+"Cancel" = "キャンセル";
+"Warning" = "注意";
+"Please select date & time" = "日時を選択してください。";
+"Please choose different from current date & time." = "現在の日時と異なる日時を選択してください。";
