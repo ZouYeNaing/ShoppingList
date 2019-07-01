@@ -12,6 +12,7 @@
 #import "SLShoppingListData.h"
 #import "SLTabMManager.h"
 #import "AppDelegate.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface SLMainTableViewController ()
 {
@@ -269,6 +270,10 @@
             [addListDict setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
             [addListDict setValue: _listAdded[i] forKey: @"data"];
             
+            NSString *memo = _listAdded[i];
+            NSLog(@"AnswersEvent Added Memo : %@", memo);
+            [Answers logCustomEventWithName:@"Added Memo" customAttributes:@{@"Memo":memo}];
+            
             [mainVCArray insertObject: addListDict atIndex: 0];
             
         }
@@ -311,6 +316,10 @@
         NSMutableDictionary *editList = [NSMutableDictionary dictionary];
         [editList setValue: [mainVCArray objectAtIndex: self.indexpath.row][@"status"] forKey: @"status"];
         [editList setValue: _EditedText forKey: @"data"];
+        
+        NSString *memo = _EditedText;
+        NSLog(@"AnswersEvent Edited Memo : %@", memo);
+        [Answers logCustomEventWithName:@"Edited Memo" customAttributes:@{@"Memo":memo}];
         
         [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: self.indexpath.row inSection: 0]] withRowAnimation:UITableViewRowAnimationFade];
         
@@ -373,6 +382,10 @@
             NSMutableDictionary *editListDict = [NSMutableDictionary dictionary];
             [editListDict setValue: [NSNumber numberWithBool: NO] forKey: @"status"];
             [editListDict setValue: _listEdited[i] forKey: @"data"];
+            
+            NSString *memo = _listEdited[i];
+            NSLog(@"AnswersEvent Edited Memo : %@", memo);
+            [Answers logCustomEventWithName:@"Edited Memo" customAttributes:@{@"Memo":memo}];
             
             [mainVCArray insertObject: editListDict atIndex: 0];
         }

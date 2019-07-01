@@ -1,5 +1,5 @@
 PODS:
-  - Crashlytics (3.8.5):
+  - Crashlytics (3.8.6):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.12)
   - Firebase/Core (4.0.3):
@@ -33,7 +33,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
 
 SPEC CHECKSUMS:
-  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
+  Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
   Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
   FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
@@ -43,4 +43,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 33f271d6230ee49a2cde8e3a8e9eec2cf4e2574f
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2
