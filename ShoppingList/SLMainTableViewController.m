@@ -599,11 +599,11 @@
 
 #pragma mark - Middle Line of Deleted List.
 
--(NSAttributedString *)deletedListLine: (NSString *) deleteString {
+-(NSAttributedString *)deletedListLine: (NSString *) memoString {
     
     NSDictionary *attributesDict = [NSDictionary dictionary];
     
-    UIFont *font = [UIFont fontWithName:@"HiraKakuProN-W3" size: 15];
+    UIFont *font = [UIFont fontWithName:selectedFont size: 15];
     
     if(selectedColor != NULL) {
         
@@ -620,7 +620,25 @@
         
     }
     
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString: deleteString
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString: memoString
+                                                                         attributes: attributesDict];
+    CGSize size = [attributedText size];
+    [attributedText drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    return attributedText;
+    
+}
+
+-(NSAttributedString *)memoListLine: (NSString *) memoString {
+    
+    NSDictionary *attributesDict = [NSDictionary dictionary];
+    
+    UIFont *font = [UIFont fontWithName:selectedFont size: 15];
+
+    attributesDict = @{ NSForegroundColorAttributeName: [UIColor blackColor],
+                        NSFontAttributeName: font};
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString: memoString
                                                                          attributes: attributesDict];
     CGSize size = [attributedText size];
     [attributedText drawInRect:CGRectMake(0, 0, size.width, size.height)];
@@ -646,21 +664,15 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier];
     }
-    
+    cell.textLabel.text = nil;
     if ([[mainVCArray objectAtIndex: indexPath.row][@"status"] boolValue] == YES) {
-        
-        cell.textLabel.text = nil;
         cell.textLabel.attributedText = [self deletedListLine: [mainVCArray objectAtIndex: indexPath.row][@"data"]];
-        
     } else {
-        
-        cell.textLabel.attributedText = nil;
-        cell.textLabel.text = [mainVCArray objectAtIndex: indexPath.row][@"data"];
-        
+        cell.textLabel.attributedText = [self memoListLine: [mainVCArray objectAtIndex: indexPath.row][@"data"]];
     }
-    if (selectedFont > 0) {
-        cell.textLabel.font = [UIFont fontWithName: selectedFont size: 15];
-    }
+//    if (selectedFont > 0) {
+//        cell.textLabel.font = [UIFont fontWithName: selectedFont size: 15];
+//    }
     return cell;
 }
 
