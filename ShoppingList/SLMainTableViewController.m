@@ -635,7 +635,9 @@
     
     UIFont *font = [UIFont fontWithName:selectedFont size: 15];
 
-    attributesDict = @{ NSForegroundColorAttributeName: [UIColor blackColor],
+    attributesDict = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleNone],
+                        NSStrikethroughColorAttributeName: [UIColor clearColor],
+                        NSForegroundColorAttributeName: [UIColor blackColor],
                         NSFontAttributeName: font};
     
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString: memoString
